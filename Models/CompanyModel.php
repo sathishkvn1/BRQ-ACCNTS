@@ -334,6 +334,11 @@ public function get_state_code($stateId) {
         $query = $this->db->get('acc_gst_classification');
         return $query;
     }
+   
+    public function  get_nature_of_goods(){
+        $query = $this->db->get('acc_vat_nature_of_goods');
+        return $query;
+    }
 
 
     public function  gst_taxability_type(){

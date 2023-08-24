@@ -120,7 +120,9 @@ public function index()
         $data["gst_rate"] = $this->get_gst_rate_details();
         $data["hsn_sac_action"] = $this->get_hsn_sac_related_action();
         $data["classification_name"] = $this-> gst_classification_details();
-      
+
+       
+        $data["nature_of_goods"] = $this->vat_nature_of_goods_details();
         
         $data["gst_taxability_type"] = $this-> get_gst_taxability_type();
         $data["gst_cess_valuation_type"] = $this->get_gst_cess_valuation_type();
@@ -1734,6 +1736,17 @@ public function get_hsn_sac_related_action(){
 public function gst_classification_details(){
 
     $res=$this->CompanyModel->hsn_gst_classification_name();
+    if($res->num_rows()>0)
+    {
+        return($res->result());
+    }
+    return array();
+}
+
+
+public function vat_nature_of_goods_details(){
+
+    $res=$this->CompanyModel->get_nature_of_goods();
     if($res->num_rows()>0)
     {
         return($res->result());
