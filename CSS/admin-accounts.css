@@ -1,0 +1,4013 @@
+:root
+{
+	--dark-yellow: #fec530;
+	--light-yellow:#fee8af;
+	--blue:#2a67b1;
+	--lightblue:#def1fc;
+}
+
+body
+{
+	font-size: 14px;
+	width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+a
+{
+	text-decoration: none !important;
+}
+a:focus
+{
+	outline: none !important;
+}
+.a_focus:focus
+{
+	background-color: var(--dark-yellow) !important;
+}
+
+input[type=number] 
+{
+	-moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button 
+{
+  -webkit-appearance: none;
+}
+textarea 
+{
+	resize: none;
+}
+
+.top-date
+{
+	padding-right: 16px;
+	text-align: right;
+}
+.top-date input
+{
+	text-align: right;
+	width: 100px !important;
+	min-width: 100px !important;
+}
+.hidden_input_field
+{
+	opacity: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    position: absolute !important;
+    right: -100px !important;
+}
+/*========Accounting Entry Style Css===========*/
+
+.payment
+{
+  text-align:center;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  color: #343a40!important;
+  background:#adb5bd!important;
+}
+.payment-right
+{
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  color: #343a40!important;
+  padding-left:15px;
+}
+.m-bottom-20
+{
+	margin-bottom:20px;
+}
+.m-bottom-30
+{
+	margin-bottom:30px;
+}
+.m-left-10
+{
+	margin-left:10px;
+}
+.m-left-5
+{
+	margin-left:5px;
+}
+.m-right-5
+{
+	margin-right:5px;
+}
+.main-content
+{
+  font-size: 14px;
+  font-weight: 600!important;
+  margin: 0;
+  color: #343a40!important;
+}
+
+@media (min-width:1200px)
+{
+	.width-20{width:10%;}
+	.width-80{width:90%;margin-top:-6px;}
+	
+}
+@media (min-width:900px) and (max-width:1199px)
+{
+	.width-20{width:15%;}
+	.width-80{width:85%;margin-top:-6px;}
+}
+@media (min-width:768px) and (max-width:899px)
+{
+	.width-20{width:15%;}
+	.width-80{width:85%;margin-top:-6px;}
+}
+@media (min-width:600px) and (max-width:767px)
+{
+	.width-20{width:15%;}
+	.width-80{width:85%;margin-top:-6px;}
+}
+@media (min-width:480px) and (max-width:599px)
+{
+	.width-20{width:20%;}
+	.width-80{width:80%;margin-top:-6px;}
+}
+@media (min-width:320px) and (max-width:479px)
+{
+	.width-20{width:100%;}
+	.width-80{width:100%;margin-top:5px;}
+}
+.table-tally-head
+{
+	border-top:1px solid #babdc1;
+	border-bottom:1px solid #babdc1;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:20px;
+}
+.table-tally-body
+{
+	padding:10px!important;
+	font-size:14px!important;
+	font-weight:600!important;
+	color:#343a40!important;
+	
+}
+.table-tally-column
+{
+	align-self:center;
+}
+.table-tally-row
+{
+	margin-top:10px;
+	background:rgba(0,0,0,.03);
+}
+.table-tally-textarea
+{
+	width:100%;
+	padding:10px;
+	outline:none;
+	margin-top:10px;
+	border: 1px solid #d4d4d4;
+}
+.table-tally-textarea:hover
+{
+	border: 1px solid #343a40;
+}
+
+.bor-none
+{
+	background-color: #f7f7f7!important;
+	border: 0px solid #ced4da!important;
+	font-size: 14px!important;
+    font-weight: 600!important;
+}
+.btn-quit
+{
+	font-size:15px;
+	font-weight:600;
+	color:#fff;
+	background:#9d221d;
+	padding:10px;
+	width:100px;
+	border:1px solid #9d221d;
+	letter-spacing: 1px;
+}
+.btn-quit:hover
+{
+	background:#fff;
+	color:#9d221d;
+	border:2px solid #9d221d;
+}
+.btn-quit:focus
+{
+	outline:none;
+}
+.btn-save
+{
+	font-size:15px;
+	font-weight:600;
+	color:#fff;
+	background:#17a2b8;
+	padding:10px;
+	width:110px;
+	border:1px solid #17a2b8;
+	letter-spacing: 1px;
+}
+.btn-save:hover
+{
+	background:#fff;
+	color:#17a2b8;
+	border:2px solid #17a2b8;
+}
+.btn-save:focus
+{
+	outline:none;
+}
+.btn-delete
+{
+	font-size:15px;
+	font-weight:600;
+	color:#fff;
+	background:#dc3545;
+	padding:10px;
+	width:100px;
+	border:1px solid #dc3545;
+	letter-spacing: 1px;
+}
+.btn-delete:hover
+{
+	background:#fff;
+	color:#dc3545;
+	border:2px solid #dc3545;
+}
+.btn-delete:focus
+{
+	outline:none;
+}
+.btn-cancel
+{
+	font-size:15px;
+	font-weight:600;
+	color:#fff;
+	background:#ffc107;
+	padding:10px;
+	width:110px;
+	border:1px solid #ffc107;
+	letter-spacing: 1px;
+}
+.btn-cancel:hover
+{
+	background:#fff;
+	color:#ffc107;
+	border:2px solid #ffc107;
+}
+.btn-cancel:focus
+{
+	outline:none;
+}
+.btn-a
+{
+	border-bottom:4px double;
+}
+@media (max-width:786px)
+{
+	.card-response{ width: 820px!important;}
+}
+.select1
+{
+	-webkit-appearance: none;
+}
+.inside
+{
+	position: absolute;
+    left: 5px;
+    top: 5px;
+}
+.amount-input
+{
+	padding-left: 15px;
+    border: none;
+	background:#f7f7f7;
+	width:100%;
+	font-weight:600;
+	color:#343a40;
+}
+.amount-input:focus
+{
+	outline:none;
+}
+.column-cur-bal
+{
+	padding-top: 10px;
+    padding-left: 40px;
+    font-style: italic;
+}
+.card-title-border
+{
+	border-bottom:1px solid #cdcdcd;
+	padding-bottom:10px;
+}
+
+/*========End Accounting Entry Style Css===========*/
+
+/*========Chart of Account css Start============*/
+.tree, .tree ul 
+{
+    margin:0;
+    padding:0;
+    list-style:none
+}
+.tree ul 
+{
+    margin-left:1em;
+    position:relative
+}
+.tree ul ul 
+{
+    margin-left:.5em
+}
+.tree ul:before 
+{
+    content:"";
+    display:block;
+    width:0;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    border-left:1px solid
+}
+.tree li 
+{
+    margin:0;
+    padding:0 1em;
+    line-height:2em;
+    color:#369!important;
+    font-weight:700;
+    position:relative
+}
+.tree ul li:before 
+{
+    content:"";
+    display:block;
+    width:10px;
+    height:0;
+    border-top:1px solid;
+    margin-top:-1px;
+    position:absolute;
+    top:1em;
+    left:0
+}
+.tree ul li:last-child:before
+{
+    background:#f0f8ff;
+    height:auto;
+    top:1em;
+    bottom:0
+}
+.indicator 
+{
+    margin-right:5px;
+}
+.tree li a 
+{
+    text-decoration: none;
+    color:#369;
+}
+.tree li button, .tree li button:active, .tree li button:focus 
+{
+    text-decoration: none;
+    color:#369;
+    border:none;
+    background:transparent;
+    margin:0px 0px 0px 0px;
+    padding:0px 0px 0px 0px;
+    outline: 0;
+}
+/*==========end chart of account =========*/
+/*==========  balance sheet Start===========*/
+.table-balance-sheet-head
+{
+	border-top:1px solid #babdc1;
+	border-bottom:1px solid #babdc1;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+.p-left-20
+{
+	padding-left:20px;
+}
+.align-self
+{
+	align-self:center;
+}
+.border-right
+{
+	border-right:1px solid #babdc1!important;
+}
+.border-left
+{
+	border-left:2px solid #babdc1!important;
+}
+.table-title
+{
+	font-size: 18px;
+	font-weight: 600;
+	margin: 0;
+	color: #343a40!important;
+	padding-left:15px;
+}
+.right-0
+{
+	right:10px;
+}
+.caret-right
+{
+	font-size: 18px;
+	font-weight: 600!important;
+	margin: 0;
+	color: #343a40!important;
+	float: right;
+}
+.balance-sheet-column
+{
+	margin-bottom:10px;
+	background:#f1f1f1;
+	padding:10px;
+}
+.balance-sheet-subcolumn
+{
+	border-bottom:1px solid #babdc1!important;
+	padding:10px;
+	color:#343a40!important;
+}
+.nested-right
+{
+	float:right;
+	padding-right:20px;
+}
+
+/*========== End balance sheet ===========*/
+
+/*========== Start Trial Balance===========*/
+.border-top2
+{
+	border-top:2px solid #babdc1!important;
+	margin-top:5px;
+	margin-right:5px;
+}
+
+@media (max-width:1024px)
+{
+	.card-table-response{ width: 1000px!important;}
+}
+.trail-table-column
+{
+	font-size: 15px;
+	font-weight: 600!important;
+	margin: 0;
+	color: #343a40!important;
+}
+.trail-table-sub-column
+{
+	border-bottom:1px solid #babdc1!important;
+	padding:10px;
+	color:#343a40!important;
+}
+.p-left-30
+{
+	padding-left:30px!important;
+}
+.m-bottom-10
+{
+	margin-bottom:10px;
+}
+/*========== End Trial Balance===========*/
+
+/*========== Start Record Css===========*/
+@media (min-width:1200px)
+{
+	.content-response{margin-left:-18px;}
+}
+.info-box .info-box-number 
+{
+    color: #000000!important;
+}
+
+.color-danger
+{
+	color:red;
+}
+.color-success
+{
+	color:green;
+}
+.red_dot
+{
+	display: inline-block;
+    width: 7px;
+    height: 7px;
+    background-color: red;
+    border-radius: 50%;
+    margin-left: 4px;
+}
+.reports-table-title
+{
+	font-size: 16px;
+	font-weight: 400;
+	margin: 0;
+	color: #343a40!important;
+	padding-left:15px;
+}
+
+/*==========End Start Record Css===========*/
+
+body .wrapper .content-wrapper
+{
+	margin-left: 0 !important;
+    margin-top: 71px !important;
+    background: white;
+    margin-right: 170px;
+    padding-bottom: 0 !important;
+    min-height: calc( 100vh - 71px ) !important;
+    max-height: calc( 100vh - 71px ) !important;
+}
+/* === For Header Start === */
+.main-header
+{
+	margin-left: 0 !important;
+	padding: 4px;
+	align-items: flex-end;
+	background: var(--blue);
+	border: 0 !important;
+	z-index: 9999 !important;
+}
+.main-header .navbar-nav
+{
+	justify-content: space-evenly;
+}
+.main-header .navbar-nav li a
+{
+	color: #fff !important;
+	font-size: 15px;
+	padding: .5em !important;
+}
+.main-header .go-to
+{
+	background: aliceblue !important; 
+	color: black !important;
+	padding: .25rem .5rem !important;
+    height: 28px !important;
+    margin-bottom: 8px !important;
+    width: fit-content;
+}
+.main-header .go-to span
+{
+	color: var(--blue);
+	border-bottom: 1px solid var(--blue);
+}
+.main-header .go-to span + span
+{
+	margin-right: 2px;
+	border-bottom: 0px solid var(--blue) !important;
+	padding-left: 2px;
+}
+.main-header a span
+{
+	border-bottom: 1px solid #a6cfed;
+	color: #a6cfed;
+}
+.main-header a span + span
+{
+	margin-right: 2px;
+	border-bottom: 0px solid #a6cfed;
+	padding-left: 2px;
+}
+.main-header img
+{
+	width:41px;
+}
+
+.main-header .dropdown.show
+{
+	background: #134b90;
+}
+.main-header .dropdown-menu.show
+{
+	z-index: 99999 !important;
+	min-width: 240px;
+    max-width: 240px;
+	/* min-width: 200px;
+    max-width: 200px; */
+    background: #e2f1fc;
+    border-radius: 0;
+    border: 1px solid #88bee6;
+    margin: 4px 0 4px -2px;
+}
+.main-header .dropdown-menu.show a.dropdown-item,
+.main-header .dropdown-menu.show a.dropdown-item:hover
+{
+    color: #000000 !important;
+    padding: 1px 20px !important;
+	background-color: transparent;
+}
+.main-header .dropdown-menu.show a.dropdown-item:focus {
+	background: var(--dark-yellow);
+}
+.main-header .dropdown-menu.show a.dropdown-item span {
+    color: var(--blue) !important;
+    border: 0 !important;
+    font-weight: 600;
+}
+.main-header .dropdown-menu.show a.dropdown-item span.right
+{
+	float: right;
+}
+
+/* === For Header End === */
+.main-footer
+{
+	margin-left: 0 !important;
+	z-index: 99 !important;
+	position: inherit !important; 
+	width: calc(100% - 170px);
+}
+
+.sub-header
+{
+	position: fixed;
+    top: 49px;
+    font-size: 12px;
+    padding: 2px 8px !important;
+    z-index: 999 !important;
+    left: 0;
+    right:170px;
+	background: #88bee6;
+}
+
+.text-blue
+{
+	color: var(--blue)!important;
+}
+.fw-600
+{
+	font-weight: 600;
+}
+.section_index,
+.section_index .container-fluid
+{
+	height: calc(100vh - 71px);
+}
+.section_index .container-fluid > .row
+{
+	height: calc(100vh - 71px);
+}
+.section_index .container-fluid > .row .row_fullheight
+{
+	height: calc(100% - 49px);
+    align-content: center;
+}
+.section_index .current_date
+{
+	position: absolute;
+    top: 0;
+    right: 0;
+	text-align:right;
+}
+.current-period
+{
+	border-radius: 6px;
+    margin-bottom: 8px;
+}
+.current-period .card-body
+{
+    padding: 4px 8px;
+    background: #ffffff;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border: 1px solid #e2f1fc;
+}
+.current-period .card-footer
+{
+	padding: 0;
+}
+.current-period .card-footer a
+{
+    color: #000;
+    width: 100%;
+    display: inline-block;
+    background: #88bee6;
+    padding: 4px 8px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    font-size: 10px;
+    text-align: center;
+}
+.current-period .card-body .card-title
+{
+	text-align: center;
+    width: 100%;
+	font-size: 12px;
+	font-weight: 600;
+	padding-bottom: 0px;
+}
+.current-period .card-body .card-text
+{
+	font-weight: 600;
+	color: #000;
+}
+.card-overdue-invoice-paid-expense
+{
+	padding: 4px;
+	margin-bottom:10px;
+}
+.card-overdue-invoice-paid-expense .card-header
+{
+	border-bottom: 0px;
+    font-size: 13px !important;
+    padding: 4px 8px;
+}
+.card-overdue-invoice-paid-expense .card-body
+{
+	background: #e2f1fc;
+    padding: 4px 8px;
+}
+.card-overdue-invoice-paid-expense .card-body .card-title
+{
+	font-size: 14px;
+    margin-bottom: 4px;
+}
+.card-overdue-invoice-paid-expense .card-body .card-text
+{
+	font-size: 13px;
+	margin-bottom: 6px;
+}
+.card-overdue-invoice-paid-expense .card-body .btn
+{
+	font-size: 10px;
+    background: #ffffff;
+    padding: 1px 8px;
+    color: var(--blue);
+    float: right;
+    border: 1px solid var(--blue);
+    margin-top: -2px;
+}
+
+
+.card-net-income .card-header
+{
+	font-size: 13px;
+	border-bottom: 1px solid rgb(136 190 230) !important;
+    padding: 4px 8px;
+}
+.card-net-income .card-body
+{
+	padding: 0 6px;
+}
+.card-net-income .card-body .card-text-left
+{
+	padding: 0px 4px;
+    font-size: 13px;
+}
+.card-net-income .card-body .card-text-right
+{
+	padding: 0px 4px;
+    font-size: 13px;
+	float: right;
+}
+.card-net-income .btn
+{
+	font-size: 10px;
+    padding: 2px 4px;
+	float: right;
+	color: var(--blue);
+	margin:2px 0;
+	display: inline-block;
+}
+.card-current-date
+{
+	background: #e2f1fc;
+}
+.card-current-date .card-header
+{
+	background: var(--blue);
+    color: white;
+    padding: 3px;
+    text-align: center;
+	font-size: 14px;
+}
+.card-current-date .card-body
+{
+	padding: 0;
+}
+.card-current-date .card-body .card-title
+{
+	padding-left: 0;
+	width: 100%;
+}
+.card-current-date .card-body .card-title h6
+{
+	font-size: 12px;
+    margin-bottom: 6px;
+	margin-top: 1rem;
+    color: #0072bc;
+	padding-left: 108px;
+}
+.card-current-date .card-body ul li
+{
+	list-style: none;
+	outline: none;
+}
+.card-current-date .card-body ul li a
+{
+	font-size: 16px;
+	padding-left: 108px;
+	color: #212529;
+	text-decoration: none ;
+	width: 100%;
+	display: block;
+	line-height: 20px;
+}
+.card-current-date .card-body ul li.selected
+{
+	background: var(--dark-yellow);
+}
+.card-current-date .card-body ul li span
+{
+	font-weight: 500 !important;
+	color: var(--blue);
+	font-family: system-ui;
+}
+.accounts-sidebar a .short-key
+{
+	font-weight: 600;
+    color: #0073c0;
+    padding: 4px;
+    font-family: monospace;
+    font-size: 14px;
+}
+.accounts-sidebar a .right-arrow
+{
+    float: right;
+    border-left: 1px solid #0072bc;
+    color: #0072bc;
+    padding-left: 3px;
+}
+.accounts-sidebar a .right-arrow i
+{
+	font-size: 12px;
+	padding-left: 1px;
+}
+
+/* ==========================================================
+            For Accounting Voucher Creation  Start
+===========================================================*/
+
+.vouchers_menu .short-key {
+    font-weight: 600;
+    color: #0073c0;
+    font-family: monospace;
+    font-size: 14px;
+}
+.vouchers_menu .short-key + span
+{
+	padding: 0 4px;
+}
+.vouchers_menu .single
+{
+	border-bottom: 1px solid #0073c0;
+}
+.section-voucher-creation
+{
+	background: #fffaf4;
+    min-height: calc(100vh - 71px);
+}
+.section-voucher-creation .voucher_top_feilds
+{
+	min-height: 155px;
+	max-height: 155px;
+	/* width: 100% !important;
+	max-width: 100% !important;
+	margin: 0 !important; */
+}
+.section-voucher-creation .voucher_bottom_feilds
+{
+	min-height: 180px;
+    max-height: 180px;
+}
+.section-voucher-creation .payment-no,
+.section-voucher-creation .payment-no input
+{
+	font-weight: 600;
+	line-height: 25px;
+	height: 25px;
+}
+
+.section-voucher-creation .payment-no span:first-child
+{
+	background: var(--blue);
+    color: #fff;
+    font-size: 14px;
+	width: 80%;
+    display: inline-block;
+    text-align: center;
+	line-height: 25px;
+	height: 25px;
+}
+
+.section-voucher-creation input, .section-voucher-creation select
+{
+	font-weight:600;
+	min-width: 170px;
+	align-self: center;
+    font-size:14px;
+    max-width: 300px;
+	background: transparent;
+	border:1px solid transparent !important;
+}
+.section-voucher-creation select
+{
+	line-height: 1.8;
+	width: 170px;
+	appearance: none;
+}
+.section-voucher-creation input:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+	outline: none !important;
+}
+.section-voucher-creation select:focus
+{
+	appearance: progress-bar !important;
+	line-height: 2;
+	padding: 3px 0;
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+	outline: none !important;
+}
+.section-voucher-creation div .colon
+{
+	float: right;
+	font-weight: 600;
+}
+.section-voucher-creation div em
+{
+	color: #696969;
+	font-size: 15px;
+}
+.section-voucher-creation .voucher-icon a:focus
+{
+	outline: 2px dotted var(--blue);
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+.section-voucher-creation .voucher-icon a:focus i
+{
+	color: var(--blue);
+}
+.section-voucher-creation .voucher-icon i
+{
+	float: right;
+    font-size: 20px;
+    margin-right: 20px;
+    padding: 4px 6px;
+    color: #696969;
+}
+
+.section-voucher-creation .table-head
+{
+	font-weight: 600;
+    margin-top: 16px;
+    border-top: 2px solid lightgray;
+    border-bottom: 1px solid lightgray;
+	display: flex;
+}
+.section-voucher-creation .table-head div
+{
+	padding: 0 10px;
+}
+.section-voucher-creation .table-head div:nth-child(2)
+{
+	text-align: right;
+}
+.section-voucher-creation .table-foot .col-md-12:first-child 
+{
+	text-align: right;
+    font-size: 15px;
+    font-weight: 600;
+    border-top: 1px solid lightgray;
+    border-bottom: 3px double lightgray;
+    height: fit-content;
+}
+.section-voucher-creation .table-foot div input
+{
+	text-align: right;
+	padding:2px 6px;
+}
+.section-voucher-creation .table-foot div input:focus
+{
+	background: var(--dark-yellow);
+	border: 1px solid #0888c8;
+}
+.section-voucher-creation .table-accounting-voucher-body
+{
+    height: calc( 100vh - 406px);
+	overflow-x: auto;
+}
+/* Scroll Width */
+.section-voucher-creation .table-accounting-voucher-body::-webkit-scrollbar
+{
+	width: 0px;
+}
+/* Scroll Track */
+.section-voucher-creation .table-accounting-voucher-body::-webkit-scrollbar-track 
+{
+	background: #fff; 
+}
+   
+/* Scroll Handle */
+.section-voucher-creation .table-accounting-voucher-body::-webkit-scrollbar-thumb 
+{
+	background: #88bee6; 
+}
+  
+/* Scroll Handle on hover */
+.section-voucher-creation .table-accounting-voucher-body::-webkit-scrollbar-thumb:hover 
+{
+	background: var(--light-yellow); 
+}
+
+.section-voucher-creation .table-accounting-voucher
+{
+	width: 100%;
+}
+.section-voucher-creation .table-accounting-voucher tr:nth-child(even) td
+{
+	padding-left: 40px;
+}
+.section-voucher-creation .table-accounting-voucher tr td:nth-child(2)
+{
+	float: right;
+}
+.section-voucher-creation .table-accounting-voucher tr td:nth-child(2) input
+{
+	text-align: right;
+}
+.section-voucher-creation .table-accounting-voucher tr td input
+{
+	border: 1px solid transparent !important;
+    font-weight: 600;
+    margin-left: 2px;
+	min-width: 230px;
+}
+.section-voucher-creation .table-accounting-voucher tr td input:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+	outline: none !important;
+}
+.section-voucher-creation .table-accounting-voucher .colon
+{
+	float: none;
+	padding: 0 8px 0 10px;
+}
+.section-voucher-creation .table-accounting-voucher .colon + em
+{
+	font-weight: 600;
+}
+.section-voucher-creation .narration label
+{
+	display: block;
+	margin-left: 10px;
+    color: var(--blue);
+}
+.section-voucher-creation .narration textarea
+{
+	margin-left: 8px;
+    margin-bottom: 0px;
+    border: none;
+	font-weight: 600;
+	background: transparent;
+	resize: none;
+}
+.section-voucher-creation .narration textarea::-webkit-scrollbar
+{
+	width: 0;
+}
+.section-voucher-creation .narration textarea:focus
+{
+	border: 1px solid var(--blue) !important;
+    background: var(--light-yellow) !important;
+	outline: none !important;
+}
+.section-voucher-creation .table .qty_input
+{
+	min-width: 100px;
+	max-width: 100px;
+}
+
+/* ==========================================================
+            For Accounting Voucher Creation  End
+===========================================================*/
+
+/* ==========================================================
+            For Receipt Voucher  Start
+===========================================================*/
+
+.receipt-voucher
+{
+	background: #f2fafd;
+}
+.receipt-voucher input
+{
+	background: transparent;
+}
+.receipt-voucher textarea
+{
+	background: transparent !important;
+}
+.receipt-voucher textarea:focus
+{
+	background: var(--light-yellow) !important;
+}
+/* ==========================================================
+            For Receipt Voucher  End
+===========================================================*/
+
+/* ==========================================================
+            For Contra Voucher  Start
+===========================================================*/
+
+.contra-voucher
+{
+	background: #f9f9f9;
+}
+.contra-voucher input
+{
+	background: transparent;
+}
+.contra-voucher textarea
+{
+	background: transparent !important;
+}
+.contra-voucher textarea:focus
+{
+	background: var(--light-yellow) !important;
+}
+/* ==========================================================
+            For Contra Voucher  End
+===========================================================*/
+
+/* ==========================================================
+            For Journal Voucher  Start
+===========================================================*/
+
+.journal-voucher
+{
+	background: #faf7fe;
+}
+.journal-voucher .table-head .col_particulars
+{
+	padding-left: 70px;
+	width: 60%;
+	min-width: 60%;
+}
+.journal-voucher .table-head .col_debit,
+.journal-voucher .table-head .col_credit
+{
+	text-align: right !important;
+	width: 20%;
+	min-width: 20%;
+	padding: 0 6px;
+}
+.journal-voucher input, .journal-voucher select
+{
+	background: transparent;
+	border:1px solid transparent !important;
+	appearance: none !important;
+}
+.section-voucher-creation.journal-voucher select
+{
+	width:40px !important;
+	min-width: 40px;
+}
+.journal-voucher select:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+    -webkit-appearance: progress-bar;
+	outline: none;
+	width: 40px !important;
+	text-align: center;
+	padding: 2px 0!important;
+}
+.journal-voucher textarea
+{
+	background: transparent !important;
+}
+.journal-voucher textarea:focus
+{
+	background: var(--light-yellow) !important;
+}
+
+.journal-voucher .table-accounting-voucher tr.by-or-to td:first-child
+{
+	width: 5%;
+	text-align: center;
+	min-width: 5%;
+}
+.section-voucher-creation.journal-voucher .table-accounting-voucher tr.by-or-to td:nth-child(2) 
+{
+    float: none;
+	width: 55%;
+	min-width: 55%;
+}
+.section-voucher-creation.journal-voucher .table-accounting-voucher tr.by-or-to td:nth-child(2) input
+{
+	text-align: left;
+}
+.journal-voucher .table-accounting-voucher tr.by-or-to td:nth-child(3),
+.journal-voucher .table-accounting-voucher tr.by-or-to td:nth-child(4)
+{
+	width: 20%;
+	min-width: 20%;
+}
+.journal-voucher .table-accounting-voucher tr.by-or-to td:nth-child(3) input,
+.journal-voucher .table-accounting-voucher tr.by-or-to td:nth-child(4) input
+{
+	min-width: 140px;
+	text-align: right;
+	float:right;
+}
+
+.section-voucher-creation.journal-voucher .voucher_top_feilds
+{
+	min-height: 145px;
+    max-height: 145px;
+}
+/* .section-voucher-creation.journal-voucher .voucher_top_feilds > div
+{
+	padding: 0 !important;
+} */
+.section-voucher-creation.journal-voucher  .table-accounting-voucher-body
+{
+    height: calc( 100vh - 396px);
+}
+
+
+/* ==========================================================
+            For Journal Voucher  End
+===========================================================*/
+
+/* ==========================================================
+            For Sales Voucher  Start
+===========================================================*/
+
+.customized_voucher .section-voucher-creation.sales_voucher .voucher_top_feilds
+{
+	min-height: 170px;
+    max-height: 170px;
+}
+.customized_voucher .section-voucher-creation.sales_voucher .voucher_datatable .dataTables_scrollBody
+{
+	min-height: calc(100vh - 440px) !important;
+    max-height: calc(100vh - 440px) !important;
+}
+.sales_voucher
+{
+	background: #f3ffe9;
+}
+
+/* ==========================================================
+            For Sales Voucher  End
+===========================================================*/
+
+/* ==========================================================
+            For Purchase Voucher  Start
+===========================================================*/
+
+.purchase-voucher
+{
+	background: #fff4fc;
+}
+/* .purchase-voucher .table-purchase-div
+{
+	min-height: 20rem;
+} */
+.purchase-voucher .table-purchase-voucher
+{
+	margin-top: 20px;
+	width: 100%;
+}
+.purchase-voucher .table-purchase-voucher thead tr th
+{
+	font-weight: 600;
+    border: 1px solid lightgrey;
+    border-top: 2px solid lightgrey;
+    padding: 2px 6px;
+	font-size: 12px;
+}
+.purchase-voucher .table-purchase-voucher tbody tr td 
+{
+    border: 1px solid lightgrey;
+    text-align: center;
+    vertical-align: baseline;
+    padding: 6px;
+}
+.purchase-voucher .table-purchase-voucher tbody tr td:first-child
+{
+	font-weight: 600;
+} 
+.section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td
+{
+	padding:3px 8px;
+	font-size: 12px;
+}
+
+/* .section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td:first-child,
+.section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td:nth-child(2)
+{
+	width: 130px;
+	min-width:130px;
+} */
+/* .section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td:nth-child(3)
+{
+	width:50px;
+} */
+/* .section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td:first-child input,
+.section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td:nth-child(2) input
+{
+	width: 130px;
+	min-width:130px;
+} */
+.section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td input, 
+.section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td select
+{
+	min-width: 100%;
+	padding:3px 6px;
+	text-align: center;
+	font-weight: 400 !important;
+	color: #212529 !important;
+	line-height: normal !important;
+	font-size: 12px;
+}
+.section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td select
+{
+	width: 100px;
+    text-align: left;
+}
+.section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td select:focus
+{
+	line-height: normal;
+}
+
+/* ==========================================================
+            For Purchase Voucher  End
+===========================================================*/
+
+
+/* ==========================================================
+            For Other Vouchers  Start
+===========================================================*/
+
+.credit-note-voucher
+{
+	background: #fef4f5;
+}
+.debit-note-voucher
+{
+	background: #ffffeb;
+}
+.delivery_challan
+{
+	background:#f2fafd !important;
+}
+.customized_voucher .section-voucher-creation.delivery_challan .voucher_top_feilds {
+    min-height: 170px;
+    max-height: 170px;
+}
+.customized_voucher .section-voucher-creation.delivery_challan .voucher_datatable .dataTables_scrollBody
+{
+	min-height: calc(100vh - 436px) !important;
+    max-height: calc(100vh - 466px) !important;
+}
+.section-voucher-creation.other-vouchers .payment-no span:first-child
+{
+	padding: 2px 44px;
+}
+
+/* -----------------------------------------------------------------------
+				 For Delivery Challan page Start Here 
+------------------------------------------------------------------------ */
+
+.section-voucher-creation.delivery-challan-voucher .table-purchase-voucher thead tr th
+{
+	font-size: 14px !important;
+	padding: 8px;
+}
+.section-voucher-creation.delivery-challan-voucher .table-purchase-voucher tbody tr td
+{
+	padding: 0 !important;
+	font-size: 14px;
+}
+.section-voucher-creation.delivery-challan-voucher .table-purchase-voucher tbody tr td input
+{
+	font-size: 14px;
+}
+.section-voucher-creation.delivery-challan-voucher .table-purchase-voucher tbody tr td:first-child input
+{
+	min-width:250px;
+}
+.customized_voucher .section-voucher-creation.delivery_challan .voucher_datatable thead tr th, 
+.customized_voucher .section-voucher-creation.delivery_challan .voucher_datatable tbody tr td
+{
+	max-width: 15% !important;
+    min-width: 15% !important;
+}
+
+.customized_voucher .section-voucher-creation.delivery_challan .voucher_datatable thead tr th:first-child, 
+.customized_voucher .section-voucher-creation.delivery_challan .voucher_datatable tbody tr td:first-child,
+.customized_voucher .section-voucher-creation.delivery_challan .voucher_datatable thead tr th:last-child,
+.customized_voucher .section-voucher-creation.delivery_challan .voucher_datatable tbody tr td:last-child
+{
+    min-width: 27.5% !important;
+    max-width: 27.5% !important;
+}
+
+/* -----------------------------------------------------------------------
+				 For Delivery Challan page End Here 
+------------------------------------------------------------------------ */
+
+/* --- For Customized Voucher page start here --- */
+
+.customized_voucher .section-voucher-creation .party_data
+{
+    font-size: 13px;
+    font-style: italic;
+    color: dimgrey;
+}
+
+.customized_voucher .section-voucher-creation .voucher_top_feilds {
+    min-height: 200px;
+    max-height: 200px;
+	align-items: center !important;
+}
+.customized_voucher .section-voucher-creation .voucher_datatable
+{
+	text-align: center;
+}
+
+.customized_voucher .section-voucher-creation .dataTables_scrollHeadInner,
+.customized_voucher .section-voucher-creation .dataTables_scrollHeadInner table
+{
+    width: 100% !important;
+}
+.customized_voucher .section-voucher-creation .dataTables_scrollHeadInner table thead tr th
+{
+	padding: 2px 2px !important;
+    border-bottom: 1px solid #dee2e6 !important;
+    border-top: 2px solid #dee2e6 !important;
+    font-weight: 600 !important;
+}
+.customized_voucher .section-voucher-creation .dataTables_scrollHeadInner thead tr th:first-child,
+.customized_voucher .section-voucher-creation .dataTables_scrollHeadInner thead tr th:last-child
+{
+	padding: 2px 10px !important;
+}
+.customized_voucher .section-voucher-creation .voucher_datatable thead tr th,
+.customized_voucher .section-voucher-creation .voucher_datatable tbody tr td
+{
+	width: 9% !important;
+}
+.customized_voucher .section-voucher-creation .voucher_datatable thead tr th:first-child,
+.customized_voucher .section-voucher-creation .voucher_datatable tbody tr td:first-child
+{
+	width: 20% !important;
+	text-align: left !important;
+}
+.customized_voucher .section-voucher-creation .voucher_datatable thead tr th:last-child,
+.customized_voucher .section-voucher-creation .voucher_datatable tbody tr td:last-child
+{
+	width: 17% !important;
+    text-align: right !important;
+}
+.customized_voucher .section-voucher-creation .voucher_datatable tbody tr td:last-child input
+{
+	text-align: right;
+}
+.customized_voucher .section-voucher-creation .voucher_datatable .dataTables_scrollBody
+{
+	min-height: calc(100vh - 466px) !important;
+    max-height: calc(100vh - 466px) !important;
+	border-bottom: 0;
+}
+.customized_voucher .section-voucher-creation .voucher_datatable .dataTables_scrollBody::-webkit-scrollbar
+{
+	width:0;
+}
+
+.customized_voucher .section-voucher-creation .voucher_datatable table.dataTable tbody tr {
+    background: transparent;
+}
+.customized_voucher .section-voucher-creation .voucher_datatable table.dataTable tbody>tr.selected, table.dataTable tbody>tr>.selected {
+    background-color: var(--light-yellow)!important;
+}
+.customized_voucher .section-voucher-creation .voucher_datatable table.dataTable tbody tr:first-child td
+{
+	border-top: 0px;
+}
+.customized_voucher .section-voucher-creation .voucher_datatable table.dataTable tbody tr:last-child td{
+	border-bottom: 1px solid #dee2e6;
+}
+.customized_voucher .section-voucher-creation .voucher_datatable table.dataTable tbody tr td
+{
+	padding:0 2px;
+}
+
+/* .customized_voucher .section-voucher-creation .scrollable input, .customized_voucher .section-voucher-creation .scrollable select
+	{
+		min-width: 100% !important;
+		max-width: 100% !important;
+	}
+	.customized_voucher .section-voucher-creation .scrollable tbody tr td
+	{
+		overflow-x:auto;
+		padding: 3px 2px !important;
+	}
+	.customized_voucher .section-voucher-creation .scrollable tbody tr td::-webkit-scrollbar
+	{
+		width:0px;
+		height: 0px;
+		padding: 0px !important;
+		margin:0px !important;
+	}
+	.customized_voucher .section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td:first-child,
+	.customized_voucher .section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td:nth-child(2),
+	.customized_voucher .section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td:nth-child(5),
+	.customized_voucher .section-voucher-creation.purchase-voucher .table-purchase-voucher tbody tr td:nth-child(6)
+	{
+		padding: 0px !important;
+	}
+
+	.customized_voucher .scrollable table
+	{
+		width: 100%;
+		border-collapse: collapse;
+		table-layout: fixed;
+	}
+
+	.customized_voucher .scrollable thead,
+	.customized_voucher .scrollable tfoot,
+	.customized_voucher .scrollable tbody,
+	.customized_voucher .scrollable th,
+	.customized_voucher .scrollable td
+	{
+		display: block;
+		width: 100%;
+	}
+
+	.customized_voucher .scrollable thead,
+	.customized_voucher .scrollable tfoot,
+	.customized_voucher .scrollable tbody
+	{
+		overflow-y: scroll;
+	}
+
+	.customized_voucher .scrollable thead,
+	.customized_voucher .scrollable tfoot
+	{
+		-ms-overflow-style: none;
+	}
+
+	.customized_voucher .scrollable thead::-webkit-scrollbar,
+	.customized_voucher .scrollable tfoot::-webkit-scrollbar,
+	.customized_voucher .scrollable tbody::-webkit-scrollbar
+	{
+		visibility: hidden;
+		width: 0;
+	}
+
+	.customized_voucher .scrollable tbody tr td,
+	.customized_voucher .scrollable tbody tr th
+	{
+		min-width: 7%;
+	}
+
+	.customized_voucher .scrollable thead tr th:first-child,
+	.customized_voucher .scrollable thead tr th:nth-child(2),
+	.customized_voucher .scrollable thead tr th:last-child,
+	.customized_voucher .scrollable tbody tr td:first-child,
+	.customized_voucher .scrollable tbody tr td:nth-child(2),
+	.customized_voucher .scrollable tbody tr td:last-child
+	{
+		min-width: 10%;
+		max-width: 10%;
+	}
+	.customized_voucher .scrollable tbody tr td.gst
+	{
+		min-width:3.5%;
+		max-width:3.5%;
+	}
+
+	.customized_voucher .scrollable tbody
+	{
+		min-height: calc( 100vh - 510px);
+		max-height: calc( 100vh - 510px);
+		position: relative;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
+	}
+
+	.customized_voucher .scrollable tr
+	{
+		display: flex;
+	}
+
+	.customized_voucher .scrollable tbody th,
+	.customized_voucher .scrollable tbody td
+	{
+		border-top: none;
+	}
+
+	.customized_voucher .scrollable th:not(:last-child),
+	.customized_voucher .scrollable td:not(:last-child)
+	{
+		border-right: none;
+	}
+
+	.customized_voucher .purchase-voucher .scrollable thead tr th
+	{
+		padding: 2px;
+	}
+
+	.customized_voucher .scrollable thead tr th.gst div:nth-child(2)
+	{
+		margin-top:4px;
+		display: flex;
+		justify-content: space-around;
+} */
+
+/* --- For Customized Voucher page End here --- */
+
+/* ==========================================================
+            For Other Vouchers  End
+===========================================================*/
+
+
+
+
+
+
+
+
+
+/* ================================================================
+    For Old Vouchers View Modal & svaed accounts view modal 
+=================================================================== */
+.modal-dialog
+{
+	inset:auto !important;
+}
+
+.modal-old-vouchers
+{
+	overflow: hidden !important;
+	width: auto;
+	right: 170px;
+	left: inherit;
+	padding-right: 0 !important;
+}
+.modal-old-vouchers .modal-dialog
+{
+    margin-top: 71px;
+	min-width: 300px;
+	height: 100%;
+}
+.modal-old-vouchers .modal-content
+{
+	box-shadow: none;
+    border: 1px solid #696969;
+    border-radius: 0;
+	height: calc(100% - 71px) !important;
+}
+.modal-old-vouchers .modal-header
+{
+	padding: 0 12px;
+    border-radius: 0;
+	color: #fff;
+    font-size: 15px;
+	background: var(--blue) !important;
+	height: 26px;
+}
+.modal-old-vouchers .modal-body
+{
+	background: #e2f1fc;
+	padding: 0;
+	overflow: hidden;
+}
+.modal-old-vouchers .modal-body .key-control-menu
+{
+	height: calc(100% - 109px) !important;
+	overflow:auto;
+}
+.modal-old-vouchers .modal-body .key-control-menu ul
+{
+	list-style: none;
+	padding: 0;
+}
+.modal-old-vouchers .modal-body .key-control-menu ul li
+{
+	padding: 0 12px;
+	outline: none;
+    cursor: default;
+}
+.modal-old-vouchers .modal-body .key-control-menu ul li:first-child
+{
+	margin-top: 20px !important;
+	text-align: right !important;
+}
+.modal-old-vouchers .modal-body .key-control-menu ul li:nth-child(2)
+{
+	border-bottom: 1px solid lightgray;
+	text-align: right;
+	margin-bottom: 20px;
+}
+.modal-old-vouchers .modal-body .key-control-menu ul li.active,
+.modal-old-vouchers .modal-body .key-control-menu ul li.selected
+{
+	background: var(--dark-yellow);
+}
+.modal-old-vouchers .modal-body .key-control-menu ul li a
+{
+	text-decoration: none;
+	color: #212529;
+	width: 100%;
+	display: inline-block;
+	outline:0 !important;
+}
+
+/*  created by mashu */
+.modal-create-side-new
+{
+	overflow: hidden !important;
+	padding-right: 0 !important;
+	width: auto;
+}
+  .modal-create-side-new .create-modal-dialog-centered{
+	min-height: (100% - -10.5rem) !important;
+}
+  .modal-create-side-new .modal-dialog
+{
+	min-width: 320px !important;
+    max-width: 320px;
+    margin-top: 76px;
+    max-height: 560px;
+    height: 560px;
+    overflow-y: hidden;
+    margin-right: auto !important;
+}
+  .modal-create-side-new .modal-content
+{
+	box-shadow: none;
+    border: 1px solid #696969;
+    border-radius: 0;
+	height: calc(100% - 10px) !important;
+}
+  .modal-create-side-new .modal-header
+{
+	padding: 0 12px;
+    border-radius: 0;
+	color: #fff;
+    font-size: 15px;
+	background: var(--blue) !important;
+	height: 26px;
+}
+  .modal-create-side-new .modal-body
+{
+	background: #e2f1fc;
+	padding: 0;
+	overflow: hidden;
+}
+  .modal-create-side-new .modal-body .key-control-menu
+{
+	height: calc(100% - 109px) !important;
+  
+}
+  .modal-create-side-new .modal-body .key-control-menu ul
+{
+	list-style: none;
+	padding: 0;
+	/* overflow-y: scroll; */
+    max-height: 500px;  
+	overflow-y: auto;
+	
+}
+.modal-create-side-new .modal-body .key-control-menu .wrapper {
+
+	position: absolute;
+	z-index: 9999999999;
+
+}
+
+.modal-create-side-new .modal-body .key-control-menu .outer_div {
+	width: 318px;
+	height: 518px;
+	overflow: hidden;
+}
+
+.modal-create-side-new .modal-body .key-control-menu .ul_movement {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	max-height: 100%;
+	width: 100%;
+	background: #e2f1fc;
+}
+.modal-create-side-new .modal-body .key-control-menu .ul_movement li.masters_list_side_heading {
+	cursor: pointer;
+    margin-bottom: 0px;
+    font-weight: 700;
+    padding: 2px 8px;
+	font-size: 13px;
+}
+
+.modal-create-side-new .modal-body .key-control-menu .element {
+	width: 100%;
+	cursor: pointer;
+	padding-left: 14px;
+	color: #212529;
+}
+
+.modal-create-side-new .modal-body .key-control-menu .element-hover {
+	background-color: var(--dark-yellow);
+}
+
+
+.modal-backdrop.fade.show {
+	width: calc(100% - 170px);
+	height: calc(100% - 71px);
+	top: 71px;
+}
+
+
+
+  .modal-create-side-new .modal-body .key-control-menu ul li
+{
+	padding: 0 12px;
+	outline: none;
+    cursor: default;
+}
+  .modal-create-side-new .modal-body .key-control-menu ul li .created_company_name
+{
+	display: flex;
+}
+  .modal-create-side-new .modal-body .key-control-menu ul li .created_company_name .first
+{
+	min-width: 66%;
+}
+  .modal-create-side-new .modal-body .key-control-menu ul li .created_company_name .second
+{
+	min-width: 10%;
+}
+  .modal-create-side-new .modal-body .key-control-menu ul li:first-child
+{
+	margin-top: 20px !important;
+	text-align: right !important;
+}
+  .modal-create-side-new .modal-body .key-control-menu ul li:nth-child(2)
+{
+	border-bottom: 1px solid lightgray;
+	text-align: right;
+	margin-bottom: 20px;
+}
+  .modal-create-side-new .modal-body .key-control-menu ul.ul_movement li:nth-child(2)
+{
+	border-bottom: 1px solid lightgray;
+	text-align: right;
+	margin-bottom: 0px;
+}
+  .modal-create-side-new .modal-body .key-control-menu ul li.active,
+  .modal-create-side-new .modal-body .key-control-menu ul li.selected
+{
+	background: var(--dark-yellow);
+}
+  .modal-create-side-new .modal-body .key-control-menu ul li a
+{
+	text-decoration: none;
+	color: #212529;
+	width: 100%;
+	display: inline-block;
+	outline:0 !important;
+}
+/*  created by mashu */
+
+/* modal header create written by mashu start here*/
+.modal-header-create
+{
+	overflow: hidden !important;
+	padding-right: 0 !important;
+	width: auto;
+}
+.modal-header-create .create-modal-dialog-centered{
+	min-height: (100% - -10.5rem) !important;
+}
+.modal-header-create .modal-dialog
+{
+	min-width: 320px !important;
+    max-width: 700px;
+    margin-top: 50px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.modal-header-create .modal-content
+{
+	box-shadow: none;
+    border: 1px solid #696969;
+    border-radius: 0;
+	max-height: 500px;
+	min-height: 500px;
+	height: calc(100% - 71px) !important;
+}
+.modal-header-create .modal-header
+{
+	padding: 0 12px;
+    border-radius: 0;
+	color: #fff;
+    font-size: 15px;
+	background: var(--blue) !important;
+	height: 26px;
+}
+.modal-header-create .modal-body
+{
+	background: #e2f1fc;
+	padding: 0;
+	overflow: hidden;
+}
+.modal-header-create .modal-body .key-control-menu
+{
+	height: calc(100% - 109px) !important;
+	overflow:auto;
+}
+.modal-header-create .modal-body .key-control-menu ul
+{
+	list-style: none;
+	padding: 0;
+}
+.modal-header-create .modal-body .key-control-menu ul li
+{
+	padding: 0 12px;
+	outline: none;
+    cursor: default;
+}
+.modal-header-create .modal-body .key-control-menu ul li .created_company_name
+{
+	display: flex;
+}
+.modal-header-create .modal-body .key-control-menu ul li .created_company_name .first
+{
+	min-width: 66%;
+}
+.modal-header-create .modal-body .key-control-menu ul li .created_company_name .second
+{
+	min-width: 10%;
+}
+.modal-header-create .modal-body .key-control-menu ul li:first-child
+{
+	margin-top: 20px !important;
+	text-align: right !important;
+}
+.modal-header-create .modal-body .key-control-menu ul li:nth-child(1)
+{
+	border-bottom: 1px solid lightgray;
+	text-align: right;
+	margin-bottom: 20px;
+}
+.modal-header-create .modal-body .key-control-menu ul li.active,
+.modal-header-create .modal-body .key-control-menu ul li.selected
+{
+	background: var(--dark-yellow);
+}
+.modal-header-create .modal-body .key-control-menu ul li a
+{
+	text-decoration: none;
+	color: #212529;
+	width: 100%;
+	display: inline-block;
+	outline:0 !important;
+}
+/* modal header create written by mashu end here*/
+
+/*=============================================================
+             For payment transaction modal Start 
+==============================================================*/
+
+.modal-payment
+{
+	color: #000 !important;
+	width: calc(100% - 170px);
+	padding: 0 !important;
+	height: calc(100% - 71px);
+    margin-top: 71px;
+    overflow-y: hidden !important;
+}
+.modal-payment .modal-dialog
+{
+	max-width: 700px;
+	margin: auto auto;
+}
+.modal-payment .modal-content
+{
+	box-shadow: none;
+    border-radius: 0;
+	min-height: 500px;
+}
+.modal-payment .modal_header .payment_main_head
+{
+	color: #000 !important;
+    padding: 10px;
+    display: block;
+    background: white !important;
+    border-bottom: 2px solid lightgray;
+    border-radius: 0;
+    font-size: 14px;
+    text-align: center;
+}
+.modal-payment .modal_header .payment_sub_head
+{
+	padding: 2px 6px;
+    font-weight: 600;
+    border-bottom: 1px solid lightgray;
+    margin: 0;
+}
+.modal-payment .modal_header .payment_sub_head div:nth-child(2)
+{
+	text-align: right;
+}
+.modal-payment .modal_header div span
+{
+	font-weight: 600;
+}
+.modal-payment .modal-body 
+{
+	padding: 0;
+	max-height: calc(100vh - 330px);
+    min-height: calc(100vh - 330px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.modal-payment .modal-body::-webkit-scrollbar
+{
+	width: 0;
+}
+.modal-payment .modal-body .table-payment-transaction
+{
+	width: 100%;
+	margin-top: 30px;
+}
+.modal-payment input
+{
+    border: 1px solid transparent;
+	font-weight:600;
+	width: 200px;
+	align-self: center;
+    /* font-size:14px; */
+    font-size:12px;
+}
+.modal-payment input:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+	outline: none !important;
+}
+.modal-payment .width-dynamic
+{
+	min-width: 200px;
+	max-width: 500px;
+}
+.modal-payment .modal-body .table-payment-transaction thead td:nth-child(2), .modal-payment .modal-body .table-payment-transaction thead td:nth-child(2) input
+{
+	text-align: right;
+}
+.modal-payment .modal-body .table-payment-transaction tbody input
+{
+	margin-left:10px;
+}
+.modal-payment .modal-body .table-payment-transaction tbody em
+{
+	margin-left: 20px;
+	color: #000;
+}
+.modal-payment .modal-body .table-payment-transaction tbody span
+{
+	float: right;
+}
+.modal-payment .modal-body .table-payment-transaction tbody .pds-note
+{
+	vertical-align: text-top;
+}
+.modal-payment .modal-body .table-payment-transaction tbody .pds-note td:nth-child(2)
+{
+	padding: 0 16px;
+}
+.modal-payment .modal-body textarea
+{
+    width: 100%;
+	font-weight: 600;
+	border: none;
+	outline: none;
+	padding: 0;
+	resize: none;
+}
+.modal-payment .modal-body textarea::-webkit-scrollbar
+{
+	width: 0;
+}
+.modal-payment .modal-body textarea:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+}
+.modal-payment .modal-body .table-payment-transaction tbody .transaction-radio input
+{
+	width: auto !important;
+	margin-left: 0;
+    margin-right: 6px;
+}
+.modal-payment .modal-body .table-payment-transaction tbody .transaction-radio label
+{
+	margin-bottom: 0 !important;
+	font-weight: 600 !important;
+	margin-left: 20px;
+}
+.modal-payment .modal-body select
+{
+	border:1px solid transparent !important;
+	font-weight:600;
+	width: 200px;
+	align-self: center;
+    font-size:13px;
+	padding: 2px 0;
+	outline: none !important;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+	margin-left: 20px;
+}
+.modal-payment .modal-body select:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+	-webkit-appearance: progress-bar;
+    -moz-appearance: progress-bar;
+}
+
+
+/*=========================================================================
+        For Choose Payment Mode / Transaction Type modal start 
+==========================================================================*/
+
+.payment-transaction .modal-dialog {
+    min-width: 220px;
+}
+.payment-transaction .key-control-menu ul li:first-child
+{
+	border-bottom: 1px solid lightgray;
+    margin-bottom: 20px;
+}
+.payment-transaction .key-control-menu ul li:nth-child(2)
+{
+	text-align: left !important;
+    margin-bottom: 0 !important;
+    border-bottom: 0px solid !important;
+}
+
+/* For  List of Banks modal start */
+.list-of-banks .modal-body .key-control-menu ul li:first-child
+{
+	text-align: left !important;
+}
+.list-of-banks .modal-body .key-control-menu ul li:nth-child(2)
+{
+	text-align: left !important;
+    margin-bottom: 0 !important;
+    border-bottom: 0px solid !important;
+}
+
+
+/*=========================================================================
+        For Product / Service Description modal start 
+==========================================================================*/
+
+.modal-old-vouchers.modal-product-service .modal-dialog
+{
+	min-width: 220px;
+}
+
+
+/*=========================================================================
+        For Item Name modal start 
+==========================================================================*/
+
+.modal-old-vouchers.modal-item-name .modal-dialog
+{
+	min-width: 220px;
+}
+
+
+/*=========================================================================
+        For Reasons modal start 
+==========================================================================*/
+
+.modal-old-vouchers.modal-reasons .modal-dialog
+{
+	min-width: 270px;
+}
+
+
+/*=========================================================================
+        For Left Large modal start 
+==========================================================================*/
+
+.modal_left_large
+{
+    width: calc(100% - 390px);
+}
+.modal_left_large .modal-dialog {
+    max-width: calc(100vw - 390px);
+    min-width: calc(100vw - 390px);
+    margin: 0;
+    margin-right: auto;
+	align-items: inherit;
+}
+.modal_left_large .modal-dialog .modal-content
+{
+	min-height: calc( 100vh - 71px);
+    max-height: calc( 100vh - 71px);
+	font-size: 14px !important;
+}
+.modal_left_large .modal-dialog .modal-content span
+{
+	font-weight: 600;
+}
+.modal_left_large .modal-dialog .modal-content span.colon
+{
+	float:right;
+}
+.modal_left_large .modal-dialog .modal-content .modal_header
+{
+	text-align: left !important;
+    height: 100px;
+    border-bottom: 2px solid lightgray;
+	padding:8px
+}
+.modal_left_large .modal-dialog .modal-content .modal_header > .row,
+.modal_left_large .modal-dialog .modal-content .modal-body .body_content > .col-md-12 > .row
+{
+	align-items: center;
+}
+.modal_left_large .modal-dialog .modal-content .modal-body 
+{
+	max-height: calc(100vh - 175px);
+    min-height: calc(100vh - 175px);
+}
+.modal_left_large .modal-dialog .modal-content .modal-body > .row
+{
+	height:100%;
+    margin: 0;
+}
+.modal_left_large .modal-dialog .modal-content .modal-body .left_side_content
+{
+	border-right: 1px solid lightgray !important;
+}
+.modal_left_large .modal-dialog .modal-content .modal-body > .row > .col-md-6 
+{
+    padding: 15px 10px !important;
+}
+.modal_left_large .modal-dialog .modal-content .modal-body .body_title h6
+{
+	font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid lightgray;
+    padding: 0 8px 2px 2px;
+    width: fit-content;
+	margin-bottom: 4px;
+}
+
+
+.modal_left_large .modal-dialog .modal-content .modal-body .body_content .col-md-6 select
+{
+	font-weight:600;
+	width: 200px;
+	align-self: center;
+    font-size:14px;
+	padding: 2px 0 !important;
+	outline: none !important;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+	border: 1px solid transparent !important;
+	margin-left: 0;
+}
+.modal_left_large .modal-dialog .modal-content .modal-body .body_content .col-md-6 select:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+	-webkit-appearance: progress-bar;
+    -moz-appearance: progress-bar;
+}
+.modal_left_large .modal-dialog .modal-content .modal-body .body_content .col-md-12 > .row
+{
+	margin-bottom: 6px;
+}
+
+/* Height Auto Set For Modal Start Here */
+.modal_left_large.h_auto .modal-dialog
+{
+    align-items: end;
+}
+.modal_left_large.h_auto .modal-dialog .modal-content,
+.modal_left_large.h_auto .modal-dialog .modal-content .modal-body
+{
+	min-height: auto;
+    max-height: fit-content;
+}
+.modal_left_large.h_auto .modal-dialog .modal-content .modal_header
+{
+    height: auto;
+}
+/* Height Auto Set For Modal End Here */
+
+
+/*=========================================================================
+        For Accept and Save modal start 
+==========================================================================*/
+
+.masters_add_edit.accept_save
+{
+    right: 170px;
+}
+
+/*=========================================================================
+        For Accept and Save modal End 
+==========================================================================*/
+
+/*=========================================================================
+        For Company Creation modal start 
+==========================================================================*/
+
+.company_creation .left_side_content input
+{
+    /* width:100% !important; */
+    width:80% !important;
+}
+.company_creation .right_side_content input
+{
+    width: fit-content;
+}
+.company_creation .bottom_side_content
+{
+	border-top: 1px solid lightgray;
+    padding: 10px 10px 30px 10px;
+}
+
+/*=========================================================================
+        For Company Creation modal End 
+==========================================================================*/
+
+/*=========================================================================
+        For Centered Large modal start 
+=========================================================================*/
+
+.modal_centered_lg .modal-dialog {
+    max-width: 1000px;
+    min-height: calc(100vh - 71px);
+    max-height: calc(100vh - 71px);
+}
+.modal_centered_lg .modal-dialog .modal-content
+{
+	min-height: 500px;
+}
+
+/*=========================================================================
+        For Centered Large modal End 
+=========================================================================*/
+
+
+/*=========================================================================
+        For Common Styles in modal Start 
+=========================================================================*/
+
+.modal_common
+{
+	color: #000 !important;
+	width: calc(100% - 170px);
+	padding: 0 !important;
+	height: calc(100% - 71px);
+    margin-top: 71px;
+    overflow-y: hidden !important;
+}
+.modal_common .modal-dialog
+{
+	margin: auto auto;
+}
+.modal_common .modal-dialog-md
+{
+    max-width: 600px;
+}
+.modal_common .modal-dialog-sm
+{
+	max-width: 350px;
+}
+.modal_common .modal-content
+{
+	box-shadow: none;
+    border-radius: 0;
+}
+.modal_common .modal_header .main_head
+{
+    padding: 10px;
+    display: block;
+    border-bottom: 2px solid lightgray;
+    border-radius: 0;
+	text-align: center;
+}
+.modal_common .modal_header .main_head h6
+{
+	color: #000 !important;
+	font-size: 15px !important;
+	font-weight: 600 !important;
+}
+.modal_common .modal_header .payment_sub_head,
+.modal_common .modal_header .sub_head
+{
+	padding: 2px 6px;
+    font-weight: 600;
+    border-bottom: 1px solid lightgray;
+    margin: 0;
+}
+.modal_common .modal_header .sub_head h6
+{
+	margin: 0;
+    text-align: center;
+    padding: 2px 0;
+    font-size: 14px;
+}
+.modal_common .modal-body
+{
+	display: flex;
+}
+.modal_common .modal-body h6
+{
+	font-size: 15px;
+    margin-bottom: 4px;
+	margin-top:10px;
+	
+}
+.modal_common .modal-body h6.tds_side_headding,
+.modal_common .modal-body h6.tcs_side_headding{
+	/* text-align: center !important; */
+    text-decoration-color: lightgray;
+    text-underline-offset: 6px;
+	margin-bottom: 10px;
+}
+
+.modal_common .modal-body label
+{
+	width:100%;
+	font-weight: 400;
+	margin-bottom: 0 !important;
+}
+.modal_common .modal-body
+{
+    padding: 0 15px !important;
+}
+.modal_common .modal-body > .row
+{
+	min-height: 100%;
+    min-width: 100%;
+    margin: 0 auto;
+}
+.modal_common .modal-body .left_side_content
+{
+	border-right:1px solid lightgray;
+}
+.modal_common .modal-body .bottom_section_in_left_side
+{
+	border-top: 1px solid lightgray;
+    border-right: 1px solid lightgrey;
+    padding-top: 10px;
+}
+
+.modal_common .modal-body .gst_bottom_side_content
+{
+	border-top:1px solid lightgray;
+	padding-top: 6px;
+}
+.modal_common .modal-body span.colon
+{
+	float:right;
+}
+.modal_common .modal-body .sub_features label
+{
+	padding-left:6px;
+}
+.modal_common .modal-body .sub_features .under_sub_features label
+{
+	padding-left:12px;
+}
+.modal_common .modal-body .sub_features.disabled
+{
+	color:#696969;
+}
+.modal_common .modal-body .under_sub_features.disabled label
+{
+	color:#696969 !important;
+}
+.modal_common input,
+.modal_common select
+{
+    border: 1px solid transparent;
+	background: transparent;
+	font-weight:600;
+	width: 100%;
+	align-self: center;
+	font-size:13px;
+    margin-left: 0 !important;
+	padding: 0px 2px !important;
+	outline: none !important;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+}
+.modal_common input:focus,
+.modal_common select:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+	outline: none !important;
+	-webkit-appearance: progress-bar;
+    -moz-appearance: progress-bar;
+}
+.modal_common .table_lut_bond input:focus,
+.modal_common .table_lut_bond select:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: green !important;
+}
+.modal_common .table_lut_bond tr:focus,
+.modal_common .table_lut_bond tr:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: green !important;
+}
+
+.modal_common .modal-body select.yes_no
+{
+    min-width: 60px;
+    max-width: 60px;
+}
+.modal_common .modal-body select.yes_no:focus
+{
+	-webkit-appearance: none !important;
+}
+.modal_common .modal-body textarea
+{
+    width: 100%;
+	font-weight: 600;
+	border: 1px solid transparent;
+	outline: none;
+	padding: 0;
+	resize: none;
+}
+.modal_common .modal-body textarea::-webkit-scrollbar
+{
+	width: 0;
+}
+.modal_common .modal-body textarea:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+}
+.modal_common .w-max-100
+{
+	width: auto;
+    max-width: 100px;
+}
+.modal_common .w-max-50
+{
+	width: auto;
+    max-width: 50px;
+	margin-right:6px;
+}
+
+.modal_create_header
+{
+	overflow: hidden !important;
+	width: auto;
+	right: 274px;
+	left: inherit;
+	padding-right: 0 !important;
+}
+
+/*=========================================================================
+        For Common Styles in modal End 
+=========================================================================*/
+
+/*=========================================================================
+        For Company Features modal start 
+==========================================================================*/
+
+.company_features .modal_header .payment_sub_head div span
+{
+	float:right;
+}
+.company_features .modal_header .payment_sub_head div:nth-child(2)
+{
+	text-align:left;
+}
+
+/*=========================================================================
+        For Company Features modal End 
+==========================================================================*/
+
+/*=========================================================================
+        For GST Details modal Start 
+==========================================================================*/
+
+.gst_details input,
+.gst_details select
+{
+	width: 100% !important;
+    margin-right: 18px;
+}
+
+
+/*=========================================================================
+        For GST Details modal End 
+==========================================================================*/
+
+/*=========================================================================
+        For TDS Details modal Start 
+==========================================================================*/
+
+.modal_tds_details .modal-body,
+.modal_tcs_details .modal-body
+{
+    display: block;
+	padding: 10px 15px 20px !important;
+}
+.modal_tds_details .modal-body .content_title h6,
+.modal_tcs_details .modal-body .content_title h6
+{
+	margin: 10px auto;
+    width: fit-content;
+    border-bottom: 1px solid lightgray;
+    padding: 0 6px 4px;
+}
+
+/*=========================================================================
+        For TDS Details modal End 
+==========================================================================*/
+
+/*=========================================================================
+        For Set / Alter person Details modal Start 
+==========================================================================*/
+
+.set_alter_person_details_modal .modal-body
+{
+    padding: 15px !important;
+}
+.set_alter_person_details_modal .modal-footer
+{
+    display: block;
+}
+
+/*=========================================================================
+        For Set / Alter person Details modal End 
+==========================================================================*/
+
+/*=========================================================================
+        For VAT Details modal End 
+==========================================================================*/
+
+.vat_details_modal .modal-body
+{
+    padding: 15px !important;
+}
+
+/*=========================================================================
+        For VAT Details modal start 
+==========================================================================*/
+
+
+/*=========================================================================
+        For Payroll Statutory Details modal End 
+==========================================================================*/
+
+.payroll_statutory_modal_details .modal_header h6
+{
+	margin-bottom: 0;
+}
+.payroll_statutory_modal_details .modal-footer
+{
+	display: block;
+    text-align: center;
+}
+.payroll_statutory_modal_details .modal-body
+{
+    padding: 0 15px 15px !important;
+}
+
+/*=========================================================================
+        For Payroll Statutory Details modal start 
+==========================================================================*/
+
+
+/*=========================================================================
+        For Multiple Addresses modal start 
+==========================================================================*/
+
+.multiple_addresses_modal .modal-content
+{
+	min-height: 500px;
+	max-height: 500px;
+}
+.multiple_addresses_modal .modal-body
+{
+    padding: 15px 0 !important;
+}
+.multiple_addresses_modal .modal-body > .row
+{
+	display:block;
+}
+.multiple_addresses_modal .modal-body > .row > .col-md-12
+{
+	padding: 0 !important;
+}
+.multiple_addresses_modal .modal-body > .row > .col-md-12:last-child
+{
+	overflow-y: auto;
+	height: 390px;
+}
+.multiple_addresses_modal .modal-body table
+{
+	width:100% !important;
+    margin-bottom: 20px;
+}
+.multiple_addresses_modal .modal-body > .row > .col-md-12:last-child::-webkit-scrollbar
+{
+	width:0;
+}
+.multiple_addresses_modal .modal-body table tr td
+{
+	font-weight: 600;
+}
+.multiple_addresses_modal .modal-body table tr td:first-child
+{
+	padding-left: 20px;
+}
+.multiple_addresses_modal .modal-body .primary_address span
+{
+	padding: 0 20px;
+}
+
+.multiple_addresses_modal .modal-body input
+{
+	max-width: 250px;
+	font-weight: 600;
+}
+.multiple_addresses_modal .modal-body .primary_address input:focus
+{
+	background-color: var(--dark-yellow);
+}
+
+/*=========================================================================
+        For Multiple Addresses modal start 
+==========================================================================*/
+
+/*=========================================================================
+        For Multiple Address Details modal start 
+==========================================================================*/
+
+.multiple_address_details_modal .modal-body
+{
+	padding:15px !important;
+}
+
+/*=========================================================================
+        For Multiple Address Details modal start 
+==========================================================================*/
+
+
+/*=========================================================================
+        For Masters modal Start  
+==========================================================================*/
+.masters
+{
+    width: calc(100% - 170px);
+}
+.masters.modal-old-vouchers .modal-dialog
+{
+    min-width: 250px;
+	max-width:250px;
+}
+.masters.modal-old-vouchers .modal-body .key-control-menu ul li:first-child
+{
+	text-align: left !important;
+}
+.masters.modal-old-vouchers .modal-body .key-control-menu ul li:nth-child(2) {
+    border-bottom: none;
+    text-align: left;
+    margin-bottom: 0;
+}
+/*=========================================================================
+        For Masters modal End 
+==========================================================================*/
+
+/*=========================================================================
+        For Ship & Order Details modal End 
+==========================================================================*/
+
+.modal_ship_order_details .modal-content
+{
+    min-height: auto;
+}
+.modal_ship_order_details .modal-body
+{
+	max-height: max-content;
+    min-height: auto;
+    overflow: hidden;
+    padding: 20px;
+}
+.modal_ship_order_details .modal_title h6
+{
+	margin: auto;
+    width: fit-content;
+    font-weight: 600;
+    border-bottom: 1px solid lightgray;
+    padding: 2px 4px;
+    margin-bottom: 12px;
+	font-size:15px !important;
+}
+.modal_ship_order_details .modal_content
+{
+	padding-bottom:20px;
+}
+.modal_ship_order_details .modal_content label
+{
+	font-weight: 400;
+	width: 100%;
+}
+.modal_ship_order_details .modal_content label span
+{
+	float:right;
+}
+.modal_ship_order_details .modal_content input.date
+{
+	width:120px;
+}
+.modal_ship_order_details .modal-body select
+{
+	margin-left:0;
+}
+
+/*=========================================================================
+        For Ship & Order Details modal End 
+==========================================================================*/
+
+/*=========================================================================
+        For Masters Start 
+==========================================================================*/
+
+.masters_pages .sub-header
+{
+    right: 0;
+}
+.masters_pages .content-wrapper
+{
+    margin-right: 0;
+}
+
+.section_masters
+{
+    height: calc(100vh - 71px);
+	background: aliceblue;
+}
+.section_masters > .d-flex
+{
+    height: calc( 100% - 2px);
+	position: relative;
+}
+.section_masters #data_table_wrapper
+{
+	max-height: calc(100% - 30%);
+    min-height: calc(100% - 30%);
+    overflow-y: hidden;
+    overflow-x: hidden;
+    min-width: 90%;
+    max-width: 90%;
+    margin: auto;
+    position: relative;
+}
+.section_masters #data_table_wrapper .dataTables_scrollHead .dataTables_scrollHeadInner
+{
+	width:100% !important;
+}
+.section_masters #data_table_wrapper .dataTables_scrollBody
+{
+    border-bottom: none;
+	overflow-x:hidden !important;
+}
+.section_masters #data_table_wrapper .dataTables_info
+{
+    color: var(--blue);
+}
+.section_masters .dataTables_filter
+{
+	float: left !important;
+    text-align: left !important;
+	/* position: absolute;
+    left: 0;
+    top: 0; */
+}
+.section_masters .dataTables_filter label
+{
+	display: flex;
+    width: fit-content;
+    align-items: center;
+}
+.section_masters .dataTables_filter label i
+{
+	background: var(--blue);
+    color: #fff;
+    height: 34px;
+    line-height: 34px;
+    padding: 0 12px;
+}
+.section_masters table
+{
+	margin-bottom: 90px;
+	width:100% !important;
+    /* margin-top: 50px !important; */
+}
+.section_masters .table td,
+.section_masters .table th
+{
+    padding: .25rem;
+}
+.section_masters .table tr td:first-child,
+.section_masters .table tr th:first-child
+{
+	width: 6% !important;
+	text-align: center;
+}
+.section_masters .table th
+{
+	font-weight: 500;
+    background: var(--blue);
+    color: #fff;
+    padding-right: 26px;
+}
+
+.section_masters #data_table_wrapper input[type="search"]
+{
+	height: 28px;
+    border-radius: 0;
+    outline: none !important;
+    box-shadow: none !important;
+    margin: 0;
+    border: 2px solid lightgray;
+}
+.section_masters #data_table_wrapper input[type="search"]:focus
+{
+	border: 2px solid var(--dark-yellow) !important;
+}
+.section_masters .masters_buttons
+{
+	position: absolute;
+    left: 0;
+    right: 0;
+    width: 90%;
+    margin: auto;
+    top: 30px;
+}
+
+.section_masters .masters_buttons a.btn {
+    background: var(--blue);
+    color: #fff;
+    border-radius: 0;
+    padding: 3px 10px 7px 10px;
+    line-height: normal;
+    font-size: 14px;
+    margin-right: 8px;
+}
+.section_masters .masters_buttons a.btn i
+{
+	padding-right: 10px;
+    font-size: 13px;
+}
+.section_masters .masters_buttons a.btn span {
+    border-bottom: 1px solid #a6cfed;
+    color: #a6cfed;
+    padding-right: 2px;
+	font-weight: 500;
+}
+.section_masters .masters_buttons a.btn span.double
+{
+    border-bottom: 4px double #a6cfed;
+}
+.section_masters .masters_buttons .col-md-6:nth-child(2)
+{
+	text-align: end;
+}
+
+/* for add edit modal Start here */
+.masters_add_edit
+{
+	right: 0;
+    left: 0;
+}
+.masters_add_edit .modal-dialog {
+    min-width: 300px;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+.masters_add_edit .modal-dialog .modal-content {
+    box-shadow: none;
+    border: 1px solid #696969;
+    border-radius: 0;
+    height: auto !important;
+}
+.masters_add_edit .modal-dialog .modal-content .modal-body
+{
+    padding: 15px;
+}
+.masters_add_edit .modal-dialog .modal-content .modal-body label
+{
+	color: var(--blue);
+    font-weight: 500;
+    font-size: 14px;
+	margin-bottom: 3px;
+    margin-left: 3px;
+}
+.masters_add_edit .modal-dialog .modal-content .modal-body label span
+{
+	margin-left: 4px;
+	color:red;
+}
+.masters_add_edit .modal-dialog .modal-content .modal-body .form-control
+{
+	padding: 6px;
+    border-radius: 0;
+    line-height: normal;
+    height: 34px;
+    font-size: 14px;
+	outline:none;
+	box-shadow: none;
+}
+.masters_add_edit .modal-dialog .modal-content .modal-body .form-control:focus
+{
+	border: 2px solid var(--dark-yellow);
+}
+.masters_add_edit .modal-dialog .modal-content .modal-body a.btn
+{
+	background: var(--blue);
+    color: #fff;
+    border-radius: 0;
+    padding: 3px 10px 7px 10px;
+    line-height: normal;
+    font-size: 14px;
+    margin-top: 15px;
+}
+.masters_add_edit .modal-dialog .modal-content .modal-body a.btn:nth-child(2)
+{
+	float:right;
+}
+.masters_add_edit .modal-dialog .modal-content .modal-body a.btn i
+{
+	padding-right: 10px;
+    font-size: 13px;
+}
+
+.masters_add_edit .modal-dialog .modal-content .modal-body a.btn span {
+    border-bottom: 1px solid #a6cfed;
+    color: #a6cfed;
+    padding-right: 2px;
+	font-weight: 500;
+}
+.masters_add_edit .modal-dialog .modal-content .modal-body a.btn span.double
+{
+    border-bottom: 4px double #a6cfed;
+}
+.masters_add_edit .modal-dialog .modal-content .modal-body textarea.form-control
+{
+	height:60px;
+}
+
+.customer_supplier_master.masters_add_edit .modal-dialog {
+    min-width: 800px;
+    max-width: 800px;
+}
+
+/* for add edit modal End here */
+
+/* for data table full row selection */
+
+.dataTable:focus {
+outline: 0 !important;
+}
+
+scroller: {
+rowHeight: 35
+} 
+
+table.dataTable th.focus,
+table.dataTable td.focus {
+outline: none !important;
+}
+
+ table.dataTable tbody>tr.selected, table.dataTable tbody>tr>.selected {
+    background-color: var(--dark-yellow) !important;
+}
+
+
+table.dataTable thead tr th
+{
+    position: relative;
+}
+table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:before, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:before, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc_disabled:before, table.dataTable thead .sorting_desc_disabled:after {
+    position: absolute;
+    bottom: 0.9em;
+    display: block;
+    opacity: 0.3;
+}
+.dataTables_wrapper .dataTable thead .sorting:before, .dataTables_wrapper .dataTable thead .sorting:after, .dataTables_wrapper .dataTable thead .sorting_asc:before, .dataTables_wrapper .dataTable thead .sorting_asc:after, .dataTables_wrapper .dataTable thead .sorting_desc:before, .dataTables_wrapper .dataTable thead .sorting_desc:after, .dataTables_wrapper .dataTable thead .sorting_asc_disabled:before, .dataTables_wrapper .dataTable thead .sorting_asc_disabled:after, .dataTables_wrapper .dataTable thead .sorting_desc_disabled:before, .dataTables_wrapper .dataTable thead .sorting_desc_disabled:after {
+    line-height: 2;
+    font-family: FontAwesome;
+    font-size: 12px;
+}
+.dataTables_wrapper .dataTable thead .sorting:after, .dataTables_wrapper .dataTable thead .sorting_asc:after, .dataTables_wrapper .dataTable thead .sorting_desc:after, .dataTables_wrapper .dataTable thead .sorting_asc_disabled:after, .dataTables_wrapper .dataTable thead .sorting_desc_disabled:after 
+{
+	content: "\f107";
+    right: 1em;
+    bottom: 0rem;
+}
+.dataTables_wrapper .dataTable thead .sorting:before, .dataTables_wrapper .dataTable thead .sorting_asc:before, .dataTables_wrapper .dataTable thead .sorting_desc:before, .dataTables_wrapper .dataTable thead .sorting_asc_disabled:before, .dataTables_wrapper .dataTable thead .sorting_desc_disabled:before {
+    content: "\f106";
+    right: 1em;
+    bottom: 0.5rem;
+}
+table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_desc:after {
+    opacity: 1;
+}
+.section_masters .dataTables_scroll
+{
+	border-top: 1px solid var(--blue);
+    width: calc( 100% - -1px );
+    background: var(--blue);
+}
+.section_masters .dataTables_scroll .dataTables_scrollHead
+{
+    width: calc(100% - 17px) !important;
+}
+.section_masters .dataTables_scroll .dataTables_scrollHead .table
+{
+	border-top: 1px solid var(--blue);
+    border-left: 1px solid var(--blue);
+    border-right: 1px solid var(--blue);
+}
+.section_masters .dataTables_scroll .dataTables_scrollHead .table tr th
+{
+	border-top: 1px solid var(--blue);
+	border-bottom: 1px solid var(--blue);
+}
+.section_masters .dataTables_scroll .dataTables_scrollHead .table tr th:first-child
+{
+    border-left: 1px solid var(--blue);
+}
+.section_masters .dataTables_scroll .dataTables_scrollHead .table tr th:last-child
+{
+    border-right: 1px solid var(--blue);
+}
+
+
+
+/* .section_masters .dataTables_scroll .dataTables_scrollBody
+{
+	padding-right: 17px !important;
+} */
+
+/* .section_masters .dataTables_scroll .dataTables_scrollBody::-webkit-scrollbar
+{
+	position: absolute;
+	right: -17px;
+	top: 0;
+} */
+
+/*=========================================================================
+        For Masters End 
+==========================================================================*/
+
+/*=========================================================================
+        For Z-Index 2000 Value Modals Start 
+==========================================================================*/
+
+.modal_sate_list,
+.modal_country_list,
+.modal-old-vouchers
+{
+	z-index:2000;
+}
+
+/*=========================================================================
+        For Z-Index 2000 Value Modals End 
+==========================================================================*/
+
+/*=========================================================================
+    	 Customized Z-Index for Modals Start 
+==========================================================================*/
+.modal.backdrop:before
+{
+	position: fixed;
+	top: 71px;
+	bottom: 0;
+	left: 0;
+	right: 170px;
+	background-color: #b6bcbf;
+	opacity: 0.8 !important;
+	content: '';
+}
+
+/*=========================================================================
+    	 Customized Z-Index for Modals End 
+==========================================================================*/
+
+/*=========================================================================
+        For Modal Backdrop Start Here
+==========================================================================*/
+.modal-backdrop {
+    background-color: #b6bcbf;
+    opacity: 0.9 !important;
+}
+/*=========================================================================
+        For ZModal Backdrop End Here
+==========================================================================*/
+.main-header .navbar-nav li p.light_gray_shade{
+		color: #afa5a5 !important;
+		padding: 0px 20px !important;
+		font-size: 15px;
+		margin-bottom: 0px;
+	}
+.main-header .navbar-nav li p.light_gray_shade span.right{
+	float: right;
+}
+.main-header .inside_content_p{
+	font-size: 10px;
+    padding: 0px 20px;
+    color: #2a67b1;
+    margin-bottom: 4px;
+    margin-top: 10px;
+	}
+.main-header .config_p{
+	font-size: 10px;
+    padding: 0px 20px;
+    color: #2a67b1;
+    margin-bottom: 6px;
+    margin-top: 14px;
+	}
+	.main-header .dropdown-menu.show a.dropdown-item.configuration{
+		margin-top: 12px;
+	} 
+
+	.modal_li_headding
+	{
+		font-weight: 500;
+		margin-bottom: 0px;
+		padding-left: 6px;
+	}
+
+   
+
+	/*  accounting master modal start here  */
+	.accounting-master
+{
+	color: #000 !important;
+	width: calc(100% - 170px);
+	padding: 0 !important;
+	height: calc(100% - 71px);
+    margin-top: 71px;
+    overflow-y: hidden !important;
+}
+.accounting-master .modal-dialog
+{
+	max-width: 700px;
+	margin: auto auto;
+}
+.accounting-master .modal-content
+{
+	box-shadow: none;
+    border-radius: 0;
+	min-height: 500px;
+}
+.accounting-master .modal_header .payment_main_head
+{
+	color: #000 !important;
+    padding: 10px;
+    display: block;
+    background: white !important;
+    border-bottom: 2px solid lightgray;
+    border-radius: 0;
+    font-size: 14px;
+    text-align: center;
+}
+.accounting-master .modal_header .payment_sub_head
+{
+	padding: 2px 6px;
+    font-weight: 600;
+    border-bottom: 1px solid lightgray;
+    margin: 0;
+}
+.accounting-master .modal_header .payment_sub_head div:nth-child(2)
+{
+	text-align: right;
+}
+.accounting-master .modal_header div span
+{
+	font-weight: 600;
+}
+.accounting-master .modal-body 
+{
+	padding: 0;
+	max-height: calc(100vh - 330px);
+    min-height: calc(100vh - 330px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.accounting-master .modal-body::-webkit-scrollbar
+{
+	width: 0;
+}
+.accounting-master .modal-body .table-payment-transaction
+{
+	width: 100%;
+	margin-top: 30px;
+}
+.accounting-master input
+{
+    border: 1px solid transparent;
+	font-weight:600;
+	width: 200px;
+	align-self: center;
+    font-size:14px;
+}
+.accounting-master input:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+	outline: none !important;
+}
+.accounting-master .width-dynamic
+{
+	min-width: 200px;
+	max-width: 500px;
+}
+.accounting-master .modal-body .table-payment-transaction thead td:nth-child(2), .accounting-master .modal-body .table-payment-transaction thead td:nth-child(2) input
+{
+	text-align: right;
+}
+.accounting-master .modal-body .table-payment-transaction tbody input
+{
+	margin-left:10px;
+}
+.accounting-master .modal-body .table-payment-transaction tbody em
+{
+	margin-left: 20px;
+	color: #000;
+}
+.accounting-master .modal-body .table-payment-transaction tbody span
+{
+	float: right;
+}
+.accounting-master .modal-body .table-payment-transaction tbody .pds-note
+{
+	vertical-align: text-top;
+}
+.accounting-master .modal-body .table-payment-transaction tbody .pds-note td:nth-child(2)
+{
+	padding: 0 16px;
+}
+.accounting-master .modal-body textarea
+{
+    width: 100%;
+	font-weight: 600;
+	border: none;
+	outline: none;
+	padding: 0;
+	resize: none;
+}
+.accounting-master .modal-body textarea::-webkit-scrollbar
+{
+	width: 0;
+}
+.accounting-master .modal-body textarea:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+}
+.accounting-master .modal-body .table-payment-transaction tbody .transaction-radio input
+{
+	width: auto !important;
+	margin-left: 0;
+    margin-right: 6px;
+}
+.accounting-master .modal-body .table-payment-transaction tbody .transaction-radio label
+{
+	margin-bottom: 0 !important;
+	font-weight: 600 !important;
+	margin-left: 20px;
+}
+.accounting-master .modal-body select
+{
+	border:1px solid transparent !important;
+	font-weight:600;
+	width: 200px;
+	align-self: center;
+    font-size:13px;
+	padding: 2px 0;
+	outline: none !important;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+	margin-left: 20px;
+}
+.accounting-master .modal-body select:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+	-webkit-appearance: progress-bar;
+    -moz-appearance: progress-bar;
+}
+.white_bg .modal-body{
+background-color: #fff !important;
+}
+/*  accounting master modal end here  */
+
+/* left side small modal code start here */
+.modal_left_small
+{
+    width: calc(100% - 390px);
+}
+.modal_left_small .modal-dialog {
+    /* max-width: 40%; */
+    min-width: 40%;
+    margin: 0;
+    margin-right: auto;
+	align-items: inherit;
+}
+.modal_left_small .modal-dialog .modal-content
+{
+	min-height: calc( 100vh - 220px);
+    max-height: calc( 100vh - 220px);
+	font-size: 14px !important;
+	width: 540px;
+}
+/*cost center change start here*/
+.modal_left_small.cost_center .modal-dialog .modal-content
+{
+	width: 350px;
+	min-height: calc( 100vh - 500px);
+    max-height: calc( 100vh - 500px);
+}
+.modal_left_small.cost_center .modal-dialog .modal-content .modal-body {
+    max-height: calc(100vh - 500px);
+    min-height: calc(100vh - 500px);
+}
+/*cost center change start here*/
+
+.modal_left_small .modal-dialog .modal-content span
+{
+	font-weight: 600;
+}
+.modal_left_small .modal-dialog .modal-content span.colon
+{
+	float:right;
+}
+.modal_left_small .modal-dialog .modal-content .modal_header
+{
+	text-align: left !important;
+    height: 100px;
+    border-bottom: 2px solid lightgray;
+	padding:8px
+}
+.modal_left_small .modal-dialog .modal-content .modal_header > .row,
+.modal_left_small .modal-dialog .modal-content .modal-body .body_content > .col-md-12 > .row
+{
+	align-items: center;
+}
+.modal_left_small .modal-dialog .modal-content .modal-body 
+{
+	max-height: calc(100vh - 220px);
+    min-height: calc(100vh - 220px);
+}
+.modal_left_small .modal-dialog .modal-content .modal-body > .row
+{
+    margin: 0;
+}
+.modal_left_small .modal-dialog .modal-content .modal-body .left_side_content
+{
+	border-right: 1px solid lightgray !important;
+}
+.modal_left_small .modal-dialog .modal-content .modal-body > .row > .col-md-6 
+{
+    padding: 15px 10px !important;
+}
+.modal_left_small .modal-dialog .modal-content .modal-body .body_title h6
+{
+	font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid lightgray;
+    padding: 0 8px 2px 2px;
+    width: fit-content;
+	margin-bottom: 4px;
+}
+
+
+.modal_left_small .modal-dialog .modal-content .modal-body .body_content .col-md-6 select
+{
+	font-weight:600;
+	width: 200px;
+	align-self: center;
+    font-size:14px;
+	padding: 2px 0 !important;
+	outline: none !important;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+	border: 1px solid transparent !important;
+	margin-left: 0;
+}
+.modal_left_small .modal-dialog .modal-content .modal-body .body_content .col-md-6 select:focus
+{
+	border: 1px solid #0888c8 !important;
+    background: var(--light-yellow);
+	-webkit-appearance: progress-bar;
+    -moz-appearance: progress-bar;
+}
+.modal_left_small .modal-dialog .modal-content .modal-body .body_content .col-md-12 > .row
+{
+	margin-bottom: 10px;
+}
+.modal-payment.modal_left_small .col-md-10 input
+{
+	width: 270px !important;
+}
+.modal-payment.modal_left_small .col-md-4 input,
+.modal-payment.modal_left_small .col-md-4 select
+{
+	width: 80px !important;
+}
+
+.modal-payment.modal_left_small .col-md-4.big input
+{
+	width: 160px !important;
+}
+.modal-payment.modal_left_small .under
+{
+	margin-top: 40px;
+}
+.col-md-12.under_margin{
+	border-bottom: 1px solid lightgray;
+    margin-top: 24px;
+	margin-bottom: 10px;
+}
+/* left side small modal code start here */
+ ul#StateDropdown li,
+ ul#CountryDropdown li
+{
+	padding: 0px 6px; 
+}
+ul#StateDropdown li.list.selected,
+ul#CountryDropdown li.list.selected  {
+    background: var(--dark-yellow);
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	color: #444;
+	line-height: 18px !important;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+	display: block;
+	padding-left: 1px;
+	padding-right: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+	background-color: var(--dark-yellow) !important;
+	color: #353535 !important;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default.select2-container--focus .select2-selection--single {
+	background-color: #fee8af !important;
+}
+
+.select2-container {
+	width: 100% !important;
+}
+
+.select2-container .select2-selection--single {
+	height: 32px !important;
+}
+
+.section_create_new_financial_year .last_financial_year{
+	margin-top:90px;
+	box-shadow: none;
+	border: 1px solid #696969;
+	 border-radius: 0;
+	height: auto !important;
+
+}
+
+.section_create_new_financial_year .last_financial_year .content-heading{
+	padding: 0 12px;
+    border-radius: 0;
+    color: #fff;
+    font-size: 15px;
+    background: var(--blue) !important;
+    height: 26px;
+    text-align: inherit;
+
+}
+.section_create_new_financial_year .last_financial_year .content-body{
+	background: #e2f1fc;
+	padding:20px;
+}
+.section_create_new_financial_year .last_financial_year .content-body label{
+	color: var(--blue);
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+	width:100%;
+}
+.section_create_new_financial_year .last_financial_year .content-body label span.colon{
+		float:right;
+}
+.section_create_new_financial_year .new_financial_year{
+	margin-top:30px;
+	box-shadow: none;
+	border: 1px solid #696969;
+	 border-radius: 0;
+	height: auto !important;
+
+}
+
+.section_create_new_financial_year .new_financial_year .content-heading{
+	padding: 0 12px;
+    border-radius: 0;
+    color: #fff;
+    font-size: 15px;
+    background: var(--blue) !important;
+    height: 26px;
+    text-align: inherit;
+
+}
+.section_create_new_financial_year .new_financial_year .content-body{
+	background: #e2f1fc;
+	padding:20px;
+}
+.section_create_new_financial_year .new_financial_year .content-body .row{
+	margin-bottom: 6px;
+}
+.section_create_new_financial_year .new_financial_year input{
+	width:100%;
+	border: 1px solid #dee2e6;
+	outline-color: #dee2e6;
+}
+.section_create_new_financial_year .new_financial_year .content-body label{
+	color: var(--blue);
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+	width:100%;
+}
+.section_create_new_financial_year .new_financial_year .content-body label span.colon{
+		float:right;
+}
+.section_create_new_financial_year .create_btn a{
+	margin-top:10px
+}
+.section_create_new_financial_year .create_btn a{
+	background: var(--blue);
+    color: #fff;
+    border-radius: 0;
+    padding: 3px 10px 7px 10px;
+    line-height: normal;
+    font-size: 14px;
+	float:right;
+}
+.section_create_new_financial_year .create_btn a span{
+	border-bottom: 1px solid #a6cfed; 
+    color: #a6cfed;
+    padding-right: 2px;
+    font-weight: 500; 
+}
+
+.section_new_financial_year .btn_set_year {
+padding: 0px;
+}
+.section_new_financial_year .btn_set_year a{
+	float: right;
+	margin-right: 0px !important;
+}
+.section_new_financial_year .masters_buttons {
+	top: 298px;
+}
+.modal_financial .modal-header {
+	padding: 6px 13px;
+    border-radius: 0;
+    color: #fff;
+    font-size: 15px;
+    background: var(--blue) !important;
+    height: 30px;
+}
+.modal_financial .year_headding{
+	height: 27px;
+    background: var(--blue);
+    color: white;
+    padding: 0px 10px;
+}
+.modal_financial .year_body{
+	padding: 16px;
+}
+.modal_financial .year_body .row label{
+	color: var(--blue);
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    width: -webkit-fill-available;
+}
+.modal_financial .year_body .row span{
+	color: var(--blue) !important;
+	float: right;
+}
+.modal_financial .last_financial_year_box,
+.modal_financial .new_financial_year_box{
+	border: 1px solid black;
+}
+/* .modal_financial .modal-body > .row {
+	justify-content: center;
+    margin-top: 50px;
+} */
+.modal_financial .new_financial_year_box{
+	margin-top: 44px;
+}
+.modal_financial .modal-body{
+	padding: 15px;
+	background: white;
+}
+.modal_financial .table-row-headding{
+	font-weight: 500;
+    font-size: 14px;
+    color: var(--blue) !important;
+}
+.modal_financial .table td, .table th{
+	padding: 12px 15px;
+	border-color: #e9e9e9;
+}
+.modal_financial  .year_body{
+	background: #e2f1fc;
+}
+.modal_financial .new_financial_year_box .year_body .row{
+	margin-bottom: 6px;
+}
+.modal_financial .new_financial_year_box .year_body .row input{
+	width: 90%;
+    border: 1px solid #dee2e6;
+    outline-color: #dee2e6
+}
+.modal_financial tr:not(:first-child):hover
+{
+	background-color: var(--dark-yellow) !important;
+}
+
+/* table-striped table-hover
+table.dataTable tbody>tr.selected, table.dataTable tbody>tr>.selected
+{} */
+
+/* .modal_financial table tr.selected 
+{
+	background: #e2f1fc !important;
+} */
+
+
+/* multiple gst  */
+/* company_multiple_gst */
+.modal-header-create.company_multiple_gst .modal-body .key-control-menu ul li .created_company_name span{
+	width:33.3% !important;
+	min-width: 33.3% !important;
+	max-width: 33.3% !important;
+
+}
+.modal-header-create.company_multiple_gst .modal-header
+{
+	align-items: center;
+}
+.modal-header-create .modal-content-header .row > div:first-child{
+	padding-left:20px;
+}
+.company_multiple_gst .modal-header input
+{
+    height: 20px;
+    width: 180px;
+}
+   
+.company_multiple_gst .modal-header input:focus
+{
+    outline: none;
+}
+.customer_supplier_master.comapany_create_financial_year_modal .modal-dialog{
+	min-width: 560px;
+    max-width: 560px;
+}
+.comapany_create_financial_year_modal .modal-dialog .modal-content .modal-body{
+	padding: 16px 30px;
+    background-color: white;
+    margin: 14px 12px 0px;
+}
+.comapany_create_financial_year_modal .last_financial_year_box{
+	margin-top: 10px;
+	border-bottom: 1px solid lightgrey;
+    margin-bottom: 50px;
+}
+.comapany_create_financial_year_modal .last_financial_year_box .year_headding,
+.comapany_create_financial_year_modal .new_financial_year_box .year_headding{
+	background-color: var(--blue);
+    color: white;
+    font-size: 18px;
+    padding: 4px 10px;
+}
+
+.comapany_create_financial_year_modal .last_financial_year_box .year_body,
+.comapany_create_financial_year_modal .new_financial_year_box .year_body{
+	padding: 14px 6px;
+}
+.comapany_create_financial_year_modal .last_financial_year_box .year_body{
+	box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
+
+}
+.comapany_create_financial_year_modal .new_financial_year_box .year_body{
+	box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+}
+.comapany_create_financial_year_modal .last_financial_year_box .year_body .row{
+	padding: 4px 0px;
+}
+.comapany_create_financial_year_modal .new_financial_year_box .year_body .row{
+	padding-bottom: 4px;
+    padding-top: 4px;
+}
+
+.comapany_create_financial_year_modal .new_financial_year_box .year_body .row input,
+.comapany_create_financial_year_modal .last_financial_year_box .year_body .row input{
+    width: 90%;
+    outline: none;
+    border: 1px solid lightgrey;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+}
+.comapany_create_financial_year_modal .last_financial_year_box .year_body label,
+.comapany_create_financial_year_modal .new_financial_year_box .year_body label{
+	color: var(--blue);
+    width: 90%;
+}
+.comapany_create_financial_year_modal .last_financial_year_box .year_body label span,
+.comapany_create_financial_year_modal .new_financial_year_box .year_body label span{
+	color: var(--blue) !important;
+    float: right;
+}
+.comapany_create_financial_year_modal .create_btn{
+	width: 98%;
+    margin-top: 24px;
+}
+.comapany_create_financial_year_modal .create_btn button{
+    border-radius: 0;
+    padding: 6px 12px;
+    line-height: normal;
+    font-size: 14px;
+    float: right;
+    outline: none;
+}
+.comapany_create_financial_year_modal .create_btn button span{
+	border-bottom: 1px solid #a6cfed;
+    color: #a6cfed;
+    padding-right: 2px;
+    font-weight: 500;
+}
+.comapany_create_financial_year_modal .create_btn button.create_financial_year_btn{
+	background: var(--blue);
+    color: #fff;
+	 border: 1px solid #88bee6; 
+}
+.comapany_create_financial_year_modal .create_btn button.create_financial_year_btn i{
+    padding-right: 10px;
+    font-size: 13px;
+}
+.comapany_create_financial_year_modal .create_btn button.cancel_financial_year_btn{
+	background: white;
+    border: 2px solid lightgrey;
+    color: var(--blue);
+    font-weight: 800;
+    border-radius: 2px;
+    margin-right: 11px;
+}
+.comapany_create_financial_year_modal .create_btn button.cancel_financial_year_btn span{
+	border-bottom: 1px solid lightslategrey;
+    color: lightslategrey;
+    padding-right: 2px;
+    font-weight: 800;
+}
+.comapany_create_financial_year_modal .modal-header-two{
+	border: 1px solid var(--blue);
+}
+.comapany_create_financial_year_modal .row-odd,
+.comapany_create_financial_year_modal .new_financial_year_box .year_body .row.row-odd{
+	background-color: rgba(0,0,0,.05)
+}
+
+.modal_common .modal-body .left_side_content .bottom_side_in_left_side{
+	position: absolute;
+    bottom: 10px;
+    width: -webkit-fill-available;
+    border-top: 1px solid lightgrey;
+    padding-top: 4px;
+}
+.modal_common .modal-body .right_side_content .bottom_side_in_right_side{
+    position: absolute;
+    bottom: 4px;
+}
+.modal_financial button{
+	/* background: var(--blue);
+    color: #fff; */
+    border-radius: 0;
+    font-size: 14px;
+    margin-right: 8px;
+    float: right;
+}
+.modal_financial button.cancel_year_btn{
+	background:#fff;
+    color:var(--blue);
+	border: 2px solid lightgrey;
+    font-weight: 800;
+}
+.modal_financial button.cancel_year_btn span{
+	border-bottom: 1px solid lightslategrey;
+    color: lightslategrey;
+    padding-right: 2px;
+    font-weight: 800;
+}
+.modal_financial button.set_year_btn{
+	background: var(--blue);
+    color: #fff;
+}
+.modal_financial button i{
+	padding-right: 10px;
+    font-size: 13px;
+}
+.modal_financial button span{
+    border-bottom: 1px solid #a6cfed;
+    color: #a6cfed;
+    padding-right: 2px;
+    font-weight: 500;
+}
+.modal-old-vouchers .modal-header .modal_financial button i:hover{
+	color: #def1fc;
+}
+/* .modal-open .modal#masters_two{
+	z-index: 1052 !important;
+} */
+#gst_clasification_table .operations{
+	display: flex !important;
+}
+#gst_clasification_table .first_a{
+	margin: 0rem 0.2rem;
+}
+#gst_clasification_table thead th{
+	font-size: 12px !important;
+}
+.modal_common .modal-body h6.gst_classes_headding{
+	margin-bottom: 8px;
+	text-align: center;
+}
+.modal-old-vouchers.index-modal .modal-dialog .modal-content
+{
+	min-height: auto !important;
+}
+.modal-old-vouchers.index-modal .modal-dialog .modal-content .modal-body
+{
+	padding:15px !important
+}
