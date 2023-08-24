@@ -98,17 +98,17 @@ public function index()
 {
     session_start();
     $data = array();
-    $_SESSION['user_id'] = 1; // Set the user ID value
+    $_SESSION['user_id'] = '1'; // Set the user ID value
 
     $data["adminController"] = $this->adminController;
     $this->load->model('accounts/AccountsModel');
     $company_details = $this->AccountsModel->get_company_details();
     $data['company_details'] = $company_details;
     $data['state'] = $this->input->post('state') ?: 'Not Applicable';
-
-    
+ 
     $company_id = $this->session->userdata('company_id');
     // echo "<script>alert($company_id)</script>";
+
 
     if ($company_id) {
         $data["tax_liability"]= $this->get_tax_liability_service_tax();
@@ -117,7 +117,28 @@ public function index()
         $data["gst_taxability"] = $this->get_gst_taxability_details();
         $data["gst_registration_type"] = $this->get_gst_registration_type();
         $data["gst_periodicity_type"] = $this->get_gst_periodicity_details();
-        $data["gst_registration_status_type"] = $this->get_gst_registration_status_details();
+        $data["gst_rate"] = $this->get_gst_rate_details();
+        $data["hsn_sac_action"] = $this->get_hsn_sac_related_action();
+        $data["classification_name"] = $this-> gst_classification_details();
+
+       
+        $data["nature_of_goods"] = $this->vat_nature_of_goods_details();
+        
+        $data["gst_taxability_type"] = $this-> get_gst_taxability_type();
+        $data["gst_cess_valuation_type"] = $this->get_gst_cess_valuation_type();
+        $data["gst_threshold_limit_values"] = $this->get_gst_threshold_limit_values();
+        
+       
+        $data["vat_periodicity_type"] = $this->get_vat_periodicity_details();
+        $data["vat_schedule_type"] = $this->  get_vat_schedule_details();
+        $data["vat_type_of_goods"] = $this->  get_vat_type_of_goods_details();
+      
+       
+        $data["vat_taxability_type"] = $this->get_vat_taxabilitytype_details();
+        
+ 
+        $data["tds_tcs_collector_deductor_type"] = $this->get_tds_tcs_collector_deductor_type_details();
+         $data["gst_registration_status_type"] = $this->get_gst_registration_status_details();
         $data["gst_states"] = $this->get_gst_state_details();
         $data["gst_tax_calculation_type_id"] = $this->gst_composition_tax_calculation_type_id();
         $data["company_detail_fetch"] = $this->get_company_detail();
@@ -440,7 +461,7 @@ else
     );
     $financialYearData = array(
         'financial_year_begin_date' => date('Y-m-d', strtotime($this->input->post('financial_year_begin_date'))),
-        'book_begin_date' => date('Y-m-d', strtotime($this->input->post('books_beginning_date'))),
+        // 'book_begin_date' => date('Y-m-d', strtotime($this->input->post('books_beginning_date'))),
         'financial_year_end_date' => date('Y-m-d', strtotime($this->input->post('financial_year_end_date'))),
         'financial_year' => $this->input->post('financial_year'),
         'is_current_year' => 'yes'
@@ -462,7 +483,6 @@ echo json_encode($response);
 public function save_company_features_data(){
  
     $companyId = $this->session->userdata('company_id');
-   
     $data = array(
         'provide_contact_details' => $this->input->post('provide_contact_details'),
         'provide_additional_base_currency_details' => $this->input->post('provide_additional_base_currency_details'),
@@ -501,29 +521,47 @@ public function save_company_features_data(){
     echo json_encode($response);
 
 }
+
+// public function checkCompanyNameExists()
+// {
+//     $company_name = $this->input->post('company_name');
+//     $exists = $this->CompanyModel->checkCompanyNameExist($company_name);
+//     $response = array('exists' => $exists);
+//     echo json_encode($response);
+// }
+public function checkCompanyNameExists()
+{
+    $company_name = $this->input->post('company_name');
+    $mode = $this->input->post('mode'); // Get the mode from the AJAX call
+    $company_id = $this->input->post('company_id'); // Get the company_id from the AJAX call
+
+    $exists = $this->CompanyModel->checkCompanyNameExists($company_name, $mode, $company_id);
+    $response = array('exists' => $exists);
+    echo json_encode($response);
+}
+ public function fetch_state_code() {
+        $stateId = $this->input->post('state_id');
+        $stateCode = $this->CompanyModel->get_state_code($stateId);
+     
+        $response = array('state_code' => $stateCode);
+        echo json_encode($response);
+    }
+
+
 ////////// fr updating company_features//////
 public function get_company_features_details()
 {
     $companyId = $this->session->userdata('company_id');
-    
-
     $companyFeatures = $this->CompanyModel->get_company_features_by_id($companyId);
- 
-
     $this->output->set_content_type('application/json');
-
-  
     $this->output->set_output(json_encode($companyFeatures));
 }
-
 
 /////////////////END  OF  COMPANY  FEATURES SAVE////////////////////////////////////   
     public function get_company_details_json()
 {
-   
+
     $company_details = $this->CompanyModel->get_company_details();
-    
-    
     // print_r( $company_details);
     // header('Content-Type: application/json');
     echo json_encode($company_details);
@@ -551,9 +589,10 @@ public function get_company_features_details()
 public function store_company_id()
 {
     $company_id = $this->input->post('companyId');
-    echo  $company_id ;
+    //  echo  $company_id ;
     $this->session->set_userdata('company_id',  $company_id);
-      $response = array('success' => true, 'message' => 'Company ID stored successfully');
+  
+    $response = array('success' => true, 'message' => 'Company ID stored successfully', 'companyId' => $company_id);
     echo json_encode($response);
 }
 
@@ -602,9 +641,7 @@ public function getStateOption() {
 
   public function getCurrencyOption()
 {
-   
     $countryId = $this->input->get('country_id');
-   
     $currencyOptions = $this->CompanyModel->getCurrencyOptions($countryId);
     // print_r($currencyOptions);
     $response = array(
@@ -619,150 +656,137 @@ public function getStateOption() {
     echo json_encode($response);
 }
 
-
 public function save_tds_details() {
-
-    
-    $tan_reg_no = $this->input->post('tan_reg_no');
-    $tax_deduction_acc_no = $this->input->post('tax_deduction_acc_no');
-    $deductor_type = $this->input->post('deductor_type');
-    $deductor_branch = $this->input->post('deductor_branch');
-    $set_alter_person_tds = $this->input->post('set_alter_person_tds');
-    $it_exception_limit = $this->input->post('it_exception_limit');
-    $active_tds = $this->input->post('active_tds');
-    $companyId = $this->session->userdata('companyId');
-
-        // Extract the person details
-        $person_name = $this->input->post('person_name');
-        $person_son_daughter_of = $this->input->post('person_son_daughter_of');
-        $person_designation = $this->input->post('person_designation');
-        $person_pan = $this->input->post('person_pan');
-        $person_flat_no = $this->input->post('person_flat_no');
-        $person_premises_building = $this->input->post('person_premises_building');
-        $person_road = $this->input->post('person_road');
-        $person_area = $this->input->post('person_area');
-        $person_city = $this->input->post('person_city');
-        $person_state = $this->input->post('person_state');
-        $person_pincode = $this->input->post('person_pincode');
-        $person_mobile = $this->input->post('person_mobile');
-        $person_std_code = $this->input->post('person_std_code');
-        $person_telephone = $this->input->post('person_telephone');
-        $person_email = $this->input->post('person_email');
-
-
-        // ($setAlterPersonTDS == 'yes') ? 'Y' : 'N',
-    $data = array(
-        'company_id'              =>$companyId,
-        'tan_registration_number' => $tan_reg_no,
-        'tan_account_number' => $tax_deduction_acc_no,
-        'tds_deductor_collector_type_id' =>$deductor_type,
-        'deductor_branch_division' => $deductor_branch,
-        'set_person_responsible' =>$set_alter_person_tds,
-        'person_responsible_name' => $person_name,
-        'son_daughter_of' => $person_son_daughter_of,
-        'designation' => $person_designation,
-        'pan' => $person_pan,
-        'flat_house_number' => $person_flat_no,
-        'premises_building_name' => $person_premises_building,
-        'road_street_lane_name' => $person_road,
-        'area_location_name' => $person_area,
-        'town_city_district_name' => $person_city,
-        'state_name' => $person_state,
-        'pincode' => $person_pincode,
-        'mobile' => $person_mobile,
-        'std_code' => $person_std_code,
-        'telephone' => $person_telephone,
-        'email_id' => $person_email,
-        'ignore_it_exemption_limit' => $it_exception_limit,
-        'activate_tds_for_stock' => $active_tds,
+     //Set/alter details of person responsible
+         $set_alter_person_tds=  $this->input->post('tds_person_responsible_activate');
+         $company_id=  $this->session->userdata('company_id');
+    $data1=array(
+        'tan_registration_number' => $this->input->post('tds_tan_registration_number'),
+        'tan_account_number'       =>  $this->input->post('tds_tan_account_number'),
+        'deductor_collector_type_id' => $this->input->post('tds_deductor_collector_type_id'),
+        'deductor_collector_branch_division' =>  $this->input->post('tds_deductor_collector_branch_division'),
+        'std_code' =>  $this->input->post('tds_std_code'),
+        'phone_number' =>  $this->input->post('tds_phone_number'),
+        'email' =>  $this->input->post('tds_email'),
+        'ignore_it_excemption_limit_for_tds' =>  $this->input->post('ignore_it_Exception_limit_for_tds_deduction'),
+        'activate_tds_for_stock_items' =>  $this->input->post('activate_tds_for_stock_items'),
+        // 'tan_registration_number' =>  $this->input->post('tds_surcharge_cess_details'),
     );
- 
+        $this->CompanyModel->updateTdsDeductorDetails($data1, $company_id);
+        $response = array(
+            'success' => true,
+            'message' => 'Tdsdetails inserted successfully.'
+        );
 
-    
-    $result = $this->CompanyModel->updateTdsDetails($companyId, $data);
-   
-
-    if ($result==1) {
-        $response = array('status' => 'success', 'message' => 'TDS details saved successfully.');
-    } else {
-        $response = array('status' => 'error', 'message' => 'Failed to save TDS details.');
-    }
-  
+        if ($set_alter_person_tds === 'yes') {
+          
+            $data2 = array(
+                'person_responsible_name' =>   $this->input->post('tds_person_responsible_name'),
+                'son_daughter_of' =>   $this->input->post('tds_son_daughter_of'),
+                'designation' =>  $this->input->post('tds_designation'),
+                'pan' =>  $this->input->post('tds_pan'),
+                'flat_house_number' =>  $this->input->post('tds_flat_house_number'),
+                'premises_building_name' =>  $this->input->post('tds_premises_building_name'),
+                'road_street_lane_name' =>  $this->input->post('tds_road_street_lane_name'),
+                'area_location_name' =>  $this->input->post('tds_area_location_name'),
+                'town_city_district_name' =>  $this->input->post('tds_town_city_district_name'),
+                'state_id' =>  $this->input->post('tds_state_id'),
+                'pincode' =>  $this->input->post('tds_pincode'),
+                'mobile' =>  $this->input->post('tds_mobile'),
+                'std_code' =>  $this->input->post('person_std_code'),
+                'telephone' => $this->input->post('tds_telephone'),
+                'email_id' => $this->input->post('tds_email_id'),
+                'std_code_alternate' =>  $this->input->post('tds_std_code_alternate'),
+                'telephone_alternate' =>  $this->input->post('tds_telephone_alternate'),
+                'email_id_alternate' => $this->input->post('tds_email_id_alternate'),
+            );
+            $this->CompanyModel->updateTdsPersonResponsibleDetails($data2, $company_id);
+            $response = array(
+                'success' => true,
+                'message' => 'Tds inserted successfully.'
+            );
+           
+        }
+      
    // Send the JSON response back to the client
 header('Content-Type: application/json');
 echo json_encode($response);
 
 }
 
-public function save_tcs_details() {
+///////////////////////// END OF TDS SAVE/////////////////////
 
-    
-    $tan_reg_nos = $this->input->post('tan_reg_nos');
-    $tax_deduction_acc_nos = $this->input->post('tax_deduction_acc_nos');
-    $collector_type = $this->input->post('collector_type');
-    $collector_branch = $this->input->post('collector_branch');
-    $set_alter_person_tcs = $this->input->post('set_alter_person_tcs');
-    $it_exception_limit = $this->input->post('it_exception_limit');
-    // $activateTDSForStock = $this->input->post('ActivateTDS');
-    $companyId = $this->session->userdata('companyId');
-
-       
-        $person_name = $this->input->post('person_name');
-        $person_son_daughter_of = $this->input->post('person_son_daughter_of');
-        $person_designation = $this->input->post('person_designation');
-        $person_pan = $this->input->post('person_pan');
-        $person_flat_no = $this->input->post('person_flat_no');
-        $person_premises_building = $this->input->post('person_premises_building');
-        $person_road = $this->input->post('person_road');
-        $person_area = $this->input->post('person_area');
-        $person_city = $this->input->post('person_city');
-        $person_state = $this->input->post('person_state');
-        $person_pincode = $this->input->post('person_pincode');
-        $person_mobile = $this->input->post('person_mobile');
-        $person_std_code = $this->input->post('person_std_code');
-        $person_telephone = $this->input->post('person_telephone');
-        $person_email = $this->input->post('person_email');
+///////////// START OF VAT SAVE///////////////////////////
 
 
-        // ($setAlterPersonTDS == 'yes') ? 'Y' : 'N',
-    $data = array(
-        'company_id'              =>$companyId,
-        'tan_registration_number' => $tan_reg_nos,
-        'tan_account_number' => $tax_deduction_acc_nos,
-        'tds_deductor_collector_type_id' =>$collector_type,
-        'deductor_branch_division' => $collector_branch,
-        'set_person_responsible' =>$set_alter_person_tcs,
-        'person_responsible_name' => $person_name,
-        'son_daughter_of' => $person_son_daughter_of,
-        'designation' => $person_designation,
-        'pan' => $person_pan,
-        'flat_house_number' => $person_flat_no,
-        'premises_building_name' => $person_premises_building,
-        'road_street_lane_name' => $person_road,
-        'area_location_name' => $person_area,
-        'town_city_district_name' => $person_city,
-        'state_name' => $person_state,
-        'pincode' => $person_pincode,
-        'mobile' => $person_mobile,
-        'std_code' => $person_std_code,
-        'telephone' => $person_telephone,
-        'email_id' => $person_email,
-        'ignore_it_exemption_limit' => $it_exception_limit,
-        // 'activate_tds_for_stock' => $activateTDSForStock,
+public function save_vat_details() {
+    //Set/alter details of person responsible
+        $vat_rate_details=  $this->input->post('vat_rate_details');
+        $company_id=  $this->session->userdata('company_id');
+   $data1=array(
+     // 20 fiels in db but only 18 in form 2 extra posted
+       'state_id' => $this->input->post('vat_state_id'),
+       'vat_applicable_from'       =>  $this->input->post('vat_applicable_from'),
+       'vat_tin_number' => $this->input->post('vat_tin_number'),
+        'interstate_sales_tax_number' =>  $this->input->post('interstate_sales_tax_number'),
+        'vat_registration_date' =>  $this->input->post('vat_registration_date'),
+         //cst_registration_date
+        
+       'e_vat_periodicity_id' =>  $this->input->post('e_vat_periodicity_id'),
+       'is_under_npv_scheme' =>  $this->input->post('is_under_npv_scheme'),
+       'enable_vat_calculation_on_quantity' =>  $this->input->post('enable_vat_calculation_on_quantity'),
+       'enable_vat_calculation_on_stock_item_rate' =>  $this->input->post('enable_vat_calculation_on_stock_item_rate'),
+       'define_commodity_and_tax_as_masters' =>  $this->input->post('define_commodity_and_tax_as_masters'),
+       'deactivate_from' =>  $this->input->post('deactivate_from'),
+       'circle_office' =>  $this->input->post('circle_office'),
+       'status_of_business' =>  $this->input->post('status_of_business'),
+       'nature_of_business' =>  $this->input->post('nature_of_business'),
+    //    ss_msi_lsi_registration_number
+    //    'vat_fax_number' =>  $this->input->post('vat_fax_number'),
+    //    'vat_website' =>  $this->input->post('vat_website'),
+       'authorised_person' =>  $this->input->post('authorised_person'),
+       'status_designation' =>  $this->input->post('vat_status_designation'),
+       'place' =>  $this->input->post('vat_place'),
+       'district' =>  $this->input->post('vat_district'),
     );
-    // print_r($data);
+       $this->CompanyModel->updateVatDetails($data1, $company_id);
+       $response = array(
+           'success' => true,
+           'message' => 'Tdsdetails inserted successfully.'
+       );
 
-   
-    $result = $this->CompanyModel->updateTdsDetails($companyId, $data);
-    //var_dump($result);
+       if ($vat_rate_details === 'yes') {
+         
+           $data2 = array(
+            // vat_effective_from
+            // cst_effective_to
+            // vat_effective_from
+            // vat_schedule_serial_number
+               'cst_effective_from' =>   $this->input->post('cst_effective_date'),
+               'cst_rate_against_form_c' =>   $this->input->post('cst_rate_against_form_c'),
+               'vat_effective_to' =>  $this->input->post('vat_effective_date'),
+               'vat_rate' =>  $this->input->post('vat_rate'),
+               'cess_rate' =>  $this->input->post('vat_cess'),
+               'vat_tax_type_id' =>  $this->input->post('vat_tax_type_id'),
+               'vat_schedule_id' =>  $this->input->post('vat_schedule_id'),
+               'type_of_goods_id' =>  $this->input->post('type_of_goods_id'),
+               'nature_of_goods_id' =>  $this->input->post('nature_of_goods_id'),
+               'commodity_name' =>  $this->input->post('commodity_name'),
+               'commodity_code' =>  $this->input->post('commodity_code'),
+               'sub_commodity_code' =>  $this->input->post('sub_commodity_code'),
+            
+           );
 
-    if ($result==1) {
-        $response = array('status' => 'success', 'message' => 'TCS details saved successfully.');
-    } else {
-        $response = array('status' => 'error', 'message' => 'Failed to save TCS details.');
-    }
-  
-  
+           $this->CompanyModel->updateVatRateDetails($data2, $company_id);
+           $response = array(
+               'success' => true,
+               'message' => 'Tds inserted successfully.'
+           );
+          
+       }
+
+ 
+  // Send the JSON response back to the client
 header('Content-Type: application/json');
 echo json_encode($response);
 
@@ -791,68 +815,112 @@ public function fetch_deductor_types() {
 ///////////////////////////////////////////////////
 
 public function get_tds_details() {
-    $companyId = $this->input->post('company_id');
-    if (empty($companyId)) {
-        
+    $company_id = $this->input->post('company_id');
+    if (empty($company_id)) {
         http_response_code(400);
         echo json_encode(array('error' => 'companyId is missing from session data'));
         return;
     }
-
-    $tdsValue = $this->input->post('tdsValue');
-    if (!in_array($tdsValue, array('yes', 'no'))) {
+    $tds_value = $this->input->post('tds_value');
+    if (!in_array($tds_value, array('yes', 'no'))) {
        
         http_response_code(400);
         echo json_encode(array('error' => 'invalid tdsValue'));
         return;
     }
+    $results = $this->CompanyModel->getTdsDetails($company_id);
+    // echo $query;
+    // exit;
+    if (!empty($results)) {
+        $row = $results[0];
+             $tdsDetails = array(
+                'tan_registration_number' => $row['tan_registration_number'],
+                'tan_account_number' => $row['tan_account_number'],
+                'tan_registration_number' => $row['tan_registration_number'],
+                'tan_account_number' => $row['tan_account_number'],
+                'deductor_collector_type_id' => $row['deductor_collector_type_id'],
+                'deductor_collector_branch_division' => $row['deductor_collector_branch_division'],
+                'std_code' => $row['std_code'],
+                'phone_number' => $row['phone_number'],
+                'email' => $row['email'],
+                'ignore_it_excemption_limit_for_tds' =>$row['ignore_it_excemption_limit_for_tds'],
+                'ignore_it_excemption_limit_for_tcs' => $row['ignore_it_excemption_limit_for_tcs'],
+                'activate_tds_for_stock_items' => $row['activate_tds_for_stock_items'],
+                'person_responsible_name' => $row['person_responsible_name'],
+                'son_daughter_of' => $row['son_daughter_of'],
+                'designation' =>$row['designation'],
+                'pan' => $row['pan'],
+                'flat_house_number' => $row['flat_house_number'],
+                'premises_building_name' => $row['premises_building_name'],
+                'road_street_lane_name' => $row['road_street_lane_name'],
+                'area_location_name' => $row['area_location_name'],
+                'town_city_district_name' => $row['town_city_district_name'],
+                 'state_id' => $row['state_id'],
+                'pincode' => $row['pincode'],
+                'mobile' => $row['mobile'],
+                'person_std_code' => $row['person_std_code'],
+                'telephone' => $row['telephone'],
+                'email_id' => $row['email_id'],
+                'std_code_alternate' => $row['std_code_alternate'],
+                'telephone_alternate' => $row['telephone_alternate'],
+                'email_id_alternate' => $row['email_id_alternate'],
+                    );
 
-
-    $query = $this->CompanyModel->getTdsDetails($tdsValue, $companyId);
-
-   
-    if ($query->num_rows() > 0) {
-      
-        $row = $query->row();
-
-      
-        $tdsDetails = array(
-            'tan_registration_number' => $row->tan_registration_number,
-            'tan_account_number' => $row->tan_account_number,
-            'tds_deductor_collector_type_id' => $row->tds_deductor_collector_type_id,
-            'deductor_branch_division' => $row->deductor_branch_division,
-            'set_person_responsible' => $row->set_person_responsible,
-            'person_responsible_name' => $row->person_responsible_name,
-            'son_daughter_of' => $row->son_daughter_of,
-            'designation' => $row->designation,
-            'pan' => $row->pan,
-            'flat_house_number' => $row->flat_house_number,
-            'premises_building_name' => $row->premises_building_name,
-            'road_street_lane_name' => $row->road_street_lane_name,
-            'town_city_district_name' => $row->town_city_district_name,
-            'area_location_name' => $row->area_location_name,
-            'state_name' => $row->state_name,
-            'pincode' => $row->pincode,
-            'mobile' => $row->mobile,
-            'std_code' => $row->std_code,
-            'telephone' => $row->telephone,
-            'email_id' => $row->email_id,
-            'ignore_it_exemption_limit' => $row->ignore_it_exemption_limit,
-            'activate_tds_for_stock' => $row->activate_tds_for_stock,
-            'mobile' => $row->mobile
-        );
-
-        // Return the response as JSON
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($tdsDetails));
     } else {
-        // If no results were found, return an empty response
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode(array()));
     }
+
+    // if ($query->num_rows() > 0) {
+
+    //     $tdsDetails = array(
+    //                     'tan_registration_number' => $row->tan_registration_number,
+    //                     'tan_account_number' => $row->tan_account_number,
+    //                     'deductor_collector_type_id' => $row->deductor_collector_type_id,
+    //                     'deductor_collector_branch_division' => $row->deductor_collector_branch_division,
+    //                     'std_code' => $row->std_code,
+    //                     'phone_number' => $row->phone_number,
+    //                     'email' => $row->email,
+    //                     'ignore_it_excemption_limit_for_tds' => $row->ignore_it_excemption_limit_for_tds,
+    //                     'ignore_it_excemption_limit_for_tcs' => $row->ignore_it_excemption_limit_for_tcs,
+    //                     'activate_tds_for_stock_items' => $row->activate_tds_for_stock_items,
+    //                     'person_responsible_name' => $row->person_responsible_name,
+    //                     'son_daughter_of' => $row->son_daughter_of,
+    //                     'designation' =>$row->designation,
+    //                     'pan' => $row->pan,
+    //                     'flat_house_number' => $row->flat_house_number,
+    //                     'premises_building_name' => $row->premises_building_name,
+    //                     'road_street_lane_name' => $row->road_street_lane_name,
+    //                     'area_location_name' => $row->area_location_name,
+    //                     'town_city_district_name' => $row->town_city_district_name,
+    //                     'state_id' => $row->state_id,
+    //                     'pincode' => $row->pincode,
+    //                     'mobile' => $row->mobile,
+    //                     'std_code' => $row->person_std_code,
+    //                     'telephone' => $row->telephone,
+    //                     'email_id' => $row->email_id,
+    //                     'std_code_alternate' => $row->std_code_alternate,
+    //                     'telephone_alternate' => $row->telephone_alternate,
+    //                     'email_id_alternate' => $row->email_id_alternate,
+    //                 );
+    //         // var_dump($tdsDetails);
+
+
+    //     $this->output
+    //         ->set_content_type('application/json')
+    //         ->set_output(json_encode($tdsDetails));
+    // } else {
+        
+    //     $this->output
+    //         ->set_content_type('application/json')
+    //         ->set_output(json_encode(array()));
+    // }
 }
+
 //////////////////////////////////////////
 
 public function get_tcs_details() {
@@ -879,32 +947,36 @@ public function get_tcs_details() {
     if ($query->num_rows() > 0) {
        
         $row = $query->row();
-
        
         $tdsDetails = array(
             'tan_registration_number' => $row->tan_registration_number,
             'tan_account_number' => $row->tan_account_number,
-            'tds_deductor_collector_type_id' => $row->tds_deductor_collector_type_id,
-            'deductor_branch_division' => $row->deductor_branch_division,
-            'set_person_responsible' => $row->set_person_responsible,
+            'deductor_collector_type_id' => $row->deductor_collector_type_id,
+            'deductor_collector_branch_division' => $row->deductor_collector_branch_division,
+            'std_code' => $row->std_code,
+            'phone_number' => $row->phone_number,
+            'email' => $row->email,
+            'ignore_it_excemption_limit_for_tds' => $row->ignore_it_excemption_limit_for_tds,
+            'ignore_it_excemption_limit_for_tcs' => $row->ignore_it_excemption_limit_for_tcs,
+            'activate_tds_for_stock_items' => $row->activate_tds_for_stock_items,
             'person_responsible_name' => $row->person_responsible_name,
             'son_daughter_of' => $row->son_daughter_of,
-            'designation' => $row->designation,
+            'designation' =>$row->designation,
             'pan' => $row->pan,
             'flat_house_number' => $row->flat_house_number,
             'premises_building_name' => $row->premises_building_name,
             'road_street_lane_name' => $row->road_street_lane_name,
-            'town_city_district_name' =>$row->town_city_district_name,
             'area_location_name' => $row->area_location_name,
-            'state_name' => $row->state_name,
+            'town_city_district_name' => $row->town_city_district_name,
+            'state_id' => $row->state_id,
             'pincode' => $row->pincode,
             'mobile' => $row->mobile,
-            'std_code' => $row->std_code,
+            'std_code' => $row->person_std_code,
             'telephone' => $row->telephone,
             'email_id' => $row->email_id,
-            'ignore_it_exemption_limit' => $row->ignore_it_exemption_limit,
-            'activate_tds_for_stock' => $row->activate_tds_for_stock,
-            'mobile' => $row->mobile
+            'std_code_alternate' => $row->std_code_alternate,
+            'telephone_alternate' => $row->telephone_alternate,
+            'email_id_alternate' => $row->email_id_alternate,
         );
 
        
@@ -919,9 +991,7 @@ public function get_tcs_details() {
     }
 }
 
-
-
-// ////////////////////////////gst//////////////////////////////////////
+/////////////////////////////////gst////////////////////////////////////////
 public function fetch_registration_name() {
     $state_id = $this->input->post('state_id');
     $registrationName = $this->CompanyModel->getRegistrationName($state_id);
@@ -945,6 +1015,8 @@ public function getAddressTypes() {
 // for saving the gst
 public function save_gst_details() {
         $company_id = $this->session->userdata('company_id');
+        $gst_row_id = $this->input->post('gst_row_id');
+
         $gst_registration_status_id = $this->input->post('gst_registration_status_id');
         $gst_state_id = $this->input->post('gst_state_id');
         $gst_registration_type_id = $this->input->post('gst_registration_type_id');
@@ -972,7 +1044,8 @@ public function save_gst_details() {
         // ($setAlterPersonTDS == 'yes') ? 'Y' : 'N',
     $data = array(
         // GST Registration Details
-        
+       
+        // 'id' => $gst_row_id,
         'gst_registration_status_id' => $gst_registration_status_id,
         'state_id' =>$gst_state_id,
         'address_type_id' =>$gst_address_type_id,
@@ -996,9 +1069,13 @@ public function save_gst_details() {
         'ignore_special_characters_used_in_supplier_document_number' => $gst_ignore_special_characters_used_in_supplier_document_number,
         'gst_registration_name'=>$gst_registration_name,
     );
+    if ($gst_row_id == 0) {
+               $result = $this->CompanyModel->insertGstDetails($data,$company_id);
+    } else {
+              $result = $this->CompanyModel->updateGstDetails($gst_row_id, $data);
+    }
  
-  
-    $result = $this->CompanyModel->updateGstDetails($company_id, $data);
+    // $result = $this->CompanyModel->updateGstDetails($gst_row_id, $data);
     if ($result['status'] === 'success') {
         $response = array('status' => 'success', 'message' => 'GST details saved successfully.');
     } else {
@@ -1012,6 +1089,50 @@ public function save_gst_details() {
 }
 
 //////////////////////////////////////
+
+public function save_gst_other_details() {
+    $company_id = $this->session->userdata('company_id');
+$data = array(
+    'hsn_sac_details_id' =>$this->input->post('hsn_sac_details_id'),
+     'hsn_gst_classification_id' =>$this->input->post('hsn_gst_classification_id'),
+    'hsn_sac_number' =>$this->input->post('hsn_sac_number'),
+    'hsn_sac_description' =>$this->input->post('hsn_sac_description'),
+    'gst_rate_details_id' =>$this->input->post('gst_rate_details_id'),
+    'gst_gst_classification_id' =>$this->input->post('gst_classification_id'),
+    'taxability_type_id' =>$this->input->post('taxability_type_id'),
+    'igst_rate' =>$this->input->post('igst_rate'),
+    'cgst_rate'=>$this->input->post('cgst_rate'),
+    'sgst_utgst_rate'=>$this->input->post('sgst_utgst_rate'),
+    'cess_valuation_type_id'=>$this->input->post('cess_valuation_type_id'),
+    'cess_rate' =>$this->input->post('cess_rate'),
+
+    'applicable_for_reverse_charge' =>$this->input->post('applicable_for_reverse_charge'),
+    'eligible_for_input_tax_credit'=>$this->input->post('eligible_for_input_tax_credit'),
+    'interstate_threshold_limit'=>$this->input->post('interstate_threshold_limit'),
+    'intrastate_threshold_limit'=>$this->input->post('intrastate_threshold_limit'),
+    'threshold_limit_id'=>$this->input->post('threshold_limit_id'),
+    'print_e_way_bill_with_invoice' =>$this->input->post('print_e_way_bill_with_invoice'),
+    
+
+     'send_e_way_bill_with_e_invoice_in_sales' =>$this->input->post('send_e_way_bill_with_e_invoice_in_sales'),
+    'ignore_differences_in_tax_values_up_to' =>$this->input->post('ignore_differences_in_tax_values_up_to'),
+    'ignore_differences_in_tax_id' =>$this->input->post('ignore_differences_in_tax_id'),
+    'show_gst_advances_for_adjustments_in_trasaction'=>$this->input->post('show_gst_advances_for_adjustments_in_trasaction'),
+    'gst_advances_for_adjustments_applicable_from'=>$this->input->post('gst_advances_for_adjustments_applicable_from')
+);
+
+
+$this->CompanyModel->updateGstOtherDetails($data, $company_id);
+$response = array(
+    'success' => true,
+    'message' => 'Gst other details inserted successfully.'
+);
+
+header('Content-Type: application/json');
+echo json_encode($response);
+
+}
+//////////////////////////
 
 public function get_gst_details() {
     $companyId = $this->input->post('company_id');
@@ -1029,18 +1150,11 @@ public function get_gst_details() {
         echo json_encode(array('error' => 'invalid tdsValue'));
         return;
     }
-
-   
     $query = $this->CompanyModel->getGstDetails($gst_value, $companyId);
-
-   
     if ($query->num_rows() > 0) {
-      
         $row = $query->row();
-
-        
         $gstDetails = array(
-            
+            'id'=>$row->id,
             'gst_registration_status_id' => $row->gst_registration_status_id,
             'state_id' => $row->state_id,
             'address_type_id' => $row->address_type_id,
@@ -1077,88 +1191,178 @@ public function get_gst_details() {
     }
 }
 
-public function save_vat_details(){
+// public function get_gst_row_count() {
     
-     $vat_state = $this->input->post('vat_state');
-     $vat_tin = $this->input->post('vat_tin');
-     $interstate_sales_tax_number = $this->input->post('interstate_sales_tax_number');
-     $stdCode = $this->input->post('stdCode');
-     $deactivate_from = $this->input->post('deactivate_from');
-     $companyId = $this->session->userdata('companyId');
-
-     $data = array(
-        'company_id'              =>$companyId,
-         'state' =>$vat_state,
-         'tin' =>$vat_tin,
-         'interstate_sales_tax_number' =>$interstate_sales_tax_number,
-        //  'deductor_branch_division' => $stdCode,
-          'deactivate_from' =>  $deactivate_from,
-         
-     );
-     // print_r($data);
- 
-    
-     $result = $this->CompanyModel->updateVatDetails($companyId, $data);
-    //  var_dump($result);
- 
-     if ($result==1) {
-         $response = array('status' => 'success', 'message' => 'VAT details saved successfully.');
-     } else {
-         $response = array('status' => 'error', 'message' => 'Failed to save VAT details.');
-     }
+//     $company_id = $this->session->userdata('company_id');
+//     $row_count = $this->CompanyModel->getGstRowCount($company_id);
    
-    
+//     $response = array('row_count' => $row_count);
+//     header('Content-Type: application/json');
+//     echo json_encode($response);
+// }
+public function get_gst_row_count() {
+    $company_id = $this->session->userdata('company_id');
+    $data = $this->CompanyModel->getGstData($company_id);
+    $row_count = count($data);
+
+    $response = array('row_count' => $row_count, 'data' => $data);
     header('Content-Type: application/json');
     echo json_encode($response);
 }
 
-public function get_vat_details(){
-    $companyId = $this->input->post('company_id');
-    if (empty($companyId)) {
-       
+public function get_gst_details_by_id(){
+    // $company_id= $this->input->post('company_id');
+    $company_id = $this->session->userdata('company_id');
+    // echo( $companyid);
+    if (empty($company_id)) {
+        
         http_response_code(400);
         echo json_encode(array('error' => 'companyId is missing from session data'));
         return;
     }
+   
+   
+    $res =  $this->CompanyModel->get_multiple_gst_details_by_id($company_id);
+    echo json_encode($res);
 
-    $vatValue = $this->input->post('vatValue');
-    if (!in_array($vatValue, array('yes', 'no'))) {
-     
-        http_response_code(400);
-        echo json_encode(array('error' => 'invalid vatValue'));
-        return;
+}
+
+ public function get_single_gst_details_by_id() {
+      
+        $gst_id = $this->input->post('gst_id');
+       
+        $gst_details = $this->CompanyModel->getGstDetailsById($gst_id);
+        header('Content-Type: application/json');
+        echo json_encode($gst_details);
     }
 
-   
-    $query = $this->CompanyModel->getVatDetails($vatValue, $companyId);
 
-   
-    if ($query->num_rows() > 0) {
-        
-        $row = $query->row();
+public function get_vat_details(){
+    $company_id = $this->input->post('company_id');
+    if (empty($company_id)) {
+        http_response_code(400);
+        echo json_encode(array('error' => 'companyId is missing from session data'));
+        return;
+    }
+    // $vat_value = $this->input->post('vat_value');
+    // if (!in_array($vat_value, array('yes', 'no'))) {
+       
+    //     http_response_code(400);
+    //     echo json_encode(array('error' => 'invalid tdsValue'));
+    //     return;
+    // }
+    $results = $this->CompanyModel->getVatDetails($company_id);
+    // echo $query;
+    // exit;
+    if (!empty($results)) {
+        $row = $results[0];
+             $vatDetails = array(
+                'state_id' => $row['state_id'],
+                'vat_applicable_from' => $row['vat_applicable_from'],
+                'vat_tin_number' => $row['vat_tin_number'],
+                'tan_account_number' => $row['tan_account_number'],
+                'vat_registration_date' => $row['vat_registration_date'],
+                'interstate_sales_tax_number' => $row['interstate_sales_tax_number'],
+                'cst_registration_date' => $row['cst_registration_date'],
+                'e_vat_periodicity_id' => $row['e_vat_periodicity_id'],
+                'enable_vat_calculation_on_quantity' => $row['enable_vat_calculation_on_quantity'],
+                'enable_vat_calculation_on_stock_item_rate' =>$row['enable_vat_calculation_on_stock_item_rate'],
+                'is_under_npv_scheme' => $row['is_under_npv_scheme'],
+                'define_commodity_and_tax_as_masters' => $row['define_commodity_and_tax_as_masters'],
+                'deactivate_from' => $row['deactivate_from'],
+                'circle_office' => $row['circle_office'],
+                'status_of_business' =>$row['status_of_business'],
+                'nature_of_business' => $row['nature_of_business'],
+                'ss_msi_lsi_registration_number' => $row['ss_msi_lsi_registration_number'],
+                'authorised_person' => $row['authorised_person'],
+                'status_designation' => $row['status_designation'],
+                'place' => $row['place'],
+                'district' => $row['district'],
+                ////////
+                'cst_rate_against_form_c' => $row['cst_rate_against_form_c'],
+                'cst_effective_from' => $row['cst_effective_from'],
+                'cst_effective_to' => $row['cst_effective_to'],
+                'vat_rate' => $row['vat_rate'],
+                'cess_rate' => $row['cess_rate'],
+                'vat_effective_from' => $row['vat_effective_from'],
+                'vat_effective_to' => $row['vat_effective_to'],
+                'vat_tax_type_id' => $row['vat_tax_type_id'],
+                'vat_schedule_id' => $row['vat_schedule_id'],
+                'vat_schedule_serial_number' => $row['vat_schedule_serial_number'],
+                'type_of_goods_id' => $row['type_of_goods_id'],
+                'nature_of_goods_id' => $row['nature_of_goods_id'],
+                'commodity_name' => $row['commodity_name'],
+                'commodity_code' => $row['commodity_code'],
+                'sub_commodity_code' => $row['sub_commodity_code'],
+                    );
 
-      
-        $vatDetails = array(
-            
-            'state' => $row->state,
-            'tin' => $row->tin,
-            'interstate_sales_tax_number' => $row->interstate_sales_tax_number,
-            'deactivate_from' => $row->deactivate_from,
-        );
-
-        
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($vatDetails));
     } else {
-       
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode(array()));
     }
-
 }
+/////////////////////////////////
 
+
+public function get_gstrate_details(){
+    $company_id = $this->input->post('company_id');
+    if (empty($company_id)) {
+        http_response_code(400);
+        echo json_encode(array('error' => 'companyId is missing from session data'));
+        return;
+    }
+    $gatrate_value = $this->input->post('gatrate_value');
+    if (!in_array($gatrate_value, array('yes', 'no'))) {
+       
+        http_response_code(400);
+        echo json_encode(array('error' => 'invalid tdsValue'));
+        return;
+    }
+    $results = $this->CompanyModel->getGstRateDetails($company_id);
+    // echo $query;
+    // exit;
+    if (!empty($results)) {
+        $row = $results[0];
+             $gstRateDetails = array(
+                'hsn_sac_details_id' => $row['hsn_sac_details_id'],
+                'hsn_gst_classification_id' => $row['hsn_gst_classification_id'],
+                'hsn_sac_number' => $row['hsn_sac_number'],
+                'hsn_sac_description' => $row['hsn_sac_description'],
+                'gst_rate_details_id' => $row['gst_rate_details_id'],
+                'gst_gst_classification_id' => $row['gst_gst_classification_id'],
+                'taxability_type_id' => $row['taxability_type_id'],
+                'igst_rate' => $row['igst_rate'],
+                'cgst_rate' => $row['cgst_rate'],
+                'sgst_utgst_rate' =>$row['sgst_utgst_rate'],
+                'cess_valuation_type_id' => $row['cess_valuation_type_id'],
+                'cess_rate' => $row['cess_rate'],
+                'applicable_for_reverse_charge' => $row['applicable_for_reverse_charge'],
+                'eligible_for_input_tax_credit' => $row['eligible_for_input_tax_credit'],
+                'interstate_threshold_limit' =>$row['interstate_threshold_limit'],
+                'intrastate_threshold_limit' => $row['intrastate_threshold_limit'],
+                'threshold_limit_id' => $row['threshold_limit_id'],
+                'print_e_way_bill_with_invoice' => $row['print_e_way_bill_with_invoice'],
+                'send_e_way_bill_with_e_invoice_in_sales' => $row['send_e_way_bill_with_e_invoice_in_sales'],
+                'ignore_differences_in_tax_values_up_to' => $row['ignore_differences_in_tax_values_up_to'],
+                'ignore_differences_in_tax_id' => $row['ignore_differences_in_tax_id'],
+                 'show_gst_advances_for_adjustments_in_trasaction' => $row['show_gst_advances_for_adjustments_in_trasaction'],
+                'gst_advances_for_adjustments_applicable_from' => $row['gst_advances_for_adjustments_applicable_from'],
+               
+                    );
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($gstRateDetails));
+    } else {
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode(array()));
+    }
+}
 
 // fetch organization  type
 public function fetch_organization_types() {
@@ -1509,6 +1713,124 @@ public function get_gst_periodicity_details(){
     }
     return array();
 }
+
+public function get_gst_rate_details(){
+    $res=$this->CompanyModel->gst_rate();
+    if($res->num_rows()>0)
+    {
+        return($res->result());
+    }
+    return array();
+}
+
+public function get_hsn_sac_related_action(){
+    $res=$this->CompanyModel->hsn_sac_related_action();
+    if($res->num_rows()>0)
+    {
+        return($res->result());
+    }
+    return array();
+}
+
+
+public function gst_classification_details(){
+
+    $res=$this->CompanyModel->hsn_gst_classification_name();
+    if($res->num_rows()>0)
+    {
+        return($res->result());
+    }
+    return array();
+}
+
+
+public function vat_nature_of_goods_details(){
+
+    $res=$this->CompanyModel->get_nature_of_goods();
+    if($res->num_rows()>0)
+    {
+        return($res->result());
+    }
+    return array();
+}
+
+public function get_gst_taxability_type(){
+    $res=$this->CompanyModel->gst_taxability_type();
+    if($res->num_rows()>0)
+    {
+        return($res->result());
+    }
+    return array();
+}
+
+public function get_gst_cess_valuation_type(){
+    $res=$this->CompanyModel->gst_cess_valuation_type();
+    
+    if($res->num_rows()>0)
+    {
+        return($res->result());
+    }
+    return array();
+}
+
+public function get_gst_threshold_limit_values(){
+    $res=$this->CompanyModel->gst_threshold_limit_values();
+    
+    if($res->num_rows()>0)
+    {
+        return($res->result());
+    }
+    return array();
+}
+
+
+public function get_vat_periodicity_details(){
+    $res=$this->CompanyModel->vat_periodicity();
+    if($res->num_rows()>0)
+    {
+        return($res->result());
+    }
+    return array();
+}
+
+public function get_vat_schedule_details(){
+    $res=$this->CompanyModel->vat_schedule();
+    if($res->num_rows()>0)
+    {
+        return($res->result());
+    }
+    return array();
+}
+
+public function get_vat_type_of_goods_details(){
+    $res=$this->CompanyModel->vat_type_of_good();
+    if($res->num_rows()>0)
+    {
+        return($res->result());
+    }
+    return array();
+}
+
+
+public function get_vat_taxabilitytype_details(){
+    $res=$this->CompanyModel->vat_taxabilitytype();
+   
+    if($res->num_rows()>0)
+    {
+        return($res->result());
+    }
+    return array();
+}
+
+public function get_tds_tcs_collector_deductor_type_details(){
+    $res=$this->CompanyModel->collector_deductor_type_details();
+    if($res->num_rows()>0)
+    {
+        return($res->result());
+    }
+    return array();
+}
+
 
 
 public function get_gst_registration_status_details(){
