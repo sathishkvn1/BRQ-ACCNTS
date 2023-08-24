@@ -18,7 +18,7 @@ ini_set('display_errors', 1);
 <body>
 
     <!------------------------------------------------------------------
-                    Modal for vat Details Start 
+                    Modal for GST Details Start 
     ------------------------------------------------------------------>
     <div class="modal fade backdrop modal_common modal_centered_lg  my-modal" data-value="enable_vat"
         id="vat_details_modal" tabindex="-1" data-backdrop="false">
@@ -51,28 +51,26 @@ ini_set('display_errors', 1);
                                         <div class="col-md-4">
                                             <select class="enable autofocus" tabindex="11200" name="vat_state_id"
                                                 id="vat_state_id">
-                                                <?php
-                                                if (isset($gst_states)):
-                                                    foreach ($gst_states as $row):
-                                                        $name = $row->state_name;
-                                                        $id = $row->id;
-                                                     
-                                                       
-                                                        ?>
-                                                        <option value="<?php echo $id; ?>" 
-                                                            ><?php echo $name; ?>
-                                                        </option>
-                                                        <?php
-                                                    endforeach;
-                                                endif;
-                                                ?>  
+                                                <option value="1">Kerala</option>
                                             </select>
-                                            
-                                          
 
                                         </div>
                                     </div>
-                                
+                                    <!-- Single Row End Here -->
+                                    <!-- Single Row End Here -->
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label>Address Type<span class="colon">:</span></label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <select tabindex="11201" class="enable" id="vat_applicable_from"
+                                                name="vat_applicable_from">
+                                                <option value="1">Primary</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- Single Row Start Here -->
+                                    <!-- Single Row Start Here -->
                                     <div class="row">
                                         <div class="col-md-8">
                                             <label>TIN<span class="colon">:</span></label>
@@ -100,7 +98,7 @@ ini_set('display_errors', 1);
                                             <label>CST registration date<span class="colon">:</span></label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="date" tabindex="11204" name="vat_registration_date"
+                                            <input type="text" tabindex="11204" name="vat_registration_date"
                                                 id="vat_registration_date" class="enable">
                                         </div>
                                     </div>
@@ -114,20 +112,9 @@ ini_set('display_errors', 1);
                                         <div class="col-md-4">
                                             <select tabindex="11205" class="enable" name="e_vat_periodicity_id"
                                                 id="e_vat_periodicity_id">
-                                                <?php
-                                                if (isset($vat_periodicity_type)): foreach ($vat_periodicity_type as $row):
-                                                        $name = $row->e_vat_periodicity;
-                                                        $id = $row->id;
-                                                        $defaultOptionId = 1;
-                                                        $selected = ($id == $defaultOptionId) ? 'selected' : '';
-                                                        ?>
-                                                        <option value="<?php echo $id; ?>" <?php echo $selected; ?>><?php echo $name; ?>
-                                                        </option>
-                                                        <?php
-                                                    endforeach;
-                                                endif;
-                                                ?>
-                                               
+                                                <option value="1">Quarterly</option>
+                                                <option value="1">Half Yearly</option>
+                                                <option value="1">Annuaerly</option>
                                             </select>
                                         </div>
                                     </div>
@@ -200,7 +187,7 @@ ini_set('display_errors', 1);
                                             <label>Deactive from<span class="colon">:</span></label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="date" tabindex="11210" name="deactivate_from"
+                                            <input type="text" tabindex="11210" name="deactivate_from"
                                                 id="deactivate_from" class="enable">
                                         </div>
                                     </div>
@@ -273,7 +260,30 @@ ini_set('display_errors', 1);
                                                 name="nature_of_business" tabindex="11214"></input>
                                         </div>
                                     </div>
-                                   
+                                    <!-- Single Row End Here -->
+                                    <!-- Single Row Start Here -->
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label>Fax Number<span class="colon">:</span></label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" class="enable" id="vat_fax_number" name="vat_fax_number"
+                                                tabindex="11215"></input>
+                                        </div>
+                                    </div>
+                                    <!-- Single Row End Here -->
+                                    <!-- Single Row Start Here -->
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label>Website Name<span class="colon">:</span></label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" tabindex="11216" class="enable" name="vat_website"
+                                                id="vat_website">
+                                        </div>
+                                    </div>
+                                    <!-- Single Row End Here -->
+                                    <!-- Single Row Start Here -->
                                     <div class="row">
                                         <div class="col-md-8">
                                             <label>Authorised Person<span class="colon">:</span></label>
@@ -356,7 +366,7 @@ ini_set('display_errors', 1);
                                     <label>CST effective Date<span class="colon">:</span></label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="date" class="enable autofocus" id="cst_effective_date" tabindex="11221"
+                                    <input type="text" class="enable autofocus" id="cst_effective_date" tabindex="11221"
                                         name="cst_effective_date">
                                 </div>
                             </div>
@@ -384,7 +394,7 @@ ini_set('display_errors', 1);
                                     <label>VAT effective Date<span class="colon">:</span></label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="date" id="vat_effective_date" name="vat_effective_date" class="enable"
+                                    <input type="text" id="vat_effective_date" name="vat_effective_date" class="enable"
                                         tabindex="11223">
                                 </div>
                             </div>
@@ -417,18 +427,7 @@ ini_set('display_errors', 1);
                                 </div>
                                 <div class="col-md-4">
                                     <select name="vat_tax_type_id" class="enable" id="vat_tax_type_id" tabindex="11226">
-                                    <?php
-                                                if (isset($vat_taxability_type)): foreach ($vat_taxability_type as $row):
-                                                        $name = $row->vat_taxability_type;
-                                                        $id = $row->id;
-                                                               
-                                                        ?>
-                                                        <option value="<?php echo $id; ?>"><?php echo $name; ?>
-                                                        </option>
-                                                        <?php
-                                                    endforeach;
-                                                endif;
-                                      ?>
+                                        <option value="">Taxable</option>
                                     </select>
                                 </div>
                             </div>
@@ -444,17 +443,7 @@ ini_set('display_errors', 1);
                                 </div>
                                 <div class="col-md-4">
                                     <select tabindex="11227" class="enable" name="vat_schedule_id" id="vat_schedule_id">
-                                    <?php
-                                                if (isset($vat_schedule_type)): foreach ($vat_schedule_type as $row):
-                                                        $name = $row->vat_schedule_group	;
-                                                        $id = $row->id;
-                                                        ?>
-                                                        <option value="<?php echo $id; ?>" ><?php echo $name; ?>
-                                                        </option>
-                                                        <?php
-                                                    endforeach;
-                                                endif;
-                                                ?>
+                                        <option value="1">Not Applicable</option>
                                     </select>
                                 </div>
                             </div>
@@ -467,18 +456,7 @@ ini_set('display_errors', 1);
                                 <div class="col-md-4">
                                     <select tabindex="11228" class="enable" name="type_of_goods_id"
                                         id="type_of_goods_id">
-                                        <?php
-                                                if (isset($vat_type_of_goods)): foreach ($vat_type_of_goods as $row):
-                                                        $name = $row->vat_type_of_goods	;
-                                                        $id = $row->id;
-                                                        ?>
-                                                        <option value="<?php echo $id; ?>" ><?php echo $name; ?>
-                                                        </option>
-                                                        <?php
-                                                    endforeach;
-                                                endif;
-                                                ?>
-
+                                        <option value="1">Raw Jute</option>
                                     </select>
                                 </div>
                             </div>
@@ -491,17 +469,7 @@ ini_set('display_errors', 1);
                                 <div class="col-md-4">
                                     <select tabindex="11229" class="enable" name="nature_of_goods_id"
                                         id="nature_of_goods_id">
-                                        <?php
-                                                if (isset($nature_of_goods)): foreach ($nature_of_goods as $row):
-                                                        $name = $row->acc_vat_nature_of_goods	;
-                                                        $id = $row->id;
-                                                        ?>
-                                                        <option value="<?php echo $id; ?>" ><?php echo $name; ?>
-                                                        </option>
-                                                        <?php
-                                                    endforeach;
-                                                endif;
-                                                ?>
+                                        <option value="1">Non Vatable</option>
                                     </select>
                                 </div>
                             </div>
@@ -570,7 +538,7 @@ ini_set('display_errors', 1);
                         </div>
 
                         <div class="col-md-12">
-                            <a class="btn" href="#" id="save_btn_vat" onclick=""><i
+                            <a class="btn" href="#" id="save-btn-vat" onclick=""><i
                                     class="fas fa-save"></i><span>S</span>ave</a>
                             <a class="btn" href="#" class="close" data-dismiss="modal" id="btn_vat_cancel"
                                 aria-label="Close"><i class="fas fa-times-circle"></i><span>C</span>ancel</a>
@@ -581,169 +549,20 @@ ini_set('display_errors', 1);
         </div>
     </div>
 </body>
+
 </html>
-
-
 <script>
- $('#save_btn_vat').click(function() {
- 
-var token = "<?php echo $_SESSION['li_token']; ?>";
-$.ajax({
-  
-    url: BASE_URL +"index.php/" + accountsController +"/save_vat_details",
-    type: 'POST',
-    dataType: 'json',
-    data: {
-        vat_state_id: $('#vat_state_id').val(),
-        vat_applicable_from: $('#vat_applicable_from').val(),
-        vat_tin_number: $('#vat_tin_number').val(),
-        interstate_sales_tax_number: $('#interstate_sales_tax_number').val(),
-        vat_registration_date: $('#vat_registration_date').val(),
-        e_vat_periodicity_id: $('#e_vat_periodicity_id').val(),
-        is_under_npv_scheme: $('#is_under_npv_scheme').val(),
-        enable_vat_calculation_on_quantity: $('#enable_vat_calculation_on_quantity').val(),
-        enable_vat_calculation_on_stock_item_rate: $('#enable_vat_calculation_on_stock_item_rate').val(),
-        define_commodity_and_tax_as_masters: $('#define_commodity_and_tax_as_masters').val(),
-        deactivate_from: $('#deactivate_from').val(),
-        circle_office: $('#circle_office').val(),
-        status_of_business: $('#status_of_business').val(),
-        nature_of_business: $('#nature_of_business').val(),
-        vat_fax_number: $('#vat_fax_number').val(),
-        vat_website: $('#vat_website').val(),
-        authorised_person: $('#authorised_person').val(),
-        vat_status_designation: $('#vat_status_designation').val(),
-        vat_place: $('#vat_place').val(),
-        vat_district: $('#vat_district').val(),
-        // Set/alter/rate details
-        vat_rate_details: $('#vat_rate_details').val(),
-        
-        cst_effective_date: $('#cst_effective_date').val(),
-        cst_rate_against_form_c: $('#cst_rate_against_form_c').val(),
-        vat_effective_date: $('#vat_effective_date').val(),
-        vat_rate: $('#vat_rate').val(),
-        vat_cess: $('#vat_cess').val(),
-        vat_tax_type_id: $('#vat_tax_type_id').val(),
-        vat_schedule_id: $('#vat_schedule_id').val(),
-        type_of_goods_id: $('#type_of_goods_id').val(),
-        nature_of_goods_id: $('#nature_of_goods_id').val(),
-        commodity_name: $('#commodity_name').val(),
-        commodity_code: $('#commodity_code').val(),
-        sub_commodity_code: $('#sub_commodity_code').val(),
-        li_token: token
-},
+    $(".yes_no,.enable").keypress(function (event) {
+        if ($("#vat_details_modal").hasClass("show")) {
+            if (event.key === "Enter") {
 
-    success: function(response) {
-      console.log("response",response);
-      if (response.success === true) {
-     toast_message("success", "Successful", response.message);
-      // alert('TDS details saved successfully.');
-      $('#vatModal').modal('hide');
-      $('#vat_details_modal').modal('hide');
-      
-
-    
-  } else {
-      alert('Failed to save VAT details.');
-  }
-    },
-    error: function(xhr, status, error) {
-        console.log('Error response:', xhr.responseText);
-// console.log(xhr.responseText);
-console.log('An error occurred:', error);
-alert('An error occurred while saving VATdetails. Please check the console for more information.');
-}
-
-});
-});
-
-
-
-
-
-
-
-
-
-
-    // $(".yes_no,.enable").keypress(function (event) {
-    //     if ($("#vat_details_modal").hasClass("show")) {
-    //         if (event.key === "Enter") {
-
-    //             // event.preventDefault();
-    //             itype = $(this).prop('type');
-    //             if (itype !== 'submit') {
-    //                 vat_current_tabindex = $(this).attr('tabindex');
-    //                 var company_vat_field_id = $(this).attr('id');
-    //                 if (company_vat_field_id == "vat_rate_details") {
-    //                     var val_company_vat_field_id = $("#vat_rate_details").val();
-    //                     if (val_company_vat_field_id === "no")//save modal open when set alter rate details calue no
-    //                     {
-    //                         $("#circle_office").prop('disabled', true);
-    //                         $("#vatModal").modal("show");
-    //                     }
-    //                     else if (val_company_vat_field_id === "yes")//save modal open when set alter rate details calue no
-    //                     {
-    //                         $("#circle_office").removeAttr('disabled');
-    //                     }
-    //                 }
-    //                 if(company_vat_field_id == "vat_tin_number") {
-                        
-    //                     var tinNumber = $(this).val();
-    //                     var stateCode = tinNumber.substring(0, 2);
-    //                     var expectedTinPattern = new RegExp('^' + stateCode + '\\d{9}$');
-    //                     if (tinNumber === "") {
-    //                         alert_message("warning", "warning", "TIN is not specified.");
-    //                         return;
-    //                     } else if (!expectedTinPattern.test(tinNumber)) {
-    //                         alert_message("warning", "Warning", "The TIN is invalid. Please enter a valid TIN with the state code and 9-digit number.");
-    //                         return;
-    //                     }
-    //                   }
-    //                 if (company_vat_field_id == "vat_district") {
-    //                     var val_company_vat_field_id = $("#vat_rate_details").val();
-    //                     if (val_company_vat_field_id === "yes")//save modal open when set alter rate details calue no
-    //                     {
-    //                         $("#vatModal").modal("show");
-    //                     }
-
-    //                 }
-    //                 var next = parseInt(vat_current_tabindex) + 1;
-
-    //                 if (vat_current_tabindex >= 11200 && vat_current_tabindex < 11400) {
-    //                     while (next < 11400) {
-
-    //                         if ($('[tabindex^="' + (parseInt(next)) + '"]').hasClass('enable')) {
-    //                             nextInput = $('[tabindex^="' + next + '"]');
-    //                             if (nextInput.length) {
-    //                                 nextInput.focus();
-    //                                 return false;
-    //                             }
-    //                         }
-    //                         next++;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    // });
-
-    $(".yes_no,.enable").on("keydown", function(event) {
-    if ($("#vat_details_modal").hasClass("show")) {
-        if (event.key === "Enter" || event.key === "Tab") {
-           
-            if (event.key === "Tab") {
-                event.preventDefault();
-            }
-
-            itype = $(this).prop('type');
-            if (itype !== 'submit') {
-                vat_current_tabindex = $(this).attr('tabindex');
-                var company_vat_field_id = $(this).attr('id');
-
-               
-                if (company_vat_field_id == "vat_rate_details") {
-                    var val_company_vat_field_id = $("#vat_rate_details").val();
+                // event.preventDefault();
+                itype = $(this).prop('type');
+                if (itype !== 'submit') {
+                    vat_current_tabindex = $(this).attr('tabindex');
+                    var company_vat_field_id = $(this).attr('id');
+                    if (company_vat_field_id == "vat_rate_details") {
+                        var val_company_vat_field_id = $("#vat_rate_details").val();//yes or no
                         if (val_company_vat_field_id === "no")//save modal open when set alter rate details calue no
                         {
                             $("#circle_office").prop('disabled', true);
@@ -753,55 +572,35 @@ alert('An error occurred while saving VATdetails. Please check the console for m
                         {
                             $("#circle_office").removeAttr('disabled');
                         }
-                    
-                } else if (company_vat_field_id == "vat_tin_number") {
-                    var tinNumber = $(this).val();
-                    var stateCode = tinNumber.substring(0, 2);
-                    var expectedTinPattern = new RegExp('^' + stateCode + '\\d{9}$');
-                    if (tinNumber === "") {
-                        alert_message("warning", "warning", "TIN is not specified.");
-                        return;
-                    } else if (!expectedTinPattern.test(tinNumber)) {
-                        alert_message("warning", "Warning", "The TIN is invalid. Please enter a valid TIN with the state code and 9-digit number.");
-                        return;
                     }
-                } else if (company_vat_field_id == "vat_district") {
-                    var val_company_vat_field_id = $("#vat_rate_details").val();
-                    if (val_company_vat_field_id === "yes")
+                    if (company_vat_field_id == "vat_district") {
+                        var val_company_vat_field_id = $("#vat_rate_details").val();
+                        if (val_company_vat_field_id === "yes")//save modal open when set alter rate details calue no
                         {
                             $("#vatModal").modal("show");
                         }
-                }
-                // else if (company_vat_field_id == "vat_rate_details") {
-                //     alert("hai");
-                //     var val_company_vat_field_id = $("#vat_rate_details").val();
-                //     alert(val_company_vat_field_id);
-                //     if (val_company_vat_field_id === "no")
-                //         {
-                //             $("#vatModal").modal("show");
-                //         }
-                // }
 
-                // Find the next input field to focus on
-                var next = parseInt(vat_current_tabindex) + 1;
-                if (vat_current_tabindex >= 11200 && vat_current_tabindex < 11400) {
-                    while (next < 11400) {
-                        if ($('[tabindex^="' + (parseInt(next)) + '"]').hasClass('enable')) {
-                            nextInput = $('[tabindex^="' + next + '"]');
-                            if (nextInput.length) {
-                                nextInput.focus();
-                                return false;
+                    }
+                    var next = parseInt(vat_current_tabindex) + 1;
+
+                    if (vat_current_tabindex >= 11200 && vat_current_tabindex < 11400) {
+                        while (next < 11400) {
+
+                            if ($('[tabindex^="' + (parseInt(next)) + '"]').hasClass('enable')) {
+                                nextInput = $('[tabindex^="' + next + '"]');
+                                if (nextInput.length) {
+                                    nextInput.focus();
+                                    return false;
+                                }
                             }
+                            next++;
                         }
-                        next++;
                     }
                 }
             }
         }
-    }
-});
 
-    //////////////////////
+    });
     $(window).keydown(function (e) {//focus last element when you press c on save modal
 
         if (e.keyCode == 9) {//tab intex integration
@@ -858,52 +657,4 @@ alert('An error occurred while saving VATdetails. Please check the console for m
             }
       
     });
-
-    $('#vat_state_id').change(function() {
-    var stateId = $(this).val();
-    var token = "<?php echo $_SESSION['li_token']; ?>";
-  
-    $.ajax({
-        type: 'POST',
-        url: BASE_URL + "index.php/" + accountsController + "/fetch_state_code",
-       
-        data: { state_id: stateId, li_token: token},
-        success: function(response) {
-            try {
-                var trimmedResponse = response.trim(); 
-                var parsedResponse = JSON.parse(trimmedResponse); 
-                var stateCode = parsedResponse.state_code;
-                $('#vat_tin_number').val(stateCode);
-              
-            } catch (error) {
-                console.log("JSON Parse Error:", error);
-            }
-            
-          
-        }
-    });
-});
-
-// $('#vat_tin_number').on('keydown', function(event) {
-//         if (event.which === 13) { // Check if Enter key is pressed
-//             event.preventDefault(); // Prevent the form from submitting (if applicable)
-            
-//             var tinNumber = $(this).val();
-//             var tinPattern = /^[2]\d{9}$/;
-//             // var tinPattern = /^[2]\d{1}[0-9]{9}$/;
-
-//             if (tinNumber === "") {
-//                 alert_message("warning", "warning", "TIN is not specified.");
-//              }
-             
-//              else if (!tinPattern.test(tinNumber)) {
-//                 alert_message("warning", "Warning", "The TIN is invalid. Please enter a valid TIN.");
-//             }
-//         }
-//     });
-
-
-
-
-
 </script>

@@ -87,10 +87,8 @@ ini_set('display_errors', 1);
                                     <div class="row">
                                         <div class="col-md-8">
                                             <label>State<span class="colon">:</span></label>
-                                            <input type="" id="gst_row_id" name="gst_row_id">
                                         </div>
                                         <div class="col-md-4">
-                                        
                                             <select class="enable" tabindex="10401" name="gst_state_id"
                                                 id="gst_state_id" >
                                               
@@ -658,6 +656,9 @@ ini_set('display_errors', 1);
 </html>
 <script>
 
+
+
+
     //enter key integration in gst start here
 
     $(".yes_no,.enable").keypress(function (event) {
@@ -678,11 +679,11 @@ ini_set('display_errors', 1);
                     var GSTexpr = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;//gst number regular expression
                     if (gstNumber == "") {
                         alert_message("warning", "warning", "GSTIN/UIN is not specified.");
-                        return;
+
                     }
                     else if (!GSTexpr.test(gstNumber)) {
-                        alert_message("warning", "Warning", "The GSTIN/UIN is invalid or contains special character.\n Enter the GSTIN/UIN manually and try again. For Example 22AAAAA0000A1Z5 ");
-                        return;
+                        alert_message("warning", "Warning", "The GSTIN/UIN is invalid or contains special character.\n Enter the GSTIN/UIN manually and try again.");
+
                     }
                 }
                 else if ($("#" + gst_field_id).is('[data-target~="#gstModal"]')) {//when you press enter key from last input of company creation
@@ -1182,17 +1183,66 @@ ini_set('display_errors', 1);
 
         $('#save-btn-gst').click(function () {
             //////////////fr console////////
-
+            gst_registration_status_id= $("#gst_registration_status_id").val();
+            console.log("gst_registration_status_id is ", gst_registration_status_id);
+            gst_state_id= $("#gst_state_id").val();
+            console.log("gst_state_id is ", gst_state_id);
+            gst_state_id_text=  $("#gst_state_id option:selected").text()
+            console.log("state id text is ", gst_state_id_text);
+            gst_address_type_id= $("#gst_address_type_id").val();
+            console.log("gst_address_type_id is ", gst_address_type_id);
+            gst_registration_type_id= $("#gst_registration_type_id").val();
+            console.log("gst_registration_type_id is ", gst_registration_type_id);
+            gst_assessee_of_other_territory=  $("#gst_assessee_of_other_territory").val()
+            console.log(" gst_assessee_of_other_territory is ",  gst_assessee_of_other_territory);
+            gstin_uin=  $("#gstin_uin").val()
+            console.log(" gstin_uin is ",  gstin_uin);
+        
+            gstr1_periodicity_id=  $("#gstr1_periodicity_id").val()
+            console.log(" gstr1_periodicity_id ",   gstr1_periodicity_id);
+          
+            gst_place_of_supply_id=  $("#gst_place_of_supply_id").val()
+            console.log("  gst_place_of_supply_id is ",    gst_place_of_supply_id);
+            
+            gst_is_e_invoicing_applicable=  $("#gst_is_e_invoicing_applicable").val()
+            console.log("gst_is_e_invoicing_applicable is ",    gst_is_e_invoicing_applicable);
+        
+            gst_e_invoicing_applicable_from_date=  $("#gst_e_invoicing_applicable_from_date").val()
+            console.log("gst_e_invoicing_applicable_from_date is ",   gst_e_invoicing_applicable_from_date);
+            gst_e_invoice_bill_from_place=  $("#gst_e_invoice_bill_from_place").val()
+            console.log("gst_e_invoice_bill_from_place is ",  gst_e_invoice_bill_from_place);
+            gst_tax_rate_for_taxable_turnover=  $("#gst_tax_rate_for_taxable_turnover").val()
+            console.log("gst_tax_rate_for_taxable_turnover is ",  gst_tax_rate_for_taxable_turnover);
+            gst_composition_tax_calculation_type_id=  $("#gst_composition_tax_calculation_type_id").val()
+            console.log("gst_composition_tax_calculation_type_id is ",  gst_composition_tax_calculation_type_id);
+            gst_is_e_way_bill_applicable= $("#gst_is_e_way_bill_applicable").val();
+            console.log("gst_is_e_way_bill_applicable is ",gst_is_e_way_bill_applicable);
+            gst_e_way_bill_applicable_from_date= $("#gst_e_way_bill_applicable_from_date").val();
+            console.log("gst_e_way_bill_applicable_from_date ",gst_e_way_bill_applicable_from_date);
+             gst_goods_dispatched_from_id= $("#gst_goods_dispatched_from_id").val();
+            console.log(" gst_goods_dispatched_from_id is ", gst_goods_dispatched_from_id);
+//////////
+            gst_is_e_way_bill_applicable_for_intrastate= $("#gst_is_e_way_bill_applicable_for_intrastate").val();
+            console.log(" gst_is_e_way_bill_applicable_for_intrastate is ", gst_is_e_way_bill_applicable_for_intrastate);
+            gst_use_voucher_number_and_date_as_in_supplier_invoice= $("#gst_use_voucher_number_and_date_as_in_supplier_invoice").val();
+            console.log(" gst_use_voucher_number_and_date_as_in_supplier_invoice is ", gst_use_voucher_number_and_date_as_in_supplier_invoice);
+            gst_ignore_zero_prefixed_in_supplier_document_number= $("#gst_ignore_zero_prefixed_in_supplier_document_number").val();
+            console.log(" gst_ignore_zero_prefixed_in_supplier_document_number is ",gst_ignore_zero_prefixed_in_supplier_document_number);
+            gst_ignore_special_characters_used_in_supplier_document_number= $("#gst_ignore_special_characters_used_in_supplier_document_number").val();
+            console.log(" gst_ignore_special_characters_used_in_supplier_document_number is ",gst_ignore_special_characters_used_in_supplier_document_number);
+            gst_registration_name=  $("#gst_registration_name").val()
+            console.log("  gst_registration_name is ",   gst_registration_name);
+            gst_create_another_gst_registration=  $("#gst_create_another_gst_registration").val()
+            console.log("  gst_create_another_gst_registration is ",   gst_create_another_gst_registration);
+            // $('.gstModal').modal('hide');
             var token = "<?php echo $_SESSION['li_token']; ?>";
             // Save the changes made in the gst_modal
-      
             $.ajax({
+                
                 url: BASE_URL + "index.php/" + accountsController + "/save_gst_details",
                 type: 'POST',
                 dataType: 'json',
                 data: {
-                    
-                    gst_row_id: $("#gst_row_id").val(),
                     gst_registration_status_id: $("#gst_registration_status_id").val(),
                     gst_state_id: $("#gst_state_id").val(),
                     gst_address_type_id: $("#gst_address_type_id").val(),
@@ -1224,15 +1274,8 @@ ini_set('display_errors', 1);
                         // alert('GST details saved successfully.');
                         toast_message("success", "Successful", "GST details saved successfully.");
                         $('#gstModal').modal('hide');
-                        var createAnotherGST = $("#gst_create_another_gst_registration").val();
-                        alert(createAnotherGST);
-                            if (createAnotherGST === "no") {
-                              
-                                 $('#gst_modal').modal('hide');
-                            } else {
-                                resetFormFields()
-                            }
-                                    } 
+                        $('#company_features').modal('show'); 
+                    } 
                     else {
                         // alert('Failed to save GST details.');
                         toast_message("failure", "Failed", "Failed to save GST details.");
@@ -1264,14 +1307,6 @@ ini_set('display_errors', 1);
  }); // end of document.ready
 
 
- function resetFormFields() {
-   
-    $('#gst_modal input[type="text"]').val('');
-    // $('#gst_modal select').val('');
-    $("#gst_row_id").val('0');
-  
-}
-
 // function to fetch regsitration name based on state selected
     function updateRegistrationName(stateId) {
     $.ajax({
@@ -1287,13 +1322,12 @@ ini_set('display_errors', 1);
     });
 }
 
-function populateGstForm(gst_id) {
-   
-    $('#gst_row_id').val(gst_id);
-   
-}
-
-  
+  // Update hidden field value when state selection changes
+//   function updateHiddenStateField(selectElement) {
+//         var hiddenField = document.getElementById('gst_state_id_hidden');
+ 
+//         hiddenField.value = selectElement.value;
+       
        
 
 
