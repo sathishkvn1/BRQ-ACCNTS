@@ -1,7 +1,4 @@
-<?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +15,15 @@ ini_set('display_errors', 1);
         .gstin_uin {
             text-transform: uppercase;
         }
+
+        /* input#gst_registration_name {
+    position: absolute;
+    left: 10px !important;
+} */
+
+
+
+
     </style>
 </head>
 
@@ -28,8 +34,8 @@ ini_set('display_errors', 1);
     ------------------------------------------------------------------>
     <!-- <div class="modal fade backdrop modal_common modal_centered_lg gst_details mainmodal my-modal"
         id="gst_modal" tabindex="-1"> -->
- <div class="modal fade backdrop modal_common modal_centered_lg gst_details my-modal" data-value="enable_gst" id="gst_modal" tabindex="-1"> 
-        <div class="modal-dialog modal-dialog-centered" role="document">
+ <div class="modal fade backdrop modal_common modal_centered_lg gst_details my-modal" data-value="gst_rate" id="gst_modal" tabindex="-1"> 
+        <div class="modal-dialog modal-dialog-centered"  role="document">
             <div class="modal-content">
                 <div class="modal_header">
                     <div class="main_head">
@@ -56,7 +62,14 @@ ini_set('display_errors', 1);
                                                         </option>
                                                         <?php
                                                     endforeach;
+                                                    else:
+                                                    ?>
+                                                     <option value="<?php echo '0'; ?>" data-value="<?php echo 'not set'; ?>"
+                                                            ><?php echo "not set"; ?>
+                                                        </option>
+                                                        <?php
                                                 endif;
+                                                
                                                 ?>
                                         </select>
                                      
@@ -87,7 +100,7 @@ ini_set('display_errors', 1);
                                     <div class="row">
                                         <div class="col-md-8">
                                             <label>State<span class="colon">:</span></label>
-                                            <input type="" id="gst_row_id" name="gst_row_id">
+                                            <input type="hidden" id="gst_row_id" name="gst_row_id">
                                         </div>
                                         <div class="col-md-4">
                                         
@@ -96,12 +109,15 @@ ini_set('display_errors', 1);
                                               
                                                 <?php
                                                 if (isset($gst_states)):
+                                                   
                                                     foreach ($gst_states as $row):
                                                         $name = $row->state_name;
                                                         $id = $row->id;
                                                      
                                                        
                                                         ?>
+                                                      
+                                                         
                                                         <option value="<?php echo $id; ?>" 
                                                             ><?php echo $name; ?>
                                                         </option>
@@ -115,42 +131,15 @@ ini_set('display_errors', 1);
                                     </div>
                                     <!-- Single Row End Here -->
 
-                                    <!-- Single Row Start Here -->
-                                    <!-- <div class="row">
-                                        <div class="col-md-8">
-                                            <label>Address Type<span class="colon">:</span></label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <select tabindex="10402" class="enable" id="gst_address_type_id"
-                                                name="gst_address_type_id" > -->
-                                                <!-- <option value="">Primaryyy</option>
-                                                <option value="">Address1</option> -->
-                                            <!-- </select>
-                                           
-                                        </div>
-                                    </div> -->
-                                    <!-- Single Row End Here -->
+                                   
                              <div class="row"> 
                                 <div class="col-md-8">
                                     <label>Address Type<span class="colon">:</span></label>
                                 </div>
                                 <div class="col-md-4">
                                     <select tabindex="10402" class="enable" id="gst_address_type_id" name="gst_address_type_id">
-                                    <?php
-                                                if (isset($address_type)):
-                                                    foreach ($address_type as $row):
-                                                        $name = $row['address_type'];
-                                                        $id = $row['id'];
-                                                     
-                                                       
-                                                        ?>
-                                                        <option value="<?php echo $id; ?>" 
-                                                            ><?php echo $name; ?>
-                                                        </option>
-                                                        <?php
-                                                    endforeach;
-                                                endif;
-                                        ?>
+                                        
+                                    
                                     </select>
                                 </div>
                             </div>
@@ -249,28 +238,12 @@ ini_set('display_errors', 1);
                                          
                                             <select tabindex="10407" class="enable" id="gst_place_of_supply_id"
                                                 name="gst_place_of_supply_id">
-                                                <?php
-                                                if (isset($address_type)):
-                                                    foreach ($address_type as $row):
-                                                        $name = $row['address_type'];
-                                                        $id = $row['id'];
-                                                     
-                                                       
-                                                        ?>
-                                                        <option value="<?php echo $id; ?>" 
-                                                            ><?php echo $name; ?>
-                                                        </option>
-                                                        <?php
-                                                    endforeach;
-                                                endif;
-                                              ?>
+                                              
                                             </select>
 
                                         </div>
                                     </div>
                                     <!-- Single Row End Here -->
-
-
 
 
                                 </div>
@@ -432,21 +405,7 @@ ini_set('display_errors', 1);
                                                     <select tabindex="10415" class="enable"
                                                         name="gst_goods_dispatched_from_id"
                                                         id="gst_goods_dispatched_from_id">
-                                                        <?php
-                                                if (isset($address_type)):
-                                                    foreach ($address_type as $row):
-                                                        $name = $row['address_type'];
-                                                        $id = $row['id'];
-                                                     
                                                        
-                                                        ?>
-                                                        <option value="<?php echo $id; ?>" 
-                                                            ><?php echo $name; ?>
-                                                        </option>
-                                                        <?php
-                                                    endforeach;
-                                                endif;
-                                        ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -579,8 +538,8 @@ ini_set('display_errors', 1);
                                                     class="colon">:</span></label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="enable" name="gst_registration_name"
-                                                id="gst_registration_name" value="kerala" tabindex="10421"></input>
+                                            <input type="text" class="enable " name="gst_registration_name"
+                                                id="gst_registration_name"  tabindex="10421"></input>
 
                                         </div>
                                     </div>
@@ -602,6 +561,7 @@ ini_set('display_errors', 1);
                                     </div>
                                     <!-- Single Row End Here -->
                                 </div>
+                               
                                 <div class="col-md-6 right">
                                     <!-- Single Row Start Here -->
                                     <div class="row bottom-item">
@@ -658,8 +618,9 @@ ini_set('display_errors', 1);
 </html>
 <script>
 
-    //enter key integration in gst start here
 
+
+   
     $(".yes_no,.enable").keypress(function (event) {
 
         if (event.key === "Enter") {
@@ -681,7 +642,7 @@ ini_set('display_errors', 1);
                         return;
                     }
                     else if (!GSTexpr.test(gstNumber)) {
-                        alert_message("warning", "Warning", "The GSTIN/UIN is invalid or contains special character.\n Enter the GSTIN/UIN manually and try again. For Example 22AAAAA0000A1Z5 ");
+                        alert_message("warning", "Warning", "The GSTIN/UIN is invalid or contains special character.\n Enter the GSTIN/UIN manually and try again.");
                         return;
                     }
                 }
@@ -711,19 +672,11 @@ ini_set('display_errors', 1);
                     }
                 }
                 //common  movement of enter key end 
-
             }
 
         }
 
-    });
-    //enter key integration in gst end here
-
-
-    // ===tab ,tab + shift integration in company gst details start here ===
-    $('.yes_no,.enable').keydown(function (e) {
-
-        if (e.shiftKey && e.keyCode == 9) {//shift+alt
+        if (event.shiftKey && event.keyCode == 9) {//shift+alt
            var  company_gst_tab_current_id = $(this).attr('id');
             if(company_gst_tab_current_id=="company_gst_tab_current_id");
             {
@@ -735,8 +688,8 @@ ini_set('display_errors', 1);
 
         }
 
-        else if (e.keyCode == 9) {
-            company_gst_tab_current_id = $(this).attr('id');
+        else if (event.keyCode == 9) {
+            // company_gst_tab_current_id = $(this).attr('id');
             if (company_gst_tab_current_id == "gstin_uin") {//gst niumber validation using tab
                 var companyName = $(this).val().trim();
                 // event.preventDefault();
@@ -745,11 +698,11 @@ ini_set('display_errors', 1);
                 var GSTexpr = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;//gst number regular expression
                 if (gstNumber == "") {
                     alert_message("warning", "warning", "GSTIN/UIN is not specified.");
-
+                    return;
                 }
                 else if (!GSTexpr.test(gstNumber)) {
                     alert_message("warning", "Warning", "The GSTIN/UIN is invalid or contains special character.\n Enter the GSTIN/UIN manually and try again.");
-
+                    return;
                 }
             }
             else if (company_gst_tab_current_id == "gst_registration_name") {
@@ -786,14 +739,23 @@ ini_set('display_errors', 1);
     var BASE_URL = "<?php echo base_url(); ?>";
     var accountsController = "<?php echo CONTROLLER_ACCOUNTS; ?>";
 
-    $(document).on('keydown', function (event) {
-        // Check if the pressed key is the "S" key and the gstModal has the "show" class
-        if ((event.key === 's' || event.key === 'S') && $("#gstModal").hasClass("show")) {
-            event.preventDefault(); // Prevent the default "s" key behavior
-            document.getElementById('save-btn-gst').click();
 
+ 
+
+$(document).on('keydown', function (event) {
+    // Check if the pressed key is the "S" key and the gstModal has the "show" class
+    if ((event.key === 's' || event.key === 'S') && $("#gstModal").hasClass("show")) {
+        event.preventDefault(); // Prevent the default "s" key behavior
+        console.log("S key pressed inside gstModal");
+        document.getElementById('save-btn-gst').click();
+        var $gst_rate = $('#gst_rate'); 
+       
+        if ($gst_rate.length) {
+            $gst_rate.focus();
         }
-    });
+    }
+});
+
 
     // for displaying the gst details modal
     $('#set_gst_rate').on('change keypress', function (event) {
@@ -1185,47 +1147,47 @@ ini_set('display_errors', 1);
 
             var token = "<?php echo $_SESSION['li_token']; ?>";
             // Save the changes made in the gst_modal
-      
+          
             $.ajax({
                 url: BASE_URL + "index.php/" + accountsController + "/save_gst_details",
                 type: 'POST',
                 dataType: 'json',
                 data: {
                     
-                    gst_row_id: $("#gst_row_id").val(),
-                    gst_registration_status_id: $("#gst_registration_status_id").val(),
-                    gst_state_id: $("#gst_state_id").val(),
-                    gst_address_type_id: $("#gst_address_type_id").val(),
-                    gst_registration_type_id: $("#gst_registration_type_id").val(),
+                    gst_row_id                  : $("#gst_row_id").val(),
+                    gst_registration_status_id  : $("#gst_registration_status_id").val(),
+                    gst_state_id                : $("#gst_state_id").val(),
+                    gst_address_type_id         : $("#gst_address_type_id").val(),
+                    gst_registration_type_id    : $("#gst_registration_type_id").val(),
                     gst_assessee_of_other_territory: $("#gst_assessee_of_other_territory").val(),
-                    gstin_uin: $("#gstin_uin").val(),
-                    gstr1_periodicity_id: $("#gstr1_periodicity_id").val(),
-                    gst_place_of_supply_id: $("#gst_place_of_supply_id").val(),
-                    gst_is_e_invoicing_applicable: $("#gst_is_e_invoicing_applicable").val(),
+                    gstin_uin                   : $("#gstin_uin").val(),
+                    gstr1_periodicity_id        : $("#gstr1_periodicity_id").val(),
+                    gst_place_of_supply_id      : $("#gst_place_of_supply_id").val(),
+                    gst_is_e_invoicing_applicable       : $("#gst_is_e_invoicing_applicable").val(),
                     gst_e_invoicing_applicable_from_date: $("#gst_e_invoicing_applicable_from_date").val(),
-                    gst_e_invoice_bill_from_place: $("#gst_e_invoice_bill_from_place").val(),
-                    gst_tax_rate_for_taxable_turnover: $("#gst_tax_rate_for_taxable_turnover").val(),
+                    gst_e_invoice_bill_from_place       : $("#gst_e_invoice_bill_from_place").val(),
+                    gst_tax_rate_for_taxable_turnover   : $("#gst_tax_rate_for_taxable_turnover").val(),
                     gst_composition_tax_calculation_type_id: $("#gst_composition_tax_calculation_type_id").val(),
-                    gst_is_e_way_bill_applicable: $("#gst_is_e_way_bill_applicable").val(),
-                    gst_e_way_bill_applicable_from_date: $('#gst_e_way_bill_applicable_from_date').val(),
-                    gst_goods_dispatched_from_id: $("#gst_goods_dispatched_from_id").val(),
-                    gst_is_e_way_bill_applicable_for_intrastate: $("#gst_is_e_way_bill_applicable_for_intrastate").val(),
-                    gst_use_voucher_number_and_date_as_in_supplier_invoice: $("#gst_use_voucher_number_and_date_as_in_supplier_invoice").val(),
-                    gst_ignore_zero_prefixed_in_supplier_document_number: $("#gst_ignore_zero_prefixed_in_supplier_document_number").val(),
+                    gst_is_e_way_bill_applicable        : $("#gst_is_e_way_bill_applicable").val(),
+                    gst_e_way_bill_applicable_from_date : $('#gst_e_way_bill_applicable_from_date').val(),
+                    gst_goods_dispatched_from_id        : $("#gst_goods_dispatched_from_id").val(),
+                    gst_is_e_way_bill_applicable_for_intrastate             : $("#gst_is_e_way_bill_applicable_for_intrastate").val(),
+                    gst_use_voucher_number_and_date_as_in_supplier_invoice  : $("#gst_use_voucher_number_and_date_as_in_supplier_invoice").val(),
+                    gst_ignore_zero_prefixed_in_supplier_document_number    : $("#gst_ignore_zero_prefixed_in_supplier_document_number").val(),
                     gst_ignore_special_characters_used_in_supplier_document_number: $("#gst_ignore_special_characters_used_in_supplier_document_number").val(),
-                    gst_registration_name: $("#gst_registration_name").val(),
-                    gst_create_another_gst_registration: $("#gst_create_another_gst_registration").val(),
-                    revised_gst_effective_date	: $("#revised_gst_effective_date").val(),
+                    gst_registration_name               : $("#gst_registration_name").val(),
+                    gst_create_another_gst_registration : $("#gst_create_another_gst_registration").val(),
+                    revised_gst_effective_date	        : $("#revised_gst_effective_date").val(),
                    
                     li_token: token
                 },
                 success: function (response) {
                     if (response.status === 'success') {
-                        // alert('GST details saved successfully.');
+                    
                         toast_message("success", "Successful", "GST details saved successfully.");
                         $('#gstModal').modal('hide');
                         var createAnotherGST = $("#gst_create_another_gst_registration").val();
-                        alert(createAnotherGST);
+                      
                             if (createAnotherGST === "no") {
                               
                                  $('#gst_modal').modal('hide');
@@ -1234,7 +1196,7 @@ ini_set('display_errors', 1);
                             }
                                     } 
                     else {
-                        // alert('Failed to save GST details.');
+                      
                         toast_message("failure", "Failed", "Failed to save GST details.");
                         var invoice_applicable_value = $("#gst_is_e_invoicing_applicable").val();
                         if (invoice_applicable_value == "no") {
@@ -1257,9 +1219,30 @@ ini_set('display_errors', 1);
  // to get the state id fr changing the regsitration name
         $('#gst_state_id').change(function() {
         var stateId = $(this).val();
-       
-        updateRegistrationName(stateId);
-    });
+            $.ajax({
+            url: BASE_URL + "index.php/" + accountsController + "/fetch_registration_name",
+            method: 'POST',
+            data: {
+                state_id: stateId,
+                li_token: token
+            },
+            success: function(response) {
+            // console.log(response);
+            var parsedResponse = JSON.parse(response);
+
+            var registrationName = parsedResponse.registration_name;
+
+            console.log(":" + registrationName + ":");
+            console.log(registrationName.length);
+
+            $('#gst_registration_name').val(registrationName);
+ 
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+      });
 
  }); // end of document.ready
 
@@ -1269,35 +1252,34 @@ ini_set('display_errors', 1);
     $('#gst_modal input[type="text"]').val('');
     // $('#gst_modal select').val('');
     $("#gst_row_id").val('0');
+}
+
+function getAddressType()
+{
+    
+        $.ajax({
+            url: BASE_URL + "index.php/" + accountsController + "/get_address_types",
+            method: 'GET',
+            dataType: 'json',
+            data: { li_token: token },
+            success: function(response) {
+                
+                         $.each(response, function (key, value) { //loop through your elements
+                         options =  '<option value="'+ key +'">'+ value +'</option>'; //add the option element as a string
+                        $("#gst_address_type_id, #gst_place_of_supply_id, #gst_goods_dispatched_from_id ").append(options);
+                        // $("")
+                    // }
+                });
+            
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
   
-}
-
-// function to fetch regsitration name based on state selected
-    function updateRegistrationName(stateId) {
-    $.ajax({
-        url: BASE_URL + "index.php/" + accountsController + "/fetch_registration_name",
-        method: 'POST',
-        data: {state_id: stateId,li_token: token},
-        success: function(response) {
-            $('#gst_registration_name').val(response);
-        },
-        error: function(xhr, status, error) {
-            console.log(xhr.responseText);
-        }
-    });
-}
-
-function populateGstForm(gst_id) {
-   
-    $('#gst_row_id').val(gst_id);
-   
-}
-
-  
-       
+   }
 
 
 
-
-
+    
 </script>

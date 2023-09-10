@@ -83,8 +83,8 @@ ini_set('display_errors', 1);
                                                 <label>Classification<span class="colon">:</span></label>
                                             </div>
                                             <div class="col-md-4">
-                                                <!-- <input type="text" class="hsn_gst_classification_id enable" name="hsn_gst_classification_id" id="hsn_gst_classification_id" tabindex="10601"> -->
-                                                <select class="enable autofocus" tabindex="10600" class="hsn_sac_details_id" name="hsn_gst_classification_id"  id="hsn_gst_classification_id">
+                                                <!--<input type="text" class="hsn_gst_classification_id enable" name="hsn_gst_classification_id" id="hsn_gst_classification_id" tabindex="10601">-->
+                                                 <select class="enable autofocus" tabindex="10601" class="hsn_sac_details_id" name="hsn_gst_classification_id"  id="hsn_gst_classification_id">
                                                
                                                 <?php
                                                 if (isset($classification_name)): foreach ($classification_name as $row):
@@ -173,8 +173,8 @@ ini_set('display_errors', 1);
                                                 <label>Classification<span class="colon">:</span></label>
                                             </div>
                                             <div class="col-md-4">
-                                                <!-- <input type="text" class="enable" name="gst_classification_id" id="gst_classification_id" tabindex="10605"> -->
-                                                <select class="enable autofocus" tabindex="10600" class="hsn_sac_details_id" name="gst_classification_id"  id="gst_classification_id">
+                                                <!--<input type="text" class="enable" name="gst_classification_id" id="gst_classification_id" tabindex="10605">-->
+                                                 <select class="enable autofocus" tabindex="10605" class="hsn_sac_details_id" name="gst_classification_id"  id="gst_classification_id">
                                                
                                                <?php
                                                if (isset($classification_name)): foreach ($classification_name as $row):
@@ -420,7 +420,7 @@ ini_set('display_errors', 1);
                                             <label>When actual tax is <span class="colon">:</span></label>
                                         </div>
                                         <div class="col-md-4">
-                                        <select class="yes_no enable" tabindex="10617" name="ignore_differences_in_tax_id"  id="ignore_differences_in_tax_id">
+                                        <select class="yes_no enable" tabindex="10619" name="ignore_differences_in_tax_id"  id="ignore_differences_in_tax_id">
                                                 <option value="yes">Yes</option>
                                                 <option value="no" selected>No</option>
                                             </select>
@@ -432,7 +432,7 @@ ini_set('display_errors', 1);
                                             <label>Send e-way bill with invoice <span class="colon">:</span></label>
                                         </div>
                                         <div class="col-md-4">
-                                        <select class="yes_no enable" tabindex="10617"  name="send_e_way_bill_with_e_invoice_in_sales" id="send_e_way_bill_with_e_invoice_in_sales">
+                                        <select class="yes_no enable" tabindex="10620"  name="send_e_way_bill_with_e_invoice_in_sales" id="send_e_way_bill_with_e_invoice_in_sales">
                                                 <option value="yes">Yes</option>
                                                 <option value="no" selected>No</option>
                                         </select>
@@ -446,7 +446,7 @@ ini_set('display_errors', 1);
                                             <label>Show GST Advances for adjustments in transaction<span class="colon">:</span></label>
                                         </div>
                                         <div class="col-md-4">
-                                            <select class="yes_no  enable" tabindex="10619" name="show_gst_advances_for_adjustments_in_trasaction" id="show_gst_advances_for_adjustments_in_trasaction">
+                                            <select class="yes_no  enable" tabindex="10621" name="show_gst_advances_for_adjustments_in_trasaction" id="show_gst_advances_for_adjustments_in_trasaction">
                                                 <option value="yes">Yes</option>
                                                 <option value="no" selected>No</option>
                                             </select>
@@ -464,7 +464,7 @@ ini_set('display_errors', 1);
                                             <label>Applicable From<span class="colon">:</span></label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="date" tabindex="10620" class="yes_no  enable" name="gst_advances_for_adjustments_applicable_from" id="gst_advances_for_adjustments_applicable_from" data-target="#gst-other_details_Modal">
+                                            <input type="date" tabindex="10622" class="yes_no  enable" name="gst_advances_for_adjustments_applicable_from" id="gst_advances_for_adjustments_applicable_from" data-target="#gst-other_details_Modal">
                                         </div>
                                     </div>
                                     <!-- --------- single row start here --------------- -->
@@ -791,7 +791,18 @@ $('#save_btn_gst_other_details').click(function () {
 
     })
 
-
+$(document).on('keydown', function (event) {
+    
+    if ((event.key === 's' || event.key === 'S') && $("#gst_other_details_Modal").hasClass("show")) {
+        event.preventDefault(); // Prevent the default "s" key behavior
+        console.log("S key pressed inside tdsModal");
+        document.getElementById('save_btn_gst_other_details').click();
+        var $enable_tds = $('#enable_tds'); 
+        if ($enable_tds.length) {
+            $enable_tds.focus();
+        }
+    }
+});
 
 
     // ---------- hide and show classification based on select input field start here----------

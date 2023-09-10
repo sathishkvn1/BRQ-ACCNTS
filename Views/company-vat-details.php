@@ -20,7 +20,7 @@ ini_set('display_errors', 1);
     <!------------------------------------------------------------------
                     Modal for vat Details Start 
     ------------------------------------------------------------------>
-    <div class="modal fade backdrop modal_common modal_centered_lg  my-modal" data-value="enable_vat"
+    <div class="modal fade backdrop modal_common modal_centered_lg  my-modal" data-value="enable_upi_payment_request"
         id="vat_details_modal" tabindex="-1" data-backdrop="false">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -72,7 +72,11 @@ ini_set('display_errors', 1);
 
                                         </div>
                                     </div>
-                                
+                                    <!-- Single Row End Here -->
+                                    <!-- Single Row End Here -->
+                             
+                                    <!-- Single Row Start Here -->
+                                    <!-- Single Row Start Here -->
                                     <div class="row">
                                         <div class="col-md-8">
                                             <label>TIN<span class="colon">:</span></label>
@@ -273,7 +277,30 @@ ini_set('display_errors', 1);
                                                 name="nature_of_business" tabindex="11214"></input>
                                         </div>
                                     </div>
-                                   
+                                    <!-- Single Row End Here -->
+                                    <!-- Single Row Start Here -->
+                                    <!-- <div class="row">
+                                        <div class="col-md-8">
+                                            <label>Fax Number<span class="colon">:</span></label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" class="enable" id="vat_fax_number" name="vat_fax_number"
+                                                tabindex="11215"></input>
+                                        </div>
+                                    </div> -->
+                                    <!-- Single Row End Here -->
+                                    <!-- Single Row Start Here -->
+                                    <!-- <div class="row">
+                                        <div class="col-md-8">
+                                            <label>Website Name<span class="colon">:</span></label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" tabindex="11216" class="enable" name="vat_website"
+                                                id="vat_website">
+                                        </div>
+                                    </div> -->
+                                    <!-- Single Row End Here -->
+                                    <!-- Single Row Start Here -->
                                     <div class="row">
                                         <div class="col-md-8">
                                             <label>Authorised Person<span class="colon">:</span></label>
@@ -594,41 +621,41 @@ $.ajax({
     type: 'POST',
     dataType: 'json',
     data: {
-        vat_state_id: $('#vat_state_id').val(),
-        vat_applicable_from: $('#vat_applicable_from').val(),
-        vat_tin_number: $('#vat_tin_number').val(),
-        interstate_sales_tax_number: $('#interstate_sales_tax_number').val(),
-        vat_registration_date: $('#vat_registration_date').val(),
-        e_vat_periodicity_id: $('#e_vat_periodicity_id').val(),
-        is_under_npv_scheme: $('#is_under_npv_scheme').val(),
-        enable_vat_calculation_on_quantity: $('#enable_vat_calculation_on_quantity').val(),
-        enable_vat_calculation_on_stock_item_rate: $('#enable_vat_calculation_on_stock_item_rate').val(),
-        define_commodity_and_tax_as_masters: $('#define_commodity_and_tax_as_masters').val(),
-        deactivate_from: $('#deactivate_from').val(),
-        circle_office: $('#circle_office').val(),
-        status_of_business: $('#status_of_business').val(),
-        nature_of_business: $('#nature_of_business').val(),
-        vat_fax_number: $('#vat_fax_number').val(),
-        vat_website: $('#vat_website').val(),
-        authorised_person: $('#authorised_person').val(),
-        vat_status_designation: $('#vat_status_designation').val(),
-        vat_place: $('#vat_place').val(),
-        vat_district: $('#vat_district').val(),
+        vat_state_id                : $('#vat_state_id').val(),
+        vat_applicable_from         : $('#vat_applicable_from').val(),
+        vat_tin_number              : $('#vat_tin_number').val(),
+        interstate_sales_tax_number : $('#interstate_sales_tax_number').val(),
+        vat_registration_date       : $('#vat_registration_date').val(),
+        e_vat_periodicity_id        : $('#e_vat_periodicity_id').val(),
+        is_under_npv_scheme         : $('#is_under_npv_scheme').val(),
+        enable_vat_calculation_on_quantity          : $('#enable_vat_calculation_on_quantity').val(),
+        enable_vat_calculation_on_stock_item_rate   : $('#enable_vat_calculation_on_stock_item_rate').val(),
+        define_commodity_and_tax_as_masters         : $('#define_commodity_and_tax_as_masters').val(),
+        deactivate_from         : $('#deactivate_from').val(),
+        circle_office           : $('#circle_office').val(),
+        status_of_business      : $('#status_of_business').val(),
+        nature_of_business      : $('#nature_of_business').val(),
+        vat_fax_number          : $('#vat_fax_number').val(),
+        vat_website             : $('#vat_website').val(),
+        authorised_person       : $('#authorised_person').val(),
+        vat_status_designation  : $('#vat_status_designation').val(),
+        vat_place               : $('#vat_place').val(),
+        vat_district            : $('#vat_district').val(),
         // Set/alter/rate details
-        vat_rate_details: $('#vat_rate_details').val(),
+        vat_rate_details        : $('#vat_rate_details').val(),
         
-        cst_effective_date: $('#cst_effective_date').val(),
-        cst_rate_against_form_c: $('#cst_rate_against_form_c').val(),
-        vat_effective_date: $('#vat_effective_date').val(),
-        vat_rate: $('#vat_rate').val(),
-        vat_cess: $('#vat_cess').val(),
-        vat_tax_type_id: $('#vat_tax_type_id').val(),
-        vat_schedule_id: $('#vat_schedule_id').val(),
-        type_of_goods_id: $('#type_of_goods_id').val(),
-        nature_of_goods_id: $('#nature_of_goods_id').val(),
-        commodity_name: $('#commodity_name').val(),
-        commodity_code: $('#commodity_code').val(),
-        sub_commodity_code: $('#sub_commodity_code').val(),
+        cst_effective_date      : $('#cst_effective_date').val(),
+        cst_rate_against_form_c : $('#cst_rate_against_form_c').val(),
+        vat_effective_date      : $('#vat_effective_date').val(),
+        vat_rate                : $('#vat_rate').val(),
+        vat_cess                : $('#vat_cess').val(),
+        vat_tax_type_id         : $('#vat_tax_type_id').val(),
+        vat_schedule_id         : $('#vat_schedule_id').val(),
+        type_of_goods_id        : $('#type_of_goods_id').val(),
+        nature_of_goods_id      : $('#nature_of_goods_id').val(),
+        commodity_name          : $('#commodity_name').val(),
+        commodity_code          : $('#commodity_code').val(),
+        sub_commodity_code      : $('#sub_commodity_code').val(),
         li_token: token
 },
 
@@ -658,84 +685,12 @@ alert('An error occurred while saving VATdetails. Please check the console for m
 
 
 
-
-
-
-
-
-
-
-    // $(".yes_no,.enable").keypress(function (event) {
-    //     if ($("#vat_details_modal").hasClass("show")) {
-    //         if (event.key === "Enter") {
-
-    //             // event.preventDefault();
-    //             itype = $(this).prop('type');
-    //             if (itype !== 'submit') {
-    //                 vat_current_tabindex = $(this).attr('tabindex');
-    //                 var company_vat_field_id = $(this).attr('id');
-    //                 if (company_vat_field_id == "vat_rate_details") {
-    //                     var val_company_vat_field_id = $("#vat_rate_details").val();
-    //                     if (val_company_vat_field_id === "no")//save modal open when set alter rate details calue no
-    //                     {
-    //                         $("#circle_office").prop('disabled', true);
-    //                         $("#vatModal").modal("show");
-    //                     }
-    //                     else if (val_company_vat_field_id === "yes")//save modal open when set alter rate details calue no
-    //                     {
-    //                         $("#circle_office").removeAttr('disabled');
-    //                     }
-    //                 }
-    //                 if(company_vat_field_id == "vat_tin_number") {
-                        
-    //                     var tinNumber = $(this).val();
-    //                     var stateCode = tinNumber.substring(0, 2);
-    //                     var expectedTinPattern = new RegExp('^' + stateCode + '\\d{9}$');
-    //                     if (tinNumber === "") {
-    //                         alert_message("warning", "warning", "TIN is not specified.");
-    //                         return;
-    //                     } else if (!expectedTinPattern.test(tinNumber)) {
-    //                         alert_message("warning", "Warning", "The TIN is invalid. Please enter a valid TIN with the state code and 9-digit number.");
-    //                         return;
-    //                     }
-    //                   }
-    //                 if (company_vat_field_id == "vat_district") {
-    //                     var val_company_vat_field_id = $("#vat_rate_details").val();
-    //                     if (val_company_vat_field_id === "yes")//save modal open when set alter rate details calue no
-    //                     {
-    //                         $("#vatModal").modal("show");
-    //                     }
-
-    //                 }
-    //                 var next = parseInt(vat_current_tabindex) + 1;
-
-    //                 if (vat_current_tabindex >= 11200 && vat_current_tabindex < 11400) {
-    //                     while (next < 11400) {
-
-    //                         if ($('[tabindex^="' + (parseInt(next)) + '"]').hasClass('enable')) {
-    //                             nextInput = $('[tabindex^="' + next + '"]');
-    //                             if (nextInput.length) {
-    //                                 nextInput.focus();
-    //                                 return false;
-    //                             }
-    //                         }
-    //                         next++;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    // });
-
-    $(".yes_no,.enable").on("keydown", function(event) {
+   $(".yes_no,.enable").on("keydown", function(event) {
     if ($("#vat_details_modal").hasClass("show")) {
-        if (event.key === "Enter" || event.key === "Tab") {
-           
-            if (event.key === "Tab") {
-                event.preventDefault();
-            }
-
+        var validationFails = false;
+        if ((event.key === "Enter" || (event.key === "Tab" && !event.shiftKey)) && !validationFails) {
+            event.preventDefault();
+         
             itype = $(this).prop('type');
             if (itype !== 'submit') {
                 vat_current_tabindex = $(this).attr('tabindex');
@@ -772,15 +727,7 @@ alert('An error occurred while saving VATdetails. Please check the console for m
                             $("#vatModal").modal("show");
                         }
                 }
-                // else if (company_vat_field_id == "vat_rate_details") {
-                //     alert("hai");
-                //     var val_company_vat_field_id = $("#vat_rate_details").val();
-                //     alert(val_company_vat_field_id);
-                //     if (val_company_vat_field_id === "no")
-                //         {
-                //             $("#vatModal").modal("show");
-                //         }
-                // }
+              
 
                 // Find the next input field to focus on
                 var next = parseInt(vat_current_tabindex) + 1;
@@ -795,30 +742,26 @@ alert('An error occurred while saving VATdetails. Please check the console for m
                         }
                         next++;
                     }
+                    if (validationFails) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    $("#" + currentId).focus();
+                     }
                 }
+                else if (event.key === "Tab" && event.shiftKey) {
+                if (validationFails) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  
+                }
+        }
             }
         }
     }
 });
-
-    //////////////////////
     $(window).keydown(function (e) {//focus last element when you press c on save modal
 
-        if (e.keyCode == 9) {//tab intex integration
-            var company_vat_field_id = $(this).attr('id');
-            if (company_vat_field_id == "vat_rate_details") {
-                var val_company_vat_field_id = $("#vat_rate_details").val();
-                if (val_company_vat_field_id === "no")//save modal open when set alter rate details calue no
-                {
-                    $("#circle_office").prop('disabled', true);
-                    $("#vatModal").modal("show");
-                }
-                else if (val_company_vat_field_id === "yes")//save modal open when set alter rate details calue no
-                {
-                    $("#circle_office").removeAttr('disabled');
-                }
-            }
-        }
+      
         if (e.keyCode == 67) {//c button press
             if ($("#vatModal").hasClass("show")) {
                 $("#vatModal").modal("hide");
@@ -835,7 +778,7 @@ alert('An error occurred while saving VATdetails. Please check the console for m
         }
         if (e.keyCode == 83) {//if you click s 
             if ($("#vatModal").hasClass("show")) {
-                alert("plese trigger the save button")
+               
                 $("#vatModal").modal("hide");
                 $("#vat_details_modal").modal("hide");
                 $("#vat_district").focus();
@@ -843,23 +786,9 @@ alert('An error occurred while saving VATdetails. Please check the console for m
         }
 
     });
-    $("#vat_details_modal").on("click",function(){
-        if ($("#vatModal").hasClass("show")) {
-                $("#vatModal").modal("hide");
-                e.preventDefault();
-                if ($("#vat_rate_details").val() == "yes") {
-                    $("#vat_district").focus();
-                }
-                else if ($("#vat_rate_details").val() == "no") {
-                 
-                    $("#vat_rate_details").focus();
-
-                }
-            }
-      
-    });
-
-    $('#vat_state_id').change(function() {
+  
+    
+     $('#vat_state_id').change(function() {
     var stateId = $(this).val();
     var token = "<?php echo $_SESSION['li_token']; ?>";
   
@@ -884,26 +813,34 @@ alert('An error occurred while saving VATdetails. Please check the console for m
     });
 });
 
-// $('#vat_tin_number').on('keydown', function(event) {
-//         if (event.which === 13) { // Check if Enter key is pressed
-//             event.preventDefault(); // Prevent the form from submitting (if applicable)
-            
-//             var tinNumber = $(this).val();
-//             var tinPattern = /^[2]\d{9}$/;
-//             // var tinPattern = /^[2]\d{1}[0-9]{9}$/;
+// $(document).on('keydown', function (event) {
+    
+//     if ((event.key === 's' || event.key === 'S') && $("#vatModal").hasClass("show")) {
+//         event.preventDefault(); // Prevent the default "s" key behavior
+       
+//         document.getElementById('save_btn_vat').click();
 
-//             if (tinNumber === "") {
-//                 alert_message("warning", "warning", "TIN is not specified.");
-//              }
-             
-//              else if (!tinPattern.test(tinNumber)) {
-//                 alert_message("warning", "Warning", "The TIN is invalid. Please enter a valid TIN.");
-//             }
+//         var $enable_upi_payment_request = $('#enable_upi_payment_request'); 
+       
+//         if ($enable_upi_payment_request.length) {
+//             $enable_upi_payment_request.focus();
 //         }
-//     });
+//     }
+// });
+$(document).on('keydown', function (event) {
+    if ((event.key === 's' || event.key === 'S') && $("#vatModal").hasClass("show")) {
+        event.preventDefault(); // Prevent the default "s" key behavior
+        document.getElementById('save_btn_vat').click();
+
+        setTimeout(function() {
+            var $enable_upi_payment_request = $('#enable_upi_payment_request'); 
+            if ($enable_upi_payment_request.length) {
+                $enable_upi_payment_request.focus();
+            }
+        }, 500); 
+    }
+});
 
 
-
-
-
+    
 </script>
