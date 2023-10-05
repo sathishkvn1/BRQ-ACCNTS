@@ -556,22 +556,8 @@
 </body>
 
 </html>
+
 <script>
-
-
-// $('#company_features').on('hidden.bs.modal', function (e) {
-// //   alert('The modal is about to be hidden.');
-// $('#savebtn_company_features').click();
-// });
-// $('#company_features').on('shown.bs.modal', function (e) {
- 
-//  $('body').addClass('modal-open');
-// })
-
-// $('#company_features').modal({
-//     backdrop: 'static',
-//     keyboard: false
-// });
 
 $('#enable_gst').on('change', function() {
   
@@ -609,10 +595,19 @@ $('#enable_gst').on('keydown', function(e) {
 
     //  $(document).ready(function(){
 
+    $(document).on('keydown', function (event) {
+    
+    if ((event.key === 's' || event.key === 'S') && $("#company_feature_save").hasClass("show")) {
+        event.preventDefault(); // Prevent the default "s" key behavior
+        console.log("S key pressed inside features");
+        document.getElementById('savebtn_company_features').click();
+       
+    }
+});
+
 
     $('#savebtn_company_features').click(function (e) {
         e.preventDefault();
-       
 
         $.ajax({
             type: 'POST',
@@ -639,18 +634,23 @@ $('#enable_gst').on('keydown', function(e) {
                 enable_tds: $('#enable_tds').val(),
                 enable_tcs: $('#enable_tcs').val(),
                 enable_vat: $('#enable_vat').val(),
-                enable_excise: $('#enable_excise').val(),
-                enable_service_tax: $('#enable_service_tax').val(),
+                // enable_excise: $('#enable_excise').val(),
+                // enable_service_tax: $('#enable_service_tax').val(),
                 enable_upi_payment_request: $('#enable_upi_payment_request').val(),
                 enable_multiple_addresses: $('#enable_multiple_addresses').val(),
                 mark_modified_vouchers: $('#mark_modified_vouchers').val(),
                 li_token: token
             },
             success: function (response) {
+                console.log(response);
+                if(response.success==false)
+                    toast_message("success", "Error", response.message);
+                else
+                {
                 toast_message("success", "Successful", response.message);
                  $('#company_feature_save').modal('hide');
                  $('#company_features').modal('hide');
-                 
+                }
             },
             error: function (xhr, status, error) {
                 // Log the error details

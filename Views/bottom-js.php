@@ -14,20 +14,24 @@ var BASE_URL="<?php echo base_url();?>";
 <script src="<?php echo base_url('admin-accounts/plugins/jquery/jquery.min.js');?>"></script>
 
 <!-- Bootstrap -->
+<script src="<?php echo base_url('admin-accounts/js/popper.min.js');?>"></script>
 <script src="<?php echo base_url('admin-accounts/js/bootstrap.min.js');?>"></script>
 <script src="<?php echo base_url('admin-accounts/plugins/bootstrap/js/bootstrap.bundle.min.js');?>"></script>
-	
+
+
 <!-- For Common Js -->
 <script src="<?php echo base_url('js/common.js');?>"></script>
 
 
 
+
 <!-- For Accounts-Common JS -->
 <script src="<?php echo base_url('admin-accounts/dist/js/accounts_common.js');?>"></script>
-<!-- For enhanced select JS -->
 
+<!-- For enhanced select JS -->
+<script src="<?php echo base_url('admin-accounts/dist/js/selectable_list_window.js');?>"></script>
 <script src="<?php echo base_url('admin-accounts/dist/js/enhanced_select.js');?>"></script>
-<script src="<?php echo base_url('admin-accounts/dist/js/selectable_list_window');?>"></script>
+
 
 
 

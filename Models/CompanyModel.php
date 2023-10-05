@@ -117,9 +117,12 @@ public function set_current_year($selected_year_id)
     {
         
         $this->db->where('company_id', $companyId );
-        $this->db->update('acc_company_features', $data);
-        echo $this->db->last_query();
-       return $this->db->affected_rows() > 0; 
+       $res= $this->db->update('acc_company_features', $data);
+       return $res;
+    //     echo $this->db->last_query();
+    // //   return $this->db->affected_rows() > 0; 
+    // echo $this->db->affected_rows();
+    // return $this->db->affected_rows();
     }
 
 

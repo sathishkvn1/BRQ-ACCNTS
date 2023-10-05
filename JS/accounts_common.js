@@ -143,41 +143,7 @@ localStorage.setItem("lastFocusInputClassNew",'');
     }
 });
 
-    // All Last Input Field Inside the Modal to Close Currently Opened Modal 
-    // $('.modal_last_input_field').blur(function(){
-    //     var modal_close = $(this).attr('data-target');
-    //     //open bootsrap modal
-    //     $(modal_close).on("hidden.bs.modal", function () { 
-    //     }).modal('hide');
-    //     $('.modal-backdrop:last').remove();
-    //     var a = localStorage.getItem("lastFocusInputClass"); 
-    //     var b = localStorage.getItem("lastFocusInputClassNew"); 
-    //     var pageId = $('.layout-navbar-fixed').attr('id');
-
-    //     if(b != '') 
-    //     {
-    //         b = parseInt(b) + 1;
-
-    //         $('.modal.show').last().find("[tabindex='" + b + "']").focus();
-
-    //         // To get the correct focus into the specified element other wise not get focused
-    //         setTimeout(function(){$("#" + pageId).find("[tabindex='" + b + "']").focus();},1);
-    //         localStorage.setItem("lastFocusInputClassNew",'');
-    //     }
-    //     else
-    //     {
-    //         a = parseInt(a) + 1;
-
-    //         $('.modal.show').last().find("[tabindex='" + a + "']").focus();
-
-    //         // To get the correct focus into the specified element other wise not get focused
-    //         setTimeout(function(){$("#" + pageId).find("[tabindex='" + a + "']").focus();},1);
-    //         localStorage.setItem("lastFocusInputClass",'');
-    //     }
-
-    // });
-
-    //this function helps to remove modal and focus previous modal next input field when you click enter key or tab
+      //this function helps to remove modal and focus previous modal next input field when you click enter key or tab
     $('.modal_last_input_field').keydown(function (e) {
     if (e.keyCode == 13 || e.keyCode == 9) {//tab integration
        
@@ -494,25 +460,6 @@ localStorage.setItem("lastFocusInputClassNew",'');
 // ------------------------------------------------------------------------------------->
 
 
-    // $(document).ready(function() {
-    //     $('.show_hide_select').change(function(){
-    //         console.log("dropdown changed");
-    //          var show_hide = $(this).parent().parent().attr('id');
-    //         if( this.value === "yes")
-    //         {
-    //             $('#' + show_hide + ' .sub_features').addClass('d-block');
-    //             $('#' + show_hide + ' .sub_features').removeClass('d-none');
-    //         }
-    //         else if( this.value === "no")
-    //         {
-    //             console.log("Showing modal...");
-              
-    //             $('#myModal').modal('show');
-               
-    //         }
-    //     });
-    // });
-
     $(document).ready(function() {
         $('.show_hide_select').on('change keydown', function(event){
             console.log("dropdown changed");
@@ -558,27 +505,6 @@ localStorage.setItem("lastFocusInputClassNew",'');
 // });
  /////////////////////////////// END FOR TDS MODAL////////////////////////////////////
 
-
- 
-//  function openModalIfNeeded() {
-//    if (shouldOpenModal) {
-//      $('#accept').modal('toggle');
-//      shouldOpenModal = false;
-//    }
-//  }
- 
-//  openModalIfNeeded();
- 
-    
-
-
-
-
-
-  
-  
-  
-    
       
     
 // <!-------------------------------------------------------------------------------------
@@ -654,52 +580,17 @@ for(var i = 0; i < selects.length; i++) {
 
 const modalBody = document.querySelector('#company_select .modal-body');
 
-document.getElementById('company_select').addEventListener('keydown', (event) => {
-  if (event.code === 'ArrowDown' || event.code === 'ArrowUp') {
-    event.preventDefault();
-
-    if (event.code === 'ArrowDown') {
-      selectedIndex = Math.min(selectedIndex + 1, companyItems.length - 1);
-    } else {
-      selectedIndex = Math.max(selectedIndex - 1, 0);
-    }
-
-    companyItems.forEach((item, index) => {
-      if (index === selectedIndex) {
-        item.style.backgroundColor = 'yellow';
-        // Scroll modal to selected item
-        const itemOffsetTop = item.offsetTop;
-        const itemHeight = item.offsetHeight;
-        const modalBodyHeight = modalBody.offsetHeight;
-        const scrollTop = itemOffsetTop - (modalBodyHeight - itemHeight) / 2;
-        modalBody.scrollTo(0, scrollTop);
-      } else {
-        item.style.backgroundColor = 'transparent';
-      }
-    });
-  }
-});
-
-
-
 
 
 // <!-------------------------------------------------------------------------------------
 //  Script for select a row when cursor focus on input or select tag End Here 
 // ------------------------------------------------------------------------------------->
 
-// document.addEventListener('keydown', function (event) {
-//     if (event.altKey && event.key.toLowerCase() === 'm') {
-
-//         document.getElementById('emaildropdownMenuButton').click();
-
-//     }
-// });
 document.addEventListener('keydown', function (event) {
     // console.log("KEY DOWN LISTEED");
 
     if (event.altKey && event.key.toLowerCase() === 'k') {
-        alert("k press");
+        // alert("k press");
         var dropdownToggle = document.querySelector('#companydropdownMenuButton');
         dropdownToggle.click();
     }
@@ -861,15 +752,15 @@ document.addEventListener('keydown', function (event) {
         //     $('#company_features').modal('show'); // Show the previous modal
         // }
         //for gst modal saving
-        else if($("#myModal").hasClass("show")){
-            
-            document.getElementById('save-btn-gst').click();
-            // alert("inside save-btn-gst");
-            
-            $('#gst_modal').modal('hide'); // Hide the current modal
-            $('#company_features').modal('show'); // Show the previous modal
+        // else if($("#gst_modal").hasClass("show")){
+        //     alert("SAve");
+        //     document.getElementById('save-btn-gst').click();
+        //     // alert("inside save-btn-gst");
+        //     $('#gstModal').modal('hide');
+        //     $('#gst_modal').modal('hide'); // Hide the current modal
+        //     $('#company_features').modal('show'); // Show the previous modal
   
-        }
+        // }
         
     }
     else if (event.key.toLowerCase() === 'r') {

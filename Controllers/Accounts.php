@@ -379,16 +379,16 @@ public function save_company_features_data()
         'enable_tds'                                => $this->input->post('enable_tds'),
         'enable_tcs'                                => $this->input->post('enable_tcs'),
         'enable_vat'                                => $this->input->post('enable_vat'),
-        'enable_excise'                             => $this->input->post('enable_excise'),
+        // 'enable_excise'                             => $this->input->post('enable_excise'),
         'enable_service_tax'                        => $this->input->post('enable_service_tax'),
         'enable_upi_payment_request'                => $this->input->post('enable_upi_payment_request'),
         'enable_multiple_addresses'                 => $this->input->post('enable_multiple_addresses'),
         'mark_modified_vouchers'                    => $this->input->post('mark_modified_vouchers')
     );
-  
-    $res = $this->CompanyModel->update_company_features($companyId , $data);
     // var_dump($data);
-    
+    // die; 
+    $res = $this->CompanyModel->update_company_features($companyId , $data);
+   
     if($res)
     {
     $response = array(
@@ -880,7 +880,7 @@ public function save_vat_details() {
            $this->CompanyModel->updateVatRateDetails($data2, $company_id);
            $response = array(
                'success' => true,
-               'message' => 'Tds inserted successfully.'
+               'message' => 'VAT Rate Details inserted successfully.'
            );
           
        }

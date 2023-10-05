@@ -228,7 +228,7 @@ ini_set('display_errors', 1);
                                                 <label>IGST Rate <span class="colon">:</span></label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" id="igst_rate" name="igst_rate" style="width:30px !important;margin-right:3px !important" value="1" class="enable" tabindex="10607">%</input>
+                                                <input type="number" id="igst_rate" name="igst_rate" style="width:30px !important;margin-right:3px !important" value="1" class="enable" tabindex="10607">%</input>
                                             </div>
                                         </div>
                                         <!-- Single Row End Here -->
@@ -239,7 +239,7 @@ ini_set('display_errors', 1);
                                                 <label>CGST Rate <span class="colon">:</span></label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" id="cgst_rate" name="cgst_rate" style="width:30px !important;margin-right:3px !important" value="1" class="enable" tabindex="10608">%</input>
+                                                <input type="number" id="cgst_rate" name="cgst_rate" style="width:30px !important;margin-right:3px !important" value="1" class="enable" tabindex="10608">%</input>
                                             </div>
                                         </div>
                                         <!-- Single Row End Here -->
@@ -250,7 +250,7 @@ ini_set('display_errors', 1);
                                                 <label>SGST/UTGST Rate <span class="colon">:</span></label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" id="sgst_utgst_rate" name="sgst_utgst_rate" style="width:30px !important;margin-right:3px !important" value="1" class="enable" tabindex="10609">%</input>
+                                                <input type="number" id="sgst_utgst_rate" name="sgst_utgst_rate" style="width:30px !important;margin-right:3px !important" value="1" class="enable" tabindex="10609">%</input>
                                             </div>
                                         </div>
                                         <!-- Single Row End Here -->
@@ -596,6 +596,9 @@ $('#save_btn_gst_other_details').click(function () {
                         alert_message("warning", "warning", "IGST rate cannot be negative..");
                         return;
                     }
+                    var cgstvalue=igst_rate/2;
+                    $("#cgst_rate").val(cgstvalue);
+                    $("#sgst_utgst_rate").val(cgstvalue);
                 }
                 if (currentId == "cgst_rate") {
                     // alert("HAIU");

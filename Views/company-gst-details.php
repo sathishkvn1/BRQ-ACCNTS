@@ -308,7 +308,7 @@
                                             <label>Tax Rate for taxable turnover<span class="colon">:</span></label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" id="gst_tax_rate_for_taxable_turnover"
+                                            <input type="number" id="gst_tax_rate_for_taxable_turnover"
                                                 name="gst_tax_rate_for_taxable_turnover"
                                                 style="width:30px !important;margin-right:3px !important" value="1"
                                                 class="enable" tabindex="10411">%</input>
@@ -1191,6 +1191,11 @@ $(document).on('keydown', function (event) {
                             if (createAnotherGST === "no") {
                               
                                  $('#gst_modal').modal('hide');
+                                 var $gst_rate = $('#gst_rate'); 
+       
+                                    if ($gst_rate.length) {
+                                        $gst_rate.focus();
+                                    }
                             } else {
                                 resetFormFields()
                             }

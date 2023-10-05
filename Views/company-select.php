@@ -115,8 +115,8 @@ function loadCompanyDetails() {
  $('#company_select').on('dblclick', '.card-text', function(event) {
 
    var companyId = $(this).data('value');
-   alert(companyId);
-//   <?php echo $this->session->set_userdata('con_id', 'companyId');?>
+
+//   <?php //echo $this->session->set_userdata('con_id', 'companyId');?>
 
     updateCompanyName(companyId);
    
@@ -126,9 +126,9 @@ function loadCompanyDetails() {
  
  $('#company_select').on('keypress', function(event) {
    if (event.which === 13) {
-   
-
-     var companyId = $('#created_comapny_selected li.element-hover').attr('data-value');
+  
+    var companyId = $('.card-text').attr('data-value');
+    //  var companyId = $('#created_comapny_selected li.element-hover').attr('data-value');
      alert(companyId);
      if (companyId) {
     

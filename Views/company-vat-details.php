@@ -82,7 +82,7 @@ ini_set('display_errors', 1);
                                             <label>TIN<span class="colon">:</span></label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" tabindex="11202" name="vat_tin_number"
+                                            <input type="number" tabindex="11202" name="vat_tin_number"
                                                 id="vat_tin_number" class="enable">
                                         </div>
                                     </div>
@@ -394,7 +394,7 @@ ini_set('display_errors', 1);
                                     <label>Against Form C<span class="colon">:</span></label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" class="enable" id="cst_rate_against_form_c" tabindex="11222"
+                                    <input type="number" class="enable" id="cst_rate_against_form_c" tabindex="11222"
                                         name="cst_rate_against_form_c">
                                 </div>
                             </div>
@@ -423,7 +423,7 @@ ini_set('display_errors', 1);
                                     <label>Tax rate<span class="colon">:</span></label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" id="vat_rate" name="vat_rate" class="enable" tabindex="11224">
+                                    <input type="number" id="vat_rate" name="vat_rate" class="enable" tabindex="11224">
                                 </div>
                             </div>
                             <!-- Single Row End Here -->
@@ -433,7 +433,7 @@ ini_set('display_errors', 1);
                                     <label>Cess<span class="colon">:</span></label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" id="vat_cess" name="vat_cess" class="enable" tabindex="11225">
+                                    <input type="number" id="vat_cess" name="vat_cess" class="enable" tabindex="11225">
                                 </div>
                             </div>
                             <!-- Single Row End Here -->
