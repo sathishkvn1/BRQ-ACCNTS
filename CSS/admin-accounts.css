@@ -1815,6 +1815,10 @@ body .wrapper .content-wrapper
 	padding: 0;
 	overflow: hidden;
 }
+#gst_classification_modal .modal-body
+{
+	background: #fff;
+}
   .modal-create-side-new .modal-body .key-control-menu
 {
 	height: calc(100% - 109px) !important;
@@ -2508,7 +2512,7 @@ body .wrapper .content-wrapper
 	font-size: 15px;
     margin-bottom: 4px;
 	margin-top:10px;
-	
+	color: #000 !important;
 }
 .modal_common .modal-body h6.tds_side_headding,
 .modal_common .modal-body h6.tcs_side_headding{
@@ -3074,16 +3078,16 @@ body .wrapper .content-wrapper
     left: 0;
 }
 .masters_add_edit .modal-dialog {
-    min-width: 300px;
-    max-width: 300px;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
+    min-width: 300px !important;
+    max-width: 300px !important;
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 auto !important;
 }
 .masters_add_edit .modal-dialog .modal-content {
-    box-shadow: none;
-    border: 1px solid #696969;
-    border-radius: 0;
+    box-shadow: none !important;
+    border: 1px solid #696969 !important;
+    border-radius: 0 !important;
     height: auto !important;
 }
 .masters_add_edit .modal-dialog .modal-content .modal-body
@@ -4071,4 +4075,403 @@ li.element-hover
 .modal-create-side-new .modal-content .ul_movement{
 	max-height: 400px;
     min-height: 400px;
+}
+.modal_common.inventory_modal .save_cancel_section{
+	position: absolute;
+    bottom: 8px;
+    right: 0px;
+    left: 0px;
+}
+	
+.modal_common.inventory_modal .save_cancel_section .save_inventory_btn{
+	background-color: #2a67b1;
+    color: white;
+    padding: 0px 16px;
+   
+    border-radius: unset;
+}
+.inventory_modals .tabular_formate .save_cancel_section button:focus{
+	border: 3px solid #ffb901 !important;
+}
+.modal_common.inventory_modal .save_cancel_section button{
+	height: 34px;
+}
+.modal_common.inventory_modal .save_cancel_section .save_inventory_btn i{
+	padding-right: 6px;
+}
+.modal_common.inventory_modal .save_cancel_section .col-9{
+	display: flex;
+    justify-content: flex-end;
+}
+.modal_common.inventory_modal .save_cancel_section .cancel_inventory_btn{
+	border: 2px solid lightgray;
+    font-weight: 500;
+    border-radius: unset;
+    margin-right: 24px;
+    padding: 0px 10px;
+    color: #2a67b1;
+}
+.modal_common.inventory_modal .modal_header .main_head{
+	display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.modal_common.inventory_modal .right_side_content{
+	height: 100% !important;
+	position: relative;
+}
+.modal_common.inventory_modal .left_side_content{
+	height: 100% !important;
+}
+.modal_common.inventory_modal .ratewithpercentage{
+	width: 25%;
+}
+
+.modal_common.inventory_modal .modal_header .main_head h6{
+	width: 90%;
+}
+.modal_common.inventory_modal .modal_header .main_head i{
+	color: #212529;
+    text-align: end;
+    padding: 3px;
+}
+.modal_common.inventory_modal .save_cancel_section span{
+	color: #88bee6;
+    font-weight: 600;
+    border-bottom: 1px solid #88bee6;
+}
+.modal_common.inventory_modal .border_bottom_for_save_cancel{
+	position: absolute;
+    border-bottom: 1px solid lightgrey;
+    width: 100%;
+    bottom: 10%;
+}
+.modal_common.inventory_modal .h6_underline{
+	text-decoration: underline;
+}
+.modal_centered_lg.small-box-left .modal-dialog .modal-content
+{
+	max-height: 270px !important;
+    min-height: 270px !important;
+    max-width: 400px !important;
+    min-width: 400px !important;
+}
+.modal_centered_lg.small-box-left .modal-dialog{
+	max-width: none;
+	align-items: stretch;
+}
+.inventory_modals .tabular_formate .save_cancel_section{
+    position: absolute;
+    bottom: 10px;
+    right: 0px;
+    left: 0px;
+    width: 100%;
+    text-align: end;
+}
+.inventory_modals .tabular_formate .save_cancel_section span{
+	color: #88bee6;
+    font-weight: 600;
+    border-bottom: 1px solid #88bee6;
+}
+.inventory_modals .tabular_formate .border_bottom_for_save_cancel{
+	position: absolute;
+    border-bottom: 1px solid lightgrey;
+    width: 100%;
+    bottom: 12%;
+}
+.inventory_modals .tabular_formate .save_cancel_section .cancel_inventory_btn{
+	border: 2px solid lightgray;
+    font-weight: 500;
+    border-radius: unset;
+    margin-left: 24px !important;
+    padding: 0px 10px;
+    color: #2a67b1;
+}
+
+.inventory_modals .tabular_formate .save_cancel_section .save_inventory_btn{
+	background-color: #2a67b1;
+    color: white;
+    padding: 0px 16px;
+    border-radius: unset;
+}
+
+
+
+.inventory_modals .tabular_formate{
+	position: relative;
+	height: 100%;
+}
+.inventory_modals .tabular_formate .dataTables_length{
+	display: none;
+}
+
+.inventory_modals .tabular_formate .save_cancel_section .save_inventory_btn i{
+	padding-right: 6px;
+}
+.inventory_modals .tabular_formate .save_cancel_section button{
+	height: 34px;
+}
+.inventory_modals .tabular_formate tr,
+.inventory_modals .tabular_formate td,
+.inventory_modals .tabular_formate th{
+	padding: 0px !important;
+}
+.inventory_modals .main_head{
+	display: flex !important;
+	background: #2a67b1;
+}
+.inventory_modals .main_head i{
+	color: #212529;
+    text-align: end;
+    padding: 3px;
+    width: 10%;
+	color:white;
+}
+.inventory_modals h6{
+	width: 90%;
+	color: #fff !important;
+}
+
+.inventory_modals .modal_header .main_head h6{
+	color: #fff !important;
+	margin-bottom: 0px;
+}
+.inventory_modals .modal_header .main_head{
+	padding:6px 10px;
+	margin-bottom: 4px;
+}
+
+.modal_centered_lg.small-box-left .main_head{
+	display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.modal_centered_lg.small-box-left .main_head h6{
+	width: 90%;
+}
+.modal_centered_lg.small-box-left .main_head i{
+	color: #212529;
+    text-align: end;
+    padding: 3px;
+	width: 10%;
+}
+.modal_centered_lg.small-box-left .save_cancel_section {
+	position: absolute;
+    bottom: 8px;
+    right: 0px;
+    left: 0px;
+    text-align: end;
+}
+.modal_centered_lg.small-box-left .save_cancel_section button{
+	height: 38px;
+}
+.modal_centered_lg.small-box-left .save_cancel_section span {
+    color: #88bee6;
+    font-weight: 600;
+    border-bottom: 1px solid #88bee6;
+}
+.modal_centered_lg.small-box-left .save_cancel_section .cancel_inventory_btn {
+	border: 2px solid lightgray;
+    font-weight: 500;
+    border-radius: unset;
+    margin-right: 24px;
+    padding: 0px 10px;
+    color: #2a67b1;
+}
+.inventory_modals .tabular_formate .save_cancel_section .new_inventory_btn
+{
+	border: 1px solid #2a67b1 !important;
+    font-weight: 500;
+    border-radius: unset;
+    margin-left: 24px !important;
+    padding: 0px 20px;
+    background: #def1fc;
+    color: #2a67b1;
+
+}
+.inventory_modals .tabular_formate .save_cancel_section .new_inventory_btn span
+{
+	color: #88bee6;
+    font-weight: 600;
+    border-bottom: 1px solid #88bee6;
+}
+
+
+
+.modal_centered_lg.small-box-left .save_cancel_section .save_inventory_btn i{
+	
+    padding: 6px;
+ 
+}
+.modal_centered_lg.small-box-left .save_cancel_section .save_inventory_btn span{
+    color: #88bee6;
+    font-weight: 600;
+    border-bottom: 1px solid #88bee6;
+}
+
+/* ====data table changes in inventory section == */
+.inventory_modals .tabular_formate table{
+	display: inline-table;
+	padding-left: 6px;
+}
+.inventory_modals .tabular_formate .row{
+	display:block !important;
+	
+}
+.inventory_modals .tabular_formate .dataTables_wrapper .dataTables_paginate .paginate_button{
+	padding: 0.1em 0.2em !important;
+	color: var(--blue) !important;
+}
+.inventory_modals .tabular_formate .dataTables_wrapper .dataTables_wrapper .dataTables_filter input{
+	border: 1px solid black !important;
+}
+.inventory_modals .dataTables_wrapper .dataTables_filter{
+	/* float: left !important;
+    text-align: left !important; */
+	width: 80%;
+    margin-top: 16px;
+    margin-bottom: 10px;
+}
+.inventory_modals table .clickable-row a:hover{
+	background-color: #ffe793!important;
+	color: black !important;
+}
+
+.inventory_modals .dataTables_wrapper .dataTables_filter input{
+    height: 23px;
+    border-radius: 0;
+    outline: none !important;
+    box-shadow: none !important;
+    margin: 0;
+    border: 2px solid lightgray;
+    width: 38% !important;
+}
+.inventory_modals .dataTables_wrapper .dataTables_filter input:focus{
+	border: 2px solid var(--dark-yellow) !important;
+	color: #000;
+	background-color: #fff;
+}
+
+.inventory_modals .dataTables_wrapper .dataTables_filter label i{
+	background: var(--blue);
+    color: #fff;
+    height: 27px;
+    line-height: 28px;
+    padding: 0 8px;
+}
+.inventory_modals th.action{
+	width: 20% !important;
+	text-align: center;
+}
+.inventory_modals .operations{
+	text-align: center;
+}
+.inventory_modals .dataTables_wrapper .dataTable thead .sorting_asc:before,
+.inventory_modals .dataTables_wrapper .dataTable thead .sorting_asc:after,
+.inventory_modals .dataTables_wrapper .dataTable thead .sorting:before,
+.inventory_modals .dataTables_wrapper .dataTable thead .sorting:after
+ {
+    content: "" !important; /* Set content to empty string */
+    /* Add any other properties you want to clear */
+}
+.inventory_modals .dataTables_wrapper .dataTables_info{
+	padding-top: 0px !important;
+	padding-left: 10px !important;
+	color: var(--blue) !important;
+	
+}
+.inventory_modals .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.inventory_modals .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+	border: 1px solid #2a67b1 !important;
+}
+.inventory_modals .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+	background: #2a67b1 !important;
+	color: #fff !important;
+}
+
+/* .inventory_modals #gst_classification_data_table tr,
+.inventory_modals #gst_classification_data_table td,
+.inventory_modals #gst_classification_data_table th{
+	padding: 0px !important;
+}
+.inventory_modals  #gst_classification_data_table .paginate_button {
+    padding: 0.1em 0.2em !important;
+    color: var(--blue) !important;
+} */
+.inventory_modals .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, 
+.inventory_modals.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active{
+	color: white !important;
+}
+.inventory_modals .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+	color: #fff !important;
+}
+.inventory_modals .dataTables_wrapper .dataTables_paginate .paginate_button.current, 
+.inventory_modals .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+	/* background: linear-gradient(to bottom, #7eaee9 0%, #def1fc 100%); */
+	background: linear-gradient(to bottom, #def1fc 0%, #7eaee9 100%);
+}
+
+.inventory_modals.table.dataTable.stripe tbody tr.odd, 
+.inventory_modals table.dataTable.display tbody tr.odd{
+	background-color: #def1fc !important;
+}
+/* .inventory_modals .tabular_formate table tbody tr.odd:hover,
+.inventory_modals .tabular_formate table tbody tr.even:hover
+{
+	background-color: #6090cb !important;
+	color: #fff !important;
+} */
+.inventory_modals .tabular_formate table tbody tr td i:hover
+{
+	background-color: #6090cb !important;
+	color: #fff !important;
+}
+.inventory_modals .tabular_formate table tbody tr td.first_td
+{
+	padding-left: 6px !important;
+}
+.inventory_modals table.dataTable thead th,
+.inventory_modals table.dataTable thead td,
+.inventory_modals table.dataTable.no-footer
+{
+	border-bottom: 1px solid #2a67b1 !important;
+}
+.inventory_modals table.dataTable thead th{
+	text-align: center !important;
+}
+.inventory_modals table.dataTable.no-footer{
+	margin-left: 10px;
+}
+.inventory_modals table th {
+	cursor: not-allowed !important; /* Change the cursor style to indicate they're not clickable */
+	pointer-events: none !important; /* Disable pointer events to prevent clicks */
+	padding: 0px !important;
+  }
+.inventory_modals  .tabular_formate table  {
+	width: -webkit-fill-available !important;
+}
+.inventory_modals  .tabular_formate table  {
+	width: -webkit-fill-available !important;
+	display: table !important;
+}
+.inventory_modals  .tabular_formate table td{
+	text-align: center !important;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: fit-content;
+	padding: 0px !important;
+ }
+.inventory_modals  .tabular_formate table tr{
+	padding: 0px !important;
+ }
+ .inventory_modals  .tabular_formate table .focused-link {
+	background-color: #ffe793!important;
+}
+.inventory_modals  .tabular_formate table .focus-atag{
+	background-color: #ffe793!important
+}
+body .save_cancel_section button:focus{
+	border: 3px solid #ffb901 !important;
+   
 }

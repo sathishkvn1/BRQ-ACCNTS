@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #gst_classification_data_table_length
+        {
+            display:none;
+        }
+    </style>
 </head>
 <body>
 
-<div class="modal fade backdrop modal_common modal_centered_lg gst_details " 
+<div class="modal fade backdrop modal_common modal_centered_lg gst_details inventory_modals my-modal" 
         id="gst_classification_modal" data-value="enable_tds" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -33,6 +39,7 @@
                                                 name="gst_classification_class_name" id="gst_classification_class_name"
                                                 tabindex="11400">
                                         </div>
+                                        <input type="hidden" id="gst_classification_class_name_isValid" value="0">
                                     </div>
                                     <h6 class="tds_side_headding">HSN/SAC & Related Details</h6>
                                   	  <!--  start of GST Registration Details -->
@@ -290,6 +297,8 @@
                                                     <option value="no" selected>No</option>
                                                 </select>
                                             </div>
+                                            <input type="hidden" id="gst_classi_hidden_id" name="gst_classi_hidden_id" value="0">
+                                            <input type="hidden" id="hid_row_id" name="hid_row_id" value="">
                                         </div>
                                         <!-- Single Row End Here -->
                                     </div>
@@ -301,50 +310,60 @@
 						
                 </div>
 				<!-- right side -->
-				<div class="col-md-6 right_side_content">
-                <h6 class="gst_classes_headding">GST Classes Available</h6>
-					<div class="row">		
-						<table class="table table-striped" id="gst_clasification_table">
-							<thead>
+				<div class="col-md-6 right_side_content tabular_formate">
+              
+                    <div class="row" >		
+                        <table id="gst_classification_data_table" class="col-12 table table-striped display">
+                        <thead>
 								<tr>
 									<th>GST Class Name</th>
-									<th>HSN/SAC</th>
-									<th>Taxability Type</th>
-									<th>GST Rate</th>
-									<th>Actions</th>
+                                    <th>Descrition</th>
+                                    
+                                   
+									<th class="action">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
-                                <!-- <div class="row_scrollable">
-
-                                </div> -->
-                            <!-- <-?php foreach ($gst_classifications as $classification): ?>
-                            <tr>
-                                <td><-?php echo $classification['gst_classification_name']; ?></td>
-                                <td><-?php echo $classification['hsn_sac']; ?></td>
-                                <td><-?php echo $classification['taxability_type_id']; ?></td>
-                                <td><-?php echo $classification['hsn_sac']; ?></td>
-                                <td>
-                                    <div class="operations">
-                                        <a href="#" class="btn btn-xs first_a" title="Edit">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-xs" title="Delete">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <-?php endforeach; ?> -->
-
-								
+                            <!-- <tr>
+									 <td>new</td> 
+									<td>
+										<div class="operations">
+											<a href="#" class="btn btn-xs" title="Edit">
+												<i class="fas fa-edit"></i>
+											</a>
+											<a href="#" class="btn btn-xs" title="Delete">
+												<i class="fas fa-trash"></i>
+											</a>
+										</div>
+										
+									</td>
+							</tr>
+                            -->
 								
 							</tbody>
-    					</table>
+                          
+                        </table>
 
-						
 
 					</div>
+                    <div class="border_bottom_for_save_cancel">
+
+                    </div>
+                    <div class="row save_cancel_section">
+                        <div class="col-12" style="display: flex !important;flex-direction: row-reverse !important;">
+                            <button id="cancel_gst_classification_btn" class="cancel_inventory_btn btn" type="button" tabindex="11416">
+                                <span>C</span>ancel
+                            </button>
+                            <button id="new_gst_classification_btn" class="new_inventory_btn btn ml-2" type="button" tabindex="11415">
+                                <i class="fas fa-calendar-check"></i><span>N</span>ew
+                            </button>
+                            <button id="save_gst_classification_btn" class="save_inventory_btn btn" type="button" tabindex="11414">
+                                <i class="fas fa-calendar-check"></i><span>S</span>ave
+                            </button>
+                          
+                            
+                        </div>
+				    </div>
 				</div>
 
             </div>
@@ -352,51 +371,48 @@
     </div>
 
 
-    <div class="modal fade backdrop bottom modal-old-vouchers masters_add_edit accept_save index-modal" id="gstmodal_classification">
-        <div class="modal-dialog modal-full-height modal-bottom">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>Confirm</div>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-
-                        <div class="col-md-12 text-center">
-                            <h6>Accept & Save ? </h6>
-                        </div>
-
-                        <div class="col-md-12">
-                            <a class="btn" href="#" id="save-btn-gst-classification" onclick=""><i
-                                    class="fas fa-save"></i><span>S</span>ave</a>
-                            <a class="btn" href="#" class="close" data-dismiss="modal" id="btn_gst_classification_cancel"
-                                aria-label="Close"><i class="fas fa-times-circle"></i><span>C</span>ancel</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+  
 
 </body>
 </html>
 <script>
+    
+
+</script>
+<script>
+
+$("#gst_classification_eligible_for_input_tax_credit").on("keydown", function(event) {
+    if (event.keyCode === 13) { 
+        event.preventDefault(); 
+        $("#save_gst_classification_btn").focus(); 
+    }
+});
+
+
+
+$("#new_gst_classification_btn").on("click", function() {
+    
+    $("input[type='text'], input[type='number']").val("");
+    $("#gst_classi_hidden_id").val('0');
+    $("#hid_row_id").val('0');
+    $("#gst_classification_class_name").focus();
+
+
+});
+
+
+
 
      $(".yes_no,.enable").keypress(function (event) {
         if ($("#gst_classification_modal").hasClass("show")) {
             if (event.key === "Enter") {
-                // event.preventDefault();
+                
                 itype = $(this).prop('type');
                 if (itype !== 'submit') {
                     current_gst_classification_tabindex = $(this).attr('tabindex');
                     var company_gst_classification_field_id = $(this).attr('id');
                     var next = parseInt(current_gst_classification_tabindex) + 1;
-                    if(company_gst_classification_field_id==='gst_classification_eligible_for_input_tax_credit')
-                    {
-                        $('#gstmodal_classification').modal('show');
-                    }
+                    
                     if (current_gst_classification_tabindex >= 11400 && current_gst_classification_tabindex < 11600) {
                         while (next < 11600) {
 
@@ -453,12 +469,19 @@
     $("#eligible_for_input_tax_credit").focus(); // Adjust the delay as needed
 });
 
+$("#cancel_gst_classification_btn").click(function() {
+
+
+ $("#gst_classification_modal").modal("hide");
+    $("#masters_two").modal("show");
+});
+
 
 $("#gst_classification_hsn_sac_details").on("change", function () {
  
     var gst_classification_hsn_sac_details_selected_option = ($("#gst_classification_hsn_sac_details option:selected").text().toLowerCase());
 
-    if (gst_classification_hsn_sac_details_selected_option == 'specify in voucher') {
+    if (gst_classification_hsn_sac_details_selected_option == 'Specify in Voucher') {
         
             $(".voucher_hide_first_in_gst_classification").hide();
             if ($("#gst_classification_hsn_sac_description").hasClass("enable")) {
@@ -468,9 +491,8 @@ $("#gst_classification_hsn_sac_details").on("change", function () {
                 $("#gst_classification_hsn_sac_number").removeClass("enable");
             }
     }
-    if (gst_classification_hsn_sac_details_selected_option != 'specify in voucher')
+    if (gst_classification_hsn_sac_details_selected_option != 'Specify in Voucher')
           {
-          
             $(".voucher_hide_first_in_gst_classification").show();
             if (!$("#gst_classification_hsn_sac_number").hasClass("enable")) {
                 $("#gst_classification_hsn_sac_number").addClass("enable");
@@ -484,7 +506,7 @@ $("#gst_classification_rate_details_id").on("change", function ()
 {
    
     var gst_classification_gst_classification_rate_details_id = ($("#gst_classification_rate_details_id option:selected").text().toLowerCase());
-    if (gst_classification_gst_classification_rate_details_id == 'specify in voucher') {
+    if (gst_classification_gst_classification_rate_details_id == 'Specify in Voucher') {
         $(".gst_classification_voucher_hide_second").hide();
     if ($("#gst_classification_taxability_type_id").hasClass("enable")) {
         $("#gst_classification_taxability_type_id").removeClass("enable");
@@ -516,7 +538,7 @@ $("#gst_classification_rate_details_id").on("change", function ()
         $('#gstmodal_classification').modal('show');
     }
 
-    if (gst_classification_gst_classification_rate_details_id != 'specify in voucher')
+    if (gst_classification_gst_classification_rate_details_id != 'Specify in Voucher')
     {
         $(".gst_classification_voucher_hide_second").show();
         if (!$("#gst_classification_taxability_type_id").hasClass("enable")) {
@@ -546,19 +568,120 @@ $("#gst_classification_rate_details_id").on("change", function ()
     }
 });
 
+function customizeDataTable(tableId) {// customized datatable function
+   
+   var table = $('#' + tableId).dataTable();// table id
+   var filterInput = document.querySelector('#' + tableId + '_filter input');// search input
+
+
+   var iconElement = document.createElement('i');// create i tag
+   iconElement.className = 'fas fa-search'; // search i tag
+
+   // Add the icon element as a child of the label element
+   var labelElement = filterInput.parentElement;
+   labelElement.insertBefore(iconElement, filterInput); // Insert the icon before the input element
+
+   // Remove the "Search:" text node
+   labelElement.removeChild(labelElement.firstChild);
+
+   // Set a placeholder for the search input
+   $('#' + tableId + '_filter input[type="search"]').attr('placeholder', 'Search...');
+
+   // Iterate through each page
+   for (var i = 0; i < table.fnSettings().fnRecordsTotal(); i++) {
+       // Go to the next page
+       table.fnPageChange(i);
+
+       // Select all rows in the current page
+       var rows = table.$('tr');
+
+       // Iterate through each row and remove the "sorting_1" class from its cells
+       rows.each(function() {
+           $(this).find('td').removeClass('sorting_1').addClass("first_td");// remove all sorting td class in each modal
+       });
+   }
+}
+
+
+function loadDataTable() {// load data table
+
+var token = "<?php echo $_SESSION['li_token']; ?>";
+var table = $('#gst_classification_data_table').DataTable();
+var accountsController = "<?php echo CONTROLLER_ACCOUNTS; ?>";
+ var url= BASE_URL + "index.php/" + accountsController + "/get_gst_classification_details";
+
+if (table) {
+    table.destroy();
+}
+  
+
+
+var table = $('#gst_classification_data_table').DataTable({
+    "processing": false,
+    "serverSide": false,
+    "ajax": {
+        "url": BASE_URL + "index.php/" + accountsController + "/get_gst_classification_details",
+        "type": "POST",
+        "dataType": "json",
+        "dataSrc": "data",
+        "data": {
+            "li_token": token
+        },
+        "error": function(xhr, textStatus, error) {
+            console.error("Error loading data:", error);
+        }
+    },
+    "columns": [
+        { "data": "gst_classification_name" },
+        { "data": "description" },
+     
+        
+        {
+            "data": "id",
+            "render": function(data, type, full, meta) {
+                var id = full.id; 
+               
+                return '<div class="operations">' +
+                
+                    '<a href="#" class="btn btn-xs first_a" title="Edit" onclick="editRow(' + id + ');"><i class="fas fa-edit"></i></a>' +
+                    '<a href="#" class="btn btn-xs" title="Delete" onclick="deleteRow(' + id + ');"><i class="fas fa-trash"></i></a>' +
+                    '</div>';
+            }
+        }
+    ],
+    "createdRow": function(row, data, dataIndex)
+     {
+    // Add a class to the <tr> element here
+           $(row).addClass("clickable-row");
+     },// call the customised data table
+     "initComplete": function(settings, json) {
+        // Call the customizeDataTable function after DataTable initialization
+        customizeDataTable('gst_classification_data_table');// call the data table function , type id of data table as parameter
+    }
+
+});
+
+}
+
 
 // fr saving gst classification
-$('#save-btn-gst-classification').click(function () {
+$('#save_gst_classification_btn').click(function () {
   
             var token = "<?php echo $_SESSION['li_token']; ?>";
-          
-          
+           var hidid= $("#gst_classi_hidden_id").val();
+
+           var hid_row_id= $("#hid_row_id").val();
+         if ($('#gst_classification_class_name_isValid').val() === "1"){
+
+     
             $.ajax({
                 url: BASE_URL + "index.php/" + accountsController + "/save_gst_classification",
                 type: 'POST',
                 dataType: 'json',
                 data: {
                     
+                    gst_classi_hidden_id                                    : $("#gst_classi_hidden_id").val(),
+                    hid_row_id                                              : $("#hid_row_id").val(),
                     gst_classification_class_name                           : $("#gst_classification_class_name").val(),
                     gst_classification_hsn_sac_details                      : $("#gst_classification_hsn_sac_details").val(),
                     gst_classification_hsn_sac_number                       : $("#gst_classification_hsn_sac_number").val(),
@@ -578,16 +701,10 @@ $('#save-btn-gst-classification').click(function () {
                 success: function (response) 
                 {
                     console.log(response);
-                    if (response.status === 'success') {
-                        
-                        fetchAndDisplayData();
-                        $('#gstmodal_classification').modal('hide');
-                        
-                   } 
-                    else {
-                      
-                        toast_message("failure", "Failed", "Failed to save GST classification details.");
-                     }
+                    toast_message("success", "Successful", response.message);
+                    loadDataTable();
+                    $("#new_gst_classification_btn").focus();
+                
                 },
                 error: function (xhr, status, error) {
                     console.log('Error response:', xhr.responseText);
@@ -595,50 +712,148 @@ $('#save-btn-gst-classification').click(function () {
                     alert('An *********** error occurred while saving GST classification details. Please check the console for more information.');
                 }
             });
+        }
+        else {
+        alert_message("failure", "Validation Error", "Please fix validation issues before saving.");
+    }
  });
 
     
- function fetchAndDisplayData() {
-    $.ajax({
-        url: BASE_URL + "index.php/" + accountsController + "/fetch_gst_classification",
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            // Clear the existing table rows
-            $('#gst_clasification_table tbody').empty();
-
-            // Loop through the data and append rows to the table
-            for (var i = 0; i < data.length; i++) {
-                var newRow = '<tr>' +
-                    '<td>' + data[i].gst_classification_name + '</td>' +
-                    '<td>' + data[i].hsn_sac + '</td>' +
-                    '<td>' + data[i].taxability_type_id + '</td>' +
-                    '<td>' + data[i].gst_rate_details_id + '</td>' +
-                    '<td>' +
-                    '<div class="operations">' +
-                    '<a href="#" class="btn btn-xs first_a" title="Edit">' +
-                    '<i class="fas fa-edit"></i>' +
-                    '</a>' +
-                    '<a href="#" class="btn btn-xs" title="Delete">' +
-                    '<i class="fas fa-trash"></i>' +
-                    '</a>' +
-                    '</div>' +
-                    '</td>' +
-                    '</tr>';
-
-                $('#gst_clasification_table tbody').append(newRow);
+ function deleteRow(id) {
+    alert('Delete clicked with id: ' + id);
+    if (confirm("Are you sure you want to delete this item?")) {
+        $.ajax({
+            url: BASE_URL + "index.php/" + accountsController + "/delete_gst_classification_by_id",
+            type: "POST",
+            data: { id: id, li_token: token },
+            dataType: "json",
+            success: function (response) {
+                toast_message("success", "Successful", response.message);
+                loadDataTable();
+                
+           
+            },
+            error: function (xhr, status, error) {
+                alert_message("failure", "Error", "Error deleting item.");
             }
-        },
-        error: function (xhr, status, error) {
-            console.log('Error fetching data:', error);
-        }
-    });
+        });
+    }
+  
 }
 
+function editRow(id) {
+   
+   alert('Edit clicked with id: ' + id);
+   $("#hid_row_id").val(id);
+   gst_classi_hidden_id=$("#gst_classi_hidden_id").val("1");
+ 
 
-// $('#gst_classification_modal').on('shown.bs.modal', function () {
-//   alert("hai");
-//     fetchAndDisplayData();
+   $.ajax({
+       url: BASE_URL + "index.php/" + accountsController + "/get_gst_classification_by_id",
+
+       type: "POST",
+       data: { id: id, li_token: token,gst_classi_hidden_id: $("#gst_classi_hidden_id").val() },
+       dataType: "json",
+       success: function (data) {
+          
+           console.log("response is" ,data);
+           console.log("gst classification name is ",data.data.gst_classification_name);
+         if (data.success == true) {
+            $("#gst_classification_class_name").focus();
+
+            $('#gst_classification_taxability_type_id').val(data.data.taxability_type_id);
+           $('#gst_classification_nature_of_transaction_id').val(data.data.nature_of_trasaction_id);
+           $('#gst_classification_rate_details_id').val(data.data.gst_rate_details_id);
+           $('#gst_classification_cess_valuation_type_id').val(data.data.cess_valuation_type_id);
+            // Populate the edit modal form fields with data
+            $('#gst_classification_class_name').val(data.data.gst_classification_name);
+            // $('#gst_classification_hsn_sac_details').val(data.hsn_sac);
+            $('#gst_classification_hsn_sac_number').val(data.data.hsn_sac);
+            $('#gst_classification_hsn_sac_description').val(data.data.description);
+           
+            $('#gst_classification_igst_rate').val(data.data.igst_rate);
+            $('#gst_classification_cgst_rate').val(data.data.cgst_rate);
+            $('#gst_classification_sgst_utgst_rate').val(data.data.sgst_utgst_rate);
+        
+            $('#gst_classification_cess_rate').val(data.data.cess_rate);
+            $('#gst_classification_eligible_for_input_tax_credit').val(data.data.eligible_for_input_tax_credit);
+            $('#gst_classification_applicable_for_reverse_charge').val(data.data.applicable_for_reverse_charge);
+
+
+           } else {
+               alert("Failed to fetch stock category details.");
+           }
+       },
+       error: function (xhr, status, error) {
+           alert("Error fetching stock category details.");
+       }
+   });
+}
+
+$('#gst_classification_class_name').blur(function() {
+    if($(this).val()=="")
+    {
+        
+        alert_message("failure", "Error", " Specify a valid Tds nature of Payment Name.");
+        $("#gst_classification_class_name").val('').focus();
+        $('#gst_classification_class_name_isValid').val("0");
+    }
+     else {
+           
+            var token = "<?php echo $_SESSION['li_token']; ?>";
+            var gst_classi_hidden_id = $('#gst_classi_hidden_id').val() === '0' ? 0 : 1; 
+            var gst_classification_name = $('#gst_classification_class_name').val();
+            var hid_row_id = $('#hid_row_id').val();
+
+               $.ajax({
+                    type: 'POST',
+                    url: BASE_URL + "index.php/" + accountsController + "/check_gst_classification_name_exist",
+                    // url: BASE_URL + "index.php/" + inventoryController + "/check_tcs_nature_of_goods_exist",
+                    data: {
+
+                            gst_classi_hidden_id: gst_classi_hidden_id,
+                            li_token: token,
+                            gst_classification_name: gst_classification_name,
+                            hid_row_id: hid_row_id
+
+                    },
+                    dataType: 'json',
+                   
+                    success: function (response) {
+                        console.log("Response from server:", response);
+
+                        if (response) {
+                          
+                            alert_message("failure", "Error", "Name already exists. Please choose a different name for update.");
+                            $('#gst_classification_class_name_isValid').val("0");
+                            $("#gst_classification_class_name").val('').focus();
+                        } 
+                        else{
+                            $('#gst_classification_class_name_isValid').val("1");
+                        }
+                        
+                    },
+
+                    error: function (xhr, status, error) {
+                        console.error('AJAX error:', error);
+                    }
+                });
+            }
+    });
+
+
+//     $('#cost_centre_name').blur(function() {
+//     var cost_centre_name = $(this).val();
+
+//     if (cost_centre_name.trim() === "") {
+//         alert_message("failure", "Error", "Cost Centre Name should not be empty.");
+//         $("#cost_centre_name").val('').focus();
+//         $('#cost_centre_name_isValid').val("0");
+//     } else {
+//         validateCostCenterName();
+//     }
 // });
+
+
  
 </script>

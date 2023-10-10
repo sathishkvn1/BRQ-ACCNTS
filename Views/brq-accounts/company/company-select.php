@@ -72,6 +72,7 @@ var BASE_URL="<?php echo base_url();?>";
   
 
 function loadCompanyDetails() {
+  alert("inside loadCompanyDetails ");
 
   $('#company_select').on('show.bs.modal', function() {
        var accountsController = "<?php echo CONTROLLER_ACCOUNTS;?>"; 
@@ -87,6 +88,7 @@ function loadCompanyDetails() {
              $("#list_company").html('');
               
               data.forEach(function(company) {
+                console.log("company list is",company);
                
                 var html = '<li class="card-text item_value dynamic-item" id="select_company_list' + company.company_id + '" data-value="' + company.company_id + '">' +
                 '<a href="#">' +
@@ -113,8 +115,10 @@ function loadCompanyDetails() {
 
 
  $('#company_select').on('dblclick', '.card-text', function(event) {
-
+  alert("inside dbclick");
    var companyId = $(this).data('value');
+   alert("company_id from company_select page is on press of double click"+companyId);
+   console.log("company_id from company_select page is on press of enter",companyId);
 
 //   <?php //echo $this->session->set_userdata('con_id', 'companyId');?>
 
@@ -125,14 +129,17 @@ function loadCompanyDetails() {
 
  
  $('#company_select').on('keypress', function(event) {
+  alert("inside keypress");
    if (event.which === 13) {
-  
-    var companyId = $('.card-text').attr('data-value');
-    //  var companyId = $('#created_comapny_selected li.element-hover').attr('data-value');
-     alert(companyId);
+  // alert()
+    // var companyId = $('.card-text').attr('data-value');
+    //  var companyId = $('.card-text li.element-hover').attr('data-value');
+var companyId = $('#created_comapny_selected li.element-hover').attr('data-value');
+     alert("company_id from company_select page is"+companyId);
+     console.log("company_id from company_select page is on press of enter",companyId);
      if (companyId) {
     
-  updateCompanyName(companyId);
+    updateCompanyName(companyId);
      }
    }
  });
@@ -160,6 +167,7 @@ function updateCompanyName(companyId) {
          $('#current_period_dates').html('<strong>' + currentPeriodDates + '</strong>');
       }
             $('#company_select').modal('hide');
+            // $('.modal-backdrop').remove();
              enableSubmenu();
    
      },

@@ -566,6 +566,7 @@ ini_set('display_errors', 1);
                      toast_message("success", "Successful", response.message);
                    
                      closeAllModal("accept");
+                     closeAllModal("company_creation");
                      openModal("company_features");
                      $("#company_select_link").removeClass("inactive-link");
                     // alterButton.classList.remove('inactive-link');
@@ -592,39 +593,60 @@ ini_set('display_errors', 1);
         }); 
 
 
-        function getFinancialYear() {
-            const currentYear = new Date().getFullYear();
-            const currentMonth = 4;
-            const currentDate = 1; // 1st
-            let financialYear;
-            let financialYearEndDate;
+//         function getFinancialYear() {
+//             const currentYear = new Date().getFullYear();
+//             const currentMonth = 4;
+//             const currentDate = 1; // 1st
+//             let financialYear;
+//             let financialYearEndDate;
 
-            if (currentMonth >= 4) {
-                financialYear = currentYear + '-' + (currentYear + 1); // 2023 - 2024
-            } else {
-                financialYear = (currentYear - 1) + '-' + currentYear; // 2022 - 2023
-            }
+//             if (currentMonth >= 4) {
+//                 financialYear = currentYear + '-' + (currentYear + 1); // 2023 - 2024
+//             } else {
+//                 financialYear = (currentYear - 1) + '-' + currentYear; // 2022 - 2023
+//             }
 
-            const formattedDate = currentDate + '-' + new Date(currentYear, currentMonth - 1).toLocaleString('default', { month: 'long' }) + '-' + currentYear;
+//             const formattedDate = currentDate + '-' + new Date(currentYear, currentMonth - 1).toLocaleString('default', { month: 'long' }) + '-' + currentYear;
             
-            const endYear = currentMonth >= 4 ? currentYear + 1 : currentYear;
-            financialYearEndDate = '31-March-' + endYear;
+//             const endYear = currentMonth >= 4 ? currentYear + 1 : currentYear;
+//             financialYearEndDate = '31-March-' + endYear;
 
-            return {
-                financial_year_begin_date: formattedDate,
-                financial_year_end_date: financialYearEndDate,
-                financial_year: financialYear
-            };
-}
+//             return {
+//                 financial_year_begin_date: formattedDate,
+//                 financial_year_end_date: financialYearEndDate,
+//                 financial_year: financialYear
+//             };
+// }
+function getFinancialYear() {
+           
+        const currentYear   = new Date().getFullYear();
+        const currentMonth  =new Date().getMonth();
+        const currentDate  =new Date().getDate();
+        let financialYear;
+        let financialYearEndDate;
+      
+        if (currentMonth >= 4) {
+            financialYear = currentYear + '-' + (currentYear + 1); // 2023 - 2024
+        } else {
+            financialYear = (currentYear - 1) + '-' + currentYear; // 2022 - 2023
+        }
+        const formattedDate     = currentYear+'-04-01';
+        const endYear           = currentMonth >= 4 ? currentYear + 1 : currentYear;
+       financialYearEndDate     =  endYear+'-03-31';
 
+        return {
+            financial_year_begin_date: formattedDate,
+            financial_year_end_date: financialYearEndDate,
+            financial_year: financialYear
+        };
+    }
         $('#company_creation').on('shown.bs.modal', function () {
         const result = getFinancialYear();
-
-        document.getElementById('financial_year_begin_date').value = result.financial_year_begin_date;
-        document.getElementById('books_beginning_date').value = result.financial_year_begin_date;
-        document.getElementById('financial_year_end_date').value = result.financial_year_end_date;
-        document.getElementById('financial_year').value = result.financial_year;
-        }).trigger('shown.bs.modal');
+        $('#financial_year_begin_date').val(result.financial_year_begin_date);
+        $('#books_beginning_date').val(result.financial_year_begin_date);
+        $('#financial_year_end_date').val(result.financial_year_begin_date);
+        $('#financial_year').val(result.financial_year_begin_date);
+         }).trigger('shown.bs.modal');
 
    
 
@@ -689,7 +711,7 @@ ini_set('display_errors', 1);
                           $("#StateDropdown").css("display","none");
                       }
                       var token = "<?php echo $_SESSION['li_token']; ?>";
-                    var company_id = <?php echo $_SESSION['company_id']; ?>;
+                    // var company_id = <?php //echo $_SESSION['company_id']; ?>;
                     var mode = $('#hidden_Id').val() === '0' ? 0 : 1; 
 
                     $('#company_mailing_name').val(companyName);
@@ -954,7 +976,7 @@ else if (e.keyCode == 9)
                           $("#CountryDropdown").css("display","none");
                       }
                       var token = "<?php echo $_SESSION['li_token']; ?>";
-                    var company_id = <?php echo $_SESSION['company_id']; ?>;
+                    // var company_id = <?php //echo $_SESSION['company_id']; ?>;
                     var mode = $('#hidden_Id').val() === '0' ? 0 : 1; 
 
                     $('#company_mailing_name').val(companyName);
@@ -963,7 +985,7 @@ else if (e.keyCode == 9)
                         type: 'POST',
                         url: BASE_URL + "index.php/" + accountsController + "/checkCompanyNameExists",
                         data: {
-                            company_id: company_id,
+                            // company_id: company_id,
                             company_name: companyName,
                             mode: mode,
                             li_token: token
@@ -1129,9 +1151,10 @@ else if (e.keyCode == 9)
     }
 
     function enableSubmenu() {
-        
+        alert("hai");
          if (alterSubmenu  && selectLinkSubmenu && financialyearmasterSubmenu && createfinancialyearSubmenu && companyfeaturesSubmenu ) {
             $('#btnaltercompany ,#company_select_link,#btnfinancialyearmaster,#btncreatefinancialyear,#btnalter_company_features ').removeClass('inactive-link');
+            
            
         }
     }

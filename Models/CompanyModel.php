@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class CompanyModel extends CI_Model {
 
-
     public function reset_current_year($company_id)
 {
     // Reset all financial years of the company to 'no'
@@ -726,6 +725,68 @@ public function getAllGstClassifications() {
   
     return $query->result();
 }
+
+public function get_gst_classification_details()
+{
+    $company_id = $this->session->userdata('company_id');
+  
+    $this->db->where('company_id', $company_id); 
+    $this->db->where('is_deleted', 'no');
+    $query = $this->db->get('acc_gst_classification');
+
+    if ($query->num_rows() > 0) {
+        return $query->result_array();
+    } else {
+        return array();
+    }
+}
+   
+
+public function delete_gst_classification_by_id($id)
+    {
+        $data = array('is_deleted' => 'yes');
+        $this->db->where('id', $id);
+        return $this->db->update('acc_gst_classification', $data);
+       
+    }
+
+
+    
+    public function get_gst_classification_by_id($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('acc_gst_classification');
+    
+        if ($query->num_rows() == 1) {
+            return $query->row();
+        } else {
+            return false;
+        }
+    }
+
+    public function check_gst_classification_name_exist($gst_classification_name, $gst_classi_hidden_id ,$hid_row_id)
+    {
+        $company_id = $this->session->userdata('company_id');
+        
+        if ($gst_classi_hidden_id == 1) {
+            $this->db->where('id !=', $hid_row_id);
+        }
+    
+        $this->db->where('gst_classification_name', $gst_classification_name);
+        $this->db->where('company_id',$company_id);
+        $this->db->where('is_deleted','no');
+        $query = $this->db->get('acc_gst_classification');
+        // $lastQuery = $this->db->last_query();
+        // echo "last query".$lastQuery;
+        if($query->num_rows() > 0) {
+            return true;
+        }
+        else{
+            return false;
+        }
+            
+        
+    }
 
 
 }

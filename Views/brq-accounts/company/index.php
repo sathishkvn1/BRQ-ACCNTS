@@ -8,7 +8,8 @@
 
 	<title>brq-glob-tech | Accounts</title>
 	<!--- top-css. ---->
-	<?php include("top-css.php"); ?>
+	<!-- <-?php include("top-css.php"); ?> -->
+	<?php include('application/views/brq-accounts/top-css.php');?>
 	<!--- // end top-css --->
 
 	<style>
@@ -35,13 +36,13 @@
 	<div class="wrapper">
 
 		<!-- Navbar  TOP NAV BAR MESSAGES & SEARCH -->
-		<?php include("header-nav-search-messages.php"); ?>
+		<?php include('application/views/brq-accounts/header-nav-search-messages.php');?>
 		<!-- /.navbar  TOP NAVE BAR MESSAGES & SEARCH-->
        
 
 
 		<!--- For sidebar Right Navigation for Short Cut Key like Tally -->
-		<?php include("index-sidebar-navigation-right.php"); ?>
+		<?php include('application/views/brq-accounts/index-sidebar-navigation-right.php');?>
 		<!--- End : For sidebar Right Navigation for Short Cut Key like Tally -->
 
 		<!-- Content Wrapper. Contains page content -->
@@ -531,13 +532,30 @@
 											data-value="li_inventory_masters">Inventory Master
 										</li>
 										<li class="element li_inventory_masters" id="master_stock_group"><a
-												href='#'>Stock Group</a>
+										href='<?php  echo base_url("AccountsInventory/stock_group_creation") ?>'>Stock Group</a>
 										</li>
-										<li class="element li_inventory_masters" id="master_stock_category"><a
-												href='#'>Stock Category</a>
+										
+										<li class="element li_inventory_masters" id="master_stock_category">
+											<a href="<?php  echo base_url('AccountsInventory/stock_category_creation')?>?source=from_master_stock_category">Stock Category</a>
 										</li>
-										<li class="element li_inventory_masters" id="master_stock_item"><a
-												href='#'>Stock Item</a>
+
+										<li class="element li_inventory_masters" id="master_cost_creation">
+										
+									
+											<a href="<?php  echo base_url('AccountsInventory/inventory_cost_creation')?>?source=from_master_cost_creation">Cost Centre Creation</a> 
+										</li>
+										<!-- <li class="element li_inventory_masters" id="master_stock_item"><a
+												href='<-?php  echo base_url("AccountsInventory/inventory_master_settings") ?>'>Inventory Master settings</a>
+										</li> -->
+										<li class="element li_inventory_masters" id="master_stock_item">
+											<a href="<?php echo base_url('AccountsInventory/inventory_master_settings')?>?source=fromListIcon">Inventory Master settings</a>
+										</li>
+										
+										<li class="element li_inventory_masters" id="inventory_unit_creation"><a
+										href='<?php  echo base_url("AccountsInventory/stock_unit_creation")?>?source=frominventoryunitcreation'>Stock Unit Creation</a>
+										</li>
+										<li class="element li_inventory_masters" id="stock_item_creation"><a
+												href='<?php  echo base_url("AccountsInventory/stock_item_creation") ?>'>Stock Item</a>
 										</li>
 										<li class="element li_inventory_masters" id="master_unit"><a href='#'>Unit</a>
 										</li>
@@ -578,16 +596,25 @@
 											data-value="li_statutory_masters">Statutory Masters
 										</li>
 										<li class="element li_statutory_masters" id="master_tds_nature_of_payment"><a
-												href='#'>TDS Nature of Payments</a>
+										href='<?php echo base_url("AccountsInventory/tds_nature_payment") ?>?source=frommastertdsnatureofpayment'>TDS Nature of Payments</a>
 										</li>
-										<li class="element li_statutory_masters" id="master_tcs_nature_of_payment"><a
-												href='#'>TCS Nature of Payments</a>
+
+										<li class="element li_statutory_masters" id="master_tcs_nature_of_goods">
+											<!-- <a href='<-?php  echo base_url("AccountsInventory/tcs_nature_of_goods") ?>'>TCS Nature of Goods</a> -->
+												<a href="<?php  echo base_url('AccountsInventory/tcs_nature_of_goods')?>?source=from_master_tcs_nature_of_goods">TCS Nature of Goods</a> 
 										</li>
+
+									
+										
 										<li class="element li_statutory_masters" id="master_tax_units"><a href='#'>Tax
 												Units</a>
 										</li>
 										<li class="element li_statutory_masters" id="gst_classification"><a href='#'>GST Classification</a>
 										</li>
+									
+										
+
+
 										<li class="double_touch_hide_show_li" id="master_statutory_detailes"
 											data-value="li_statutory_detailes">Statutory
 										Detailes</li>
@@ -623,11 +650,14 @@
 		 <!------------------------------------------------------------------
                     Modal for Gst_classification Details Start 
     ------------------------------------------------------------------>
-	<?php include 'company_modal_for_gst_classification.php';?>
+	<?php include('application/views/brq-accounts/company/company_modal_for_gst_classification.php');?>
+
+	
+
 
 
 		<!----------- bottom-js ---------------------->
-		<?php include("bottom-js.php"); ?>
+		<?php include('application/views/brq-accounts/bottom-js.php');?>
 		<!------------- bottom-js end --------------->
 
 		
@@ -636,24 +666,48 @@
 
 </html>
 
-
 <script>
- 
-	  var company_id = <?php echo $company_id; ?>;
+
+	 var company_id = <?php echo $company_id; ?>;
+	// var company_id = <-?php echo $this->session->userdata('company_id'); ?>;
+	 alert(company_id);
+	 $('#masters_two').modal('hide');
 	  if (company_id == 0) {
 
 			loadCompanyDetails();                       //Defined in company-select.php file
 			$('#company_select').modal('show');
 		 }
 
+	$(document).ready(function () {
+	
+		
+  const params = new URLSearchParams(window.location.search);
+//  alert(params);  //openModal=true
+const openModal = params.get('openModal');
+
+// alert(openModal); //true
+
+if (openModal === 'true') {
+
+	$('#masters_two').modal('show');
+	const urlWithoutParameter = window.location.href.split('?')[0];
+    history.replaceState({}, document.title, urlWithoutParameter);
+}
+});
+
+ 
+	
 // to open gst_classification modal
 	$("#gst_classification").on("click",function(){
-		fetchAndDisplayData();
+		alert("hai");
+		loadDataTable();
+		
 		$('#gst_classification_modal').modal('show');
+		
 	})
 
 
-  // to open tds modal
+//   // to open tds modal
   $('#masters_two').on('click', '#master_tds_detailes a', function (event) {
 	// $('#tds_details_modal').modal('show');
 		 populateTDSModal();
@@ -686,45 +740,46 @@ $('#masters_two').on('click', '#master_vat_registration_detailes a', function (e
         $('#tds_details_modal').modal('show');
     });
 
-// to open gst modal
+// // to open gst modal
 function openGstModal(){
 	
- var company_id = <?php echo $this->session->userdata('company_id'); ?>;
-
-var token = "<?php echo $_SESSION['li_token']; ?>";
-// alert(token);
-$.ajax({
-	url: BASE_URL + "index.php/" + accountsController + "/get_gst_row_count",
-	type: 'POST',
-	dataType: 'json',
-	data: {
-		company_id: company_id, li_token: token
-	},
- 
-	success: function (response) {
-		// console.log(response);
-		var rowCount = response.row_count;
-
-		if (rowCount > 1) {
-			$('#masters_two').modal('hide');
-			$('#company_multiple_gst').modal('show');
-			loadMultipleGst();
-		} else {
-			 $('#masters_two').modal('hide');
-			
-			getAddressType();
-			$('#gst_modal').modal('show');
-			openGstModalById(response.data[0].id); 
+	//  var company_id = <?php //echo $this->session->userdata('company_id'); ?>;
+	
+	 var token = "<?php echo $_SESSION['li_token']; ?>";
+	// alert(token);
+	$.ajax({
+		url: BASE_URL + "index.php/" + accountsController + "/get_gst_row_count",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			 li_token: token
+		},
+	 
+		success: function (response) {
+			// console.log(response);
+			var rowCount = response.row_count;
+	
+			if (rowCount > 1) {
+				$('#masters_two').modal('hide');
+				$('#company_multiple_gst').modal('show');
+				loadMultipleGst();
+			} else {
+				 $('#masters_two').modal('hide');
+				
+				getAddressType();
+				$('#gst_modal').modal('show');
+				openGstModalById(response.data[0].id); 
+			}
+		},
+		error: function (xhr, status, error) {
+			console.log('Error response:', xhr.responseText);
+			console.log('An error occurred:', error);
+		   
 		}
-	},
-	error: function (xhr, status, error) {
-		console.log('Error response:', xhr.responseText);
-		console.log('An error occurred:', error);
-	   
+	});
+	
 	}
-});
-
-}
+	
 
 function openGstModalById(gstId) {
   // Fetch GST details by ID and open the gst_modal
@@ -838,8 +893,8 @@ $(window).on("keydown", function (e)
 
 
 
-</script>
-<script>
+ </script>
+ <script>
 	$('#list_of_masters_cancel_icon').click(function () {
         // Close the modal by selecting its ID and calling modal('hide')
         $('#masters').modal('hide');
@@ -856,15 +911,26 @@ $(window).on("keydown", function (e)
 </script>
 
 
-<script>
-	//li movement modal library
-	
+ <script>
+
+
 $("#list_of_vouchers_new_cancel_icon").on("click",function(){
 	$("#vouchers").modal("hide");
-})
-
-// $(document).ready(function () {
-//     save();
-// });
+});
 </script>
+
+<script>
+
+// const params = new URLSearchParams(window.location.search);
+// const openModal = params.get('openModal');
+// alert(openModal);
+
+// // If "openModal" is set to "true", open the modal
+// if (openModal === 'true') {
+// 	alert("hai")
+//     $('#masters_two').modal('show');
+// }
+
+ </script> 
+
 

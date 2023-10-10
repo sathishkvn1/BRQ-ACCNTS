@@ -209,7 +209,7 @@
 							
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item"  href="#"  id="btnalter_company_features" data-backdrop="false" onclick="disableSubmenu();" tabindex="-1" autofocus><span>F</span>eatures</a>
-							<a class="dropdown-item" href="<?php echo base_url('AccountsInventory/inventory_master_settings'); ?>" tabindex="-1" autofocus><span>I</span>nventory</a>
+							<!-- <a class="dropdown-item" href="<-?php echo base_url('AccountsInventory/inventory_master_settings'); ?>" tabindex="-1" autofocus><span>I</span>nventory</a> -->
 		
 						</div>
 					</div>
@@ -217,11 +217,15 @@
 				<li class="nav-item">
 					<div class="dropdown" id="dropdown_Data">
 						<a href="#" class="nav-link" id="dataMenuButton" data-toggle="dropdown">
-							<span>Y</span><span>:</span>Data
+							<span>Y</span><span>:</span>Inventory
 						</a>
 						<div class="dropdown-menu">
-							<p class="inside_content_p">COMPANY DATA</p>
-							<a class="dropdown-item" href="#" tabindex="-1" autofocus><span>B</span>ackup</a>
+							<p class="inside_content_p">INVENTORY DATA</p>
+							<!-- <a class="dropdown-item" href="<-?php  echo base_url("AccountsInventory/inventory_master_settings") ?>" tabindex="-1" autofocus><span>I</span>nventory Master Settings</a> -->
+							<a class="dropdown-item" href="<?php echo base_url('AccountsInventory/inventory_master_settings'); ?>?source=fromHeaderNav">
+								<span>I</span>nventory Master Settings
+							</a>
+
 							<a class="dropdown-item" href="#" tabindex="-1"><span>R</span>estore</a>
 							<a class="dropdown-item" href="#" tabindex="-1"><span>S</span>plit </a>
 							<p class="config_p">CONFIGURE</p>
@@ -365,14 +369,35 @@
 </div>
 
  <!--Modals for Headers Start Here -->
-<?php include('modals-for-header.php'); ?>
+<?php include('application/views/brq-accounts/company/modals-for-header.php'); ?>
  <!--Modals for Headers End Here -->
 
 <!-- Modals for Common Start Here -->
 <!--<?php //include('modals-for-common.php'); ?>-->
 <!-- Modals for Common End Here -->
+<script>
+function alert_message(type,title,textmsg) {
+    //type values :  'success','failure','warning'
+    var alertmessage_window = document.getElementById("snackbar");
+    alertmessage_window.className = "show","";
+    setTimeout(function(){ alertmessage_window.className = alertmessage_window.className.replace("show", ""); }, 3000);
 
+        $('#snackbar').addClass(type);
+        $("#snackbar .title").text(title);
+        $("#snackbar .content").text(textmsg);
+}
 
+function toast_message(type,title,textmsg) {
+    //type values :  'success','failure','warning'
+    var toast_window = document.getElementById("toast");
+    toast_window.className = "show","";
+    setTimeout(function(){ toast_window.className = toast_window.className.replace("show", ""); }, 3000);
+
+        $('#toast').addClass(type);
+        $("#toast .title").text(title);
+        $("#toast .content").text(textmsg);
+}
+</script>
 <script>
 	var company_id = <?php echo $company_id; ?>;
 
@@ -569,17 +594,7 @@ $(document).on('click', '#company_select_link', function() {
    loadCompanyDetails();
    $('#company_select').modal('show');
 });
-//  $(document).on('click', '#btncreate', function() {
-// 	// $company_id = $this->session->userdata('company_id');
-// 	// alert($company_id );
-// // 	$("#company_name").val("");
-// //  document.getElementById('selectedCountryId').value = 3;
-// // $('#company_creation input[type="text"]').val('');
-//  $('#company_mailing_name,#company_name,#company_address_1, #company_address_2, #company_address_3, #company_address_4, #company_address_5, #company_pincode, #company_telephone, #company_mobile, #company_fax, #company_email, #company_website, #currency_symbol, #company_formal_name, #number_decimal_places ').val("");
-//  $('#CountryInput, #StateInput').val('Not Applicable');
-//  $(' #suffix_symbol_to_amount, #show_amount_in_millions').val('no');
-//   $('#company_creation').modal('show');
-// });
+
 
 function companyCreation()
 {
@@ -596,39 +611,6 @@ function companyCreation()
 	// alert($company_id );
    fetchDataAndDisplayInModal();
 });
-
-
-// $(document).on('click', '#btnfinancialyearmaster', function() {
-
-// 	fetchFinacialyearDetails();
- 
-// });
-
-
-
-function alert_message(type,title,textmsg) {
-    //type values :  'success','failure','warning'
-    var alertmessage_window = document.getElementById("snackbar");
-    alertmessage_window.className = "show","";
-    setTimeout(function(){ alertmessage_window.className = alertmessage_window.className.replace("show", ""); }, 3000);
-
-        $('#snackbar').addClass(type);
-        $("#snackbar .title").text(title);
-        $("#snackbar .content").text(textmsg);
-}
-
-function toast_message(type,title,textmsg) {
-    //type values :  'success','failure','warning'
-    var toast_window = document.getElementById("toast");
-    toast_window.className = "show","";
-    setTimeout(function(){ toast_window.className = toast_window.className.replace("show", ""); }, 3000);
-
-        $('#toast').addClass(type);
-        $("#toast .title").text(title);
-        $("#toast .content").text(textmsg);
-}
-
-
 
 
 </script>

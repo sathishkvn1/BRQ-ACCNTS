@@ -140,7 +140,7 @@ function index()
     
     }
 
-    $this->load->view('accounts/index', $data);
+    $this->load->view('brq-accounts/company/index', $data);
 		
 }
 
@@ -1421,8 +1421,11 @@ public function get_gstrate_details(){
 
 public function save_gst_classification() {
     $company_id = $this->session->userdata('company_id');
-    // echo "Company ID: " . $company_id ;
- 
+   
+    $gst_classi_hidden_id=$_POST['gst_classi_hidden_id'];
+    
+    $hid_row_id=$_POST['hid_row_id'];
+    
 $data = array(
 
     'company_id'                    =>$company_id,
@@ -1442,12 +1445,20 @@ $data = array(
     'eligible_for_input_tax_credit'          => $this->input->post('gst_classification_eligible_for_input_tax_credit'),
  
 );
-// var_dump($data);
-    $this->db->insert('acc_gst_classification', $data);
-    // echo "Generated SQL Query: " . $this->db->last_query();
+
+    if ($gst_classi_hidden_id == '0') {
+        
+        $this->db->insert('acc_gst_classification', $data);
+    } 
+    else {
+      
+        $this->db->where('id', $hid_row_id);
+        $this->db->update('acc_gst_classification', $data);
+    }
 
     $response = array(
-        'status' => 'success', 
+        'status' => 'success',
+        'message' => 'Saved' 
     );
 
     header('Content-Type: application/json');
@@ -1461,6 +1472,65 @@ public function fetch_gst_classification() {
     header('Content-Type: application/json');
     echo json_encode($data);
 }
+
+
+public function get_gst_classification_details()
+{
+    // $company_id = $this->session->userdata('company_id');
+    $gst_classification = $this->CompanyModel->get_gst_classification_details();
+    echo json_encode(['data' => $gst_classification]);
+
+}
+
+public function delete_gst_classification_by_id()
+{
+    $id  = $this->input->post('id');
+    $res = $this->CompanyModel->delete_gst_classification_by_id($id);
+
+    if ($result) {
+        $response = ['success' => true, 'message' => 'Item marked as deleted successfully'];
+    } else {
+        $response = ['success' => false, 'message' => 'Failed to mark item as deleted'];
+    }
+
+    echo json_encode($response);
+}
+
+
+public function get_gst_classification_by_id()
+{
+    $id = $this->input->post('id');
+    $result = $this->CompanyModel->get_gst_classification_by_id($id);
+
+    if ($result) {
+        $response = [
+            'success' => true,
+            'data' => $result
+        ];
+    } else {
+        $response = [
+            'success' => false,
+            'message' => 'Not found'
+        ];
+    }
+
+    echo json_encode($response);
+}
+
+public function check_gst_classification_name_exist(){
+    $gst_classification_name    = $this->input->post('gst_classification_name');
+    $gst_classi_hidden_id       = $this->input->post('gst_classi_hidden_id'); // Get the mode from the AJAX call
+    $hid_row_id                 = $this->input->post('hid_row_id'); // Get the mode from the AJAX call
+
+    $response             = $this->CompanyModel->check_gst_classification_name_exist($gst_classification_name, $gst_classi_hidden_id ,$hid_row_id );
+// var_dump($response);
+// die;
+    echo json_encode($response);
+
+    }
+
+
+
 
 
 
