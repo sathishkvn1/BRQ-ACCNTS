@@ -531,8 +531,9 @@
 										<li class="double_touch_hide_show_li " id="master_inventory_masters"
 											data-value="li_inventory_masters">Inventory Master
 										</li>
-										<li class="element li_inventory_masters" id="master_stock_group"><a
-										href='<?php  echo base_url("AccountsInventory/stock_group_creation") ?>'>Stock Group</a>
+										
+										<li class="element li_inventory_masters" id="master_stock_category">
+											<a href="<?php  echo base_url('AccountsInventory/stock_group_creation')?>?source=from_master_stock_group">Stock Group</a>
 										</li>
 										
 										<li class="element li_inventory_masters" id="master_stock_category">

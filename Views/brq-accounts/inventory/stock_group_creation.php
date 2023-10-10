@@ -453,10 +453,10 @@
                                 <div class="row save_cancel_section">
                                     <div class="col-9">
                                        
-                                        <button id="save_inventory_group_settings_btn" class="save_inventory_btn btn" type="button">
+                                        <button id="save_inventory_group_settings_btn" class="save_inventory_btn btn"   tabindex="11823" type="button"  >
                                              <i class="fas fa-calendar-check"></i><span>S</span>ave
                                         </button>
-                                        <button id="cancel_inventory_group_settings_btn" class="cancel_inventory_btn btn" type="button">
+                                        <button id="cancel_inventory_group_settings_btn" class="cancel_inventory_btn btn" type="button" tabindex="11824">
                                             <span>C</span>ancel
                                         </button>
                                     </div>
@@ -907,6 +907,11 @@ $('.yes_no,.enable').keydown(function (e) {
                 // if ($("#" + currentId).is('[data-target~="#company_feature_save"]')) {//when you press enter key from last input of company creation
                 //     $('#company_feature_save').modal('toggle');
                 // }
+                if (currentId === "set_alter_excise_details") {
+                    alert("hai");
+                  $("#save_inventory_group_settings_btn").focus();
+                  event.preventDefault(); 
+                  }
                 
 
                 while (next < 12000) {
@@ -921,6 +926,7 @@ $('.yes_no,.enable').keydown(function (e) {
                     next++;
                 }
             }
+            
         }
     }
         // if (e.which === 83) {
@@ -936,6 +942,30 @@ $('.yes_no,.enable').keydown(function (e) {
 
 
 });
+
+
+function handleCancel() {
+
+const urlParams = new URLSearchParams(window.location.search);
+const source = urlParams.get('source');
+alert(source);
+
+if (source === 'from_master_stock_group') {
+    $('#inventory_group_creation_modal').modal('hide');
+    window.location.href = '<?php echo base_url(); ?>/Accounts?openModal=true';
+    
+}
+
+}
+
+$('#cancel_inventory_group_settings_btn').click(handleCancel);
+$('#stock_group_creation_cancel_icon').click(handleCancel);
+$(document).keydown(function (event) {
+    if (event.which == 27) { 
+        handleCancel();
+    }
+});
+
 
     </script>
 
