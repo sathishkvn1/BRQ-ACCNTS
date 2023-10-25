@@ -490,7 +490,6 @@
 }); // document.ready
              $('#save_inventory_group_settings_btn').click(function() {
                 var parentGroupId = $("#parent_group_id").val();
-                alert(parentGroupId);
                     var formData  = new FormData();
                     formData.append('stock_group_name', $("#stock_group_name").val()); 
                     formData.append('stock_group_alternate_name', $("#stock_group_alternate_name").val());
@@ -542,10 +541,8 @@
 /// on select of As per company/Stock Group
 
 $("#hsn_sac_details_id_for_stock").change(function() {
-        alert("inside hsn_sac_details_id");
         var selectedOption = $(this).val(); 
-        alert(selectedOption);
-        
+
         if (selectedOption === "5") {
            
             $.ajax({
@@ -603,8 +600,7 @@ $("#hsn_sac_details_id_for_stock").change(function() {
 
 $("#hsn_gst_classification_id_for_stock").change(function() {
         var selected_classi_Option = $(this).val(); 
-        alert(selected_classi_Option);
-         
+
         $.ajax({
             url: BASE_URL + "index.php/" + inventoryController + "/getGstClassificationDetails",
             type: 'POST',
@@ -627,7 +623,6 @@ $("#hsn_gst_classification_id_for_stock").change(function() {
 
 $("#gst_rate_details_id_for_stock").change(function() {
     var selectedGstRateDetailsOption = $(this).val();
-    alert(selectedGstRateDetailsOption);
     var gstClassificationDropdown = $("#gst_gst_classification_id");
 
         if (selectedGstRateDetailsOption === "4") {
@@ -659,8 +654,7 @@ $("#gst_rate_details_id_for_stock").change(function() {
 
 $("#gst_gst_classification_id").change(function() {
     var selectedGstClassificationOption = $(this).val();
-    alert(selectedGstClassificationOption); //23
-   
+
     $.ajax({
         url: BASE_URL + "index.php/" + inventoryController + "/getGstClassification",
         type: 'POST',
@@ -742,7 +736,6 @@ $("#gst_gst_classification_id").change(function() {
             }
             else if(hsn_sac_details_id_val=="4")// hide all three element under hsn_sac_details_id_val
             {
-                // alert("hai");
                 $(".hide_show_based_on_hsn_sac_field").hide();
                 $(".hide_show_based_on_hsn_sac_field .col-md-4 select,.hide_show_based_on_hsn_sac_field .col-md-4 input").removeClass("enable");
 
@@ -908,7 +901,6 @@ $('.yes_no,.enable').keydown(function (e) {
                 //     $('#company_feature_save').modal('toggle');
                 // }
                 if (currentId === "set_alter_excise_details") {
-                    alert("hai");
                   $("#save_inventory_group_settings_btn").focus();
                   event.preventDefault(); 
                   }
@@ -948,11 +940,10 @@ function handleCancel() {
 
 const urlParams = new URLSearchParams(window.location.search);
 const source = urlParams.get('source');
-alert(source);
 
 if (source === 'from_master_stock_group') {
     $('#inventory_group_creation_modal').modal('hide');
-    window.location.href = '<?php echo base_url(); ?>/Accounts?openModal=true';
+    window.location.href = '<?php echo base_url(); ?>Accounts?openModal=true';
     
 }
 

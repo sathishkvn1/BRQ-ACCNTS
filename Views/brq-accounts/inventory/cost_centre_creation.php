@@ -731,11 +731,11 @@ function handleCancel() {
 
 const urlParams = new URLSearchParams(window.location.search);
 const source = urlParams.get('source');
-alert(source);
+
 
 if (source === 'from_master_cost_creation') {
     $('#cost_centre_creation_modal').modal('hide');
-    window.location.href = '<?php echo base_url(); ?>/Accounts?openModal=true';
+    window.location.href = '<?php echo base_url(); ?>Accounts?openModal=true';
     
 }
 

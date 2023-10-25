@@ -1151,7 +1151,7 @@ else if (e.keyCode == 9)
     }
 
     function enableSubmenu() {
-        alert("hai");
+        
          if (alterSubmenu  && selectLinkSubmenu && financialyearmasterSubmenu && createfinancialyearSubmenu && companyfeaturesSubmenu ) {
             $('#btnaltercompany ,#company_select_link,#btnfinancialyearmaster,#btncreatefinancialyear,#btnalter_company_features ').removeClass('inactive-link');
             

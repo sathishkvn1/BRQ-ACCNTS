@@ -670,8 +670,7 @@
 <script>
 
 	 var company_id = <?php echo $company_id; ?>;
-	// var company_id = <-?php echo $this->session->userdata('company_id'); ?>;
-	 alert(company_id);
+	
 	 $('#masters_two').modal('hide');
 	  if (company_id == 0) {
 
@@ -680,27 +679,23 @@
 		 }
 
 	$(document).ready(function () {
-	
 		
-  const params = new URLSearchParams(window.location.search);
-//  alert(params);  //openModal=true
-const openModal = params.get('openModal');
+    const params = new URLSearchParams(window.location.search);
 
-// alert(openModal); //true
+    const openModal = params.get('openModal');
 
-if (openModal === 'true') {
-
-	$('#masters_two').modal('show');
-	const urlWithoutParameter = window.location.href.split('?')[0];
-    history.replaceState({}, document.title, urlWithoutParameter);
-}
-});
+    if (openModal === 'true') {
+    
+    	$('#masters_two').modal('show');
+    	const urlWithoutParameter = window.location.href.split('?')[0];
+        history.replaceState({}, document.title, urlWithoutParameter);
+    }
+   });
 
  
 	
 // to open gst_classification modal
 	$("#gst_classification").on("click",function(){
-		alert("hai");
 		loadDataTable();
 		
 		$('#gst_classification_modal').modal('show');
@@ -744,10 +739,9 @@ $('#masters_two').on('click', '#master_vat_registration_detailes a', function (e
 // // to open gst modal
 function openGstModal(){
 	
-	//  var company_id = <?php //echo $this->session->userdata('company_id'); ?>;
-	
+
 	 var token = "<?php echo $_SESSION['li_token']; ?>";
-	// alert(token);
+
 	$.ajax({
 		url: BASE_URL + "index.php/" + accountsController + "/get_gst_row_count",
 		type: 'POST',
@@ -859,7 +853,7 @@ $(window).on("keydown", function (e)
         			var modalId = liSelectedClass.find('a').attr("data-target"); // Get the data-target attribute value
        				 if (modalId)
 					  {
-						// alert(modalId)
+					
 						// Close any open modal first
 						$(".modal.show").modal("hide");
 
@@ -919,19 +913,5 @@ $("#list_of_vouchers_new_cancel_icon").on("click",function(){
 	$("#vouchers").modal("hide");
 });
 </script>
-
-<script>
-
-// const params = new URLSearchParams(window.location.search);
-// const openModal = params.get('openModal');
-// alert(openModal);
-
-// // If "openModal" is set to "true", open the modal
-// if (openModal === 'true') {
-// 	alert("hai")
-//     $('#masters_two').modal('show');
-// }
-
- </script> 
 
 

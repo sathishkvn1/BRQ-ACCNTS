@@ -788,15 +788,15 @@ function handleCancel() {
 
 const urlParams = new URLSearchParams(window.location.search);
 const source = urlParams.get('source');
-// alert(source); 
+
 
 if (source === 'frommastertdsnatureofpayment') {
     $('#tds_nature_payment_modal').modal('hide');
-    window.location.href = '<?php echo base_url(); ?>/Accounts?openModal=true';
+    window.location.href = '<?php echo base_url(); ?>Accounts?openModal=true';
     
 } else if (source === 'fromHeaderNav') {
     // window.location.href = '<-?php echo base_url(); ?>';
-    window.location.href = '<?php echo base_url(); ?>/Accounts';
+    window.location.href = '<?php echo base_url(); ?>Accounts';
 }
 }
 

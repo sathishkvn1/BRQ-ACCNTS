@@ -72,8 +72,7 @@ var BASE_URL="<?php echo base_url();?>";
   
 
 function loadCompanyDetails() {
-  alert("inside loadCompanyDetails ");
-
+ 
   $('#company_select').on('show.bs.modal', function() {
        var accountsController = "<?php echo CONTROLLER_ACCOUNTS;?>"; 
       
@@ -115,12 +114,10 @@ function loadCompanyDetails() {
 
 
  $('#company_select').on('dblclick', '.card-text', function(event) {
-  alert("inside dbclick");
+ 
    var companyId = $(this).data('value');
-   alert("company_id from company_select page is on press of double click"+companyId);
+  
    console.log("company_id from company_select page is on press of enter",companyId);
-
-//   <?php //echo $this->session->set_userdata('con_id', 'companyId');?>
 
     updateCompanyName(companyId);
    
@@ -129,13 +126,10 @@ function loadCompanyDetails() {
 
  
  $('#company_select').on('keypress', function(event) {
-  alert("inside keypress");
+
    if (event.which === 13) {
-  // alert()
-    // var companyId = $('.card-text').attr('data-value');
-    //  var companyId = $('.card-text li.element-hover').attr('data-value');
-var companyId = $('#created_comapny_selected li.element-hover').attr('data-value');
-     alert("company_id from company_select page is"+companyId);
+  
+    var companyId = $('#created_comapny_selected li.element-hover').attr('data-value');
      console.log("company_id from company_select page is on press of enter",companyId);
      if (companyId) {
     

@@ -604,7 +604,7 @@ const source = urlParams.get('source');
 
 if (source === 'from_master_stock_category') {
     $('#comapny_stock_category_creation_modal').modal('hide');
-    window.location.href = '<?php echo base_url(); ?>/Accounts?openModal=true';
+    window.location.href = '<?php echo base_url(); ?>Accounts?openModal=true';
     
 }
 

@@ -284,13 +284,12 @@
 </body>
 </html>
 <script>
+
  
   var BASE_URL = "<?php echo base_url(); ?>";
+  
 var inventoryController = "<?php echo CONTROLLER_INVENTORY; ?>";
 var token = "<?php echo $_SESSION['li_token']; ?>";     
-
-
-
 
 
 $( document ).ready(function() { 
@@ -302,24 +301,24 @@ $( document ).ready(function() {
 
     $('#save_inventory_tcs_nature_btn').click(function() {
    
-           var formData  = new FormData();
-           formData.append('nature_of_payment_name', $("#nature_of_payment_name").val()); 
-           formData.append('payment_section', $("#payment_section").val());
-           formData.append('payment_code', $("#payment_code").val()); 
-           formData.append('rate_for_individual_with_pan', $("#rate_for_individual_with_pan").val());
-           formData.append('rate_for_individual_without_pan', $("#rate_for_individual_without_pan").val()); 
-           formData.append('rate_for_other_deductee_with_pan', $("#rate_for_other_deductee_with_pan").val()); 
-           formData.append('rate_for_other_deductee_without_pan', $("#rate_for_other_deductee_without_pan").val()); 
-           formData.append('tax_calculation_based_on_realisation', $("#tax_calculation_based_on_realisation").val()); 
+          var formData  = new FormData();
+          formData.append('nature_of_payment_name', $("#nature_of_payment_name").val()); 
+          formData.append('payment_section', $("#payment_section").val());
+          formData.append('payment_code', $("#payment_code").val()); 
+          formData.append('rate_for_individual_with_pan', $("#rate_for_individual_with_pan").val());
+          formData.append('rate_for_individual_without_pan', $("#rate_for_individual_without_pan").val()); 
+          formData.append('rate_for_other_deductee_with_pan', $("#rate_for_other_deductee_with_pan").val()); 
+          formData.append('rate_for_other_deductee_without_pan', $("#rate_for_other_deductee_without_pan").val()); 
+          formData.append('tax_calculation_based_on_realisation', $("#tax_calculation_based_on_realisation").val()); 
            
-           formData.append('threshold_or_excemption_limit', $("#threshold_or_excemption_limit").val()); 
-           formData.append('calculate_tax_on_value_exceeding_limit', $("#calculate_tax_on_value_exceeding_limit").val()); 
+          formData.append('threshold_or_excemption_limit', $("#threshold_or_excemption_limit").val()); 
+          formData.append('calculate_tax_on_value_exceeding_limit', $("#calculate_tax_on_value_exceeding_limit").val()); 
 
 
-           formData.append('flag_id', $("#flag_id").val()); 
-           formData.append('row_id', $("#row_id").val()); 
+          formData.append('flag_id', $("#flag_id").val()); 
+          formData.append('row_id', $("#row_id").val()); 
 
-           formData.append('li_token', token); 
+          formData.append('li_token', token); 
    
 $.ajax({
     url: BASE_URL + "index.php/" + inventoryController + "/save_tcs_nature_of_goods",
@@ -334,8 +333,8 @@ $.ajax({
         console.log("response",response);
       
         toast_message("success", "Successful", response.message);
-       loadDataTable();
-       $("#new_inventory_tcs_nature_btn").focus();
+      loadDataTable();
+      $("#new_inventory_tcs_nature_btn").focus();
 
     },
     error: function(xhr, status, error) {
@@ -355,39 +354,39 @@ $(document).ready(function() {
 });
 
 
-// datatable dessign part 
+// // datatable dessign part 
 function customizeDataTable(tableId) {// customized datatable function
    
-   var table = $('#' + tableId).dataTable();// table id
-   var filterInput = document.querySelector('#' + tableId + '_filter input');// search input
+  var table = $('#' + tableId).dataTable();// table id
+  var filterInput = document.querySelector('#' + tableId + '_filter input');// search input
 
 
-   var iconElement = document.createElement('i');// create i tag
-   iconElement.className = 'fas fa-search'; // search i tag
+  var iconElement = document.createElement('i');// create i tag
+  iconElement.className = 'fas fa-search'; // search i tag
 
-   // Add the icon element as a child of the label element
-   var labelElement = filterInput.parentElement;
-   labelElement.insertBefore(iconElement, filterInput); // Insert the icon before the input element
+  // Add the icon element as a child of the label element
+  var labelElement = filterInput.parentElement;
+  labelElement.insertBefore(iconElement, filterInput); // Insert the icon before the input element
 
-   // Remove the "Search:" text node
-   labelElement.removeChild(labelElement.firstChild);
+  // Remove the "Search:" text node
+  labelElement.removeChild(labelElement.firstChild);
 
-   // Set a placeholder for the search input
-   $('#' + tableId + '_filter input[type="search"]').attr('placeholder', 'Search...');
+  // Set a placeholder for the search input
+  $('#' + tableId + '_filter input[type="search"]').attr('placeholder', 'Search...');
 
-   // Iterate through each page
-   for (var i = 0; i < table.fnSettings().fnRecordsTotal(); i++) {
-       // Go to the next page
-       table.fnPageChange(i);
+  // Iterate through each page
+  for (var i = 0; i < table.fnSettings().fnRecordsTotal(); i++) {
+      // Go to the next page
+      table.fnPageChange(i);
 
-       // Select all rows in the current page
-       var rows = table.$('tr');
+      // Select all rows in the current page
+      var rows = table.$('tr');
 
-       // Iterate through each row and remove the "sorting_1" class from its cells
-       rows.each(function() {
-           $(this).find('td').removeClass('sorting_1').addClass("first_td");// remove all sorting td class in each modal
-       });
-   }
+      // Iterate through each row and remove the "sorting_1" class from its cells
+      rows.each(function() {
+          $(this).find('td').removeClass('sorting_1').addClass("first_td");// remove all sorting td class in each modal
+      });
+  }
 }
 
 
@@ -438,7 +437,7 @@ var table = $('#tcs_nature_of_goods_datatable').DataTable({
     "createdRow": function(row, data, dataIndex)
      {
     // Add a class to the <tr> element here
-           $(row).addClass("clickable-row");
+          $(row).addClass("clickable-row");
      },// call the customised data table
      "initComplete": function(settings, json) {
         // Call the customizeDataTable function after DataTable initialization
@@ -479,41 +478,41 @@ function deleteRow(id) {
 
 function editRow(id) {
     // get_cost_centre_by_id
-   alert('Edit clicked with id: ' + id);
-   $("#row_id").val(id);
-   flag_id=$("#flag_id").val("1");
+  alert('Edit clicked with id: ' + id);
+  $("#row_id").val(id);
+  flag_id=$("#flag_id").val("1");
  
 
-   $.ajax({
-       url: BASE_URL + "index.php/" + inventoryController + "/get_tcs_goods_by_id",
-       type: "POST",
-       data: { id: id, li_token: token,flag_id: $("#flag_id").val() },
-       dataType: "json",
-       success: function (response) {
-           // console.log(response is ,response);
-           if (response.success) {
+  $.ajax({
+      url: BASE_URL + "index.php/" + inventoryController + "/get_tcs_goods_by_id",
+      type: "POST",
+      data: { id: id, li_token: token,flag_id: $("#flag_id").val() },
+      dataType: "json",
+      success: function (response) {
+          // console.log(response is ,response);
+          if (response.success) {
             $("#nature_of_payment_name").focus();
            
-               $("#nature_of_payment_name").val(response.data.nature_of_payment_name);
-               $("#payment_section").val(response.data.payment_section);
-               $("#payment_code").val(response.data.payment_code);
-               $("#rate_for_individual_with_pan").val(response.data.rate_for_individual_with_pan);
-               $("#rate_for_individual_without_pan").val(response.data.rate_for_individual_without_pan);
-               $("#rate_for_other_deductee_with_pan").val(response.data.rate_for_other_deductee_with_pan);
-               $("#rate_for_other_deductee_without_pan").val(response.data.rate_for_other_deductee_without_pan);
-               $("#tax_calculation_based_on_realisation").val(response.data.tax_calculation_based_on_realisation);
-               $("#threshold_or_excemption_limit").val(response.data.threshold_or_excemption_limit);
-               $("#calculate_tax_on_value_exceeding_limit").val(response.data.calculate_tax_on_value_exceeding_limit);
+              $("#nature_of_payment_name").val(response.data.nature_of_payment_name);
+              $("#payment_section").val(response.data.payment_section);
+              $("#payment_code").val(response.data.payment_code);
+              $("#rate_for_individual_with_pan").val(response.data.rate_for_individual_with_pan);
+              $("#rate_for_individual_without_pan").val(response.data.rate_for_individual_without_pan);
+              $("#rate_for_other_deductee_with_pan").val(response.data.rate_for_other_deductee_with_pan);
+              $("#rate_for_other_deductee_without_pan").val(response.data.rate_for_other_deductee_without_pan);
+              $("#tax_calculation_based_on_realisation").val(response.data.tax_calculation_based_on_realisation);
+              $("#threshold_or_excemption_limit").val(response.data.threshold_or_excemption_limit);
+              $("#calculate_tax_on_value_exceeding_limit").val(response.data.calculate_tax_on_value_exceeding_limit);
              
-               $("#comapny_stock_category_creation_modal").modal("show");
-           } else {
+              $("#comapny_stock_category_creation_modal").modal("show");
+          } else {
             //    alert("Failed to fetch stock category details.");
-           }
-       },
-       error: function (xhr, status, error) {
-           alert("Error fetching stock category details.");
-       }
-   });
+          }
+      },
+      error: function (xhr, status, error) {
+          alert("Error fetching stock category details.");
+      }
+  });
 }
 
 
@@ -547,11 +546,11 @@ function handleCancel() {
 
 const urlParams = new URLSearchParams(window.location.search);
 const source = urlParams.get('source');
-alert(source);
+
 
 if (source === 'from_master_tcs_nature_of_goods') {
     $('#tcs_nature_goods_modal').modal('hide');
-    window.location.href = '<?php echo base_url(); ?>/Accounts?openModal=true';
+    window.location.href = '<?php echo base_url(); ?>Accounts?openModal=true';
     
 }
 

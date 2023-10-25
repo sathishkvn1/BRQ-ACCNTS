@@ -667,15 +667,15 @@ function handleCancel() {
 
     const urlParams = new URLSearchParams(window.location.search);
     const source = urlParams.get('source');
-    alert(source); 
+    
    
     if (source === 'fromListIcon') {
         $('#acc_inventory_master_settings2').modal('hide');
-        window.location.href = '<?php echo base_url(); ?>/Accounts?openModal=true';
+        window.location.href = '<?php echo base_url(); ?>Accounts?openModal=true';
         
     } else if (source === 'fromHeaderNav') {
         // window.location.href = '<-?php echo base_url(); ?>';
-        window.location.href = '<?php echo base_url(); ?>/Accounts';
+        window.location.href = '<?php echo base_url(); ?>Accounts';
     }
 }
 
