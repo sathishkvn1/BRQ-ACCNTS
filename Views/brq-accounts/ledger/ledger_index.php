@@ -82,8 +82,10 @@ $(document).ready(function() {
 function cancelLegderIndex()
 {
 
+    localStorage.setItem('cancelFlag', 'cancel_ledger');
     window.history.back();
 
+	
 }
 
 function handleEscapeLedgerCreation(event) {

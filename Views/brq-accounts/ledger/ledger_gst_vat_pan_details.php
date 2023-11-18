@@ -262,7 +262,7 @@
     <script>
          
            
-           $( document ).ready(function() {
+           $(document).ready(function() {
             
          
             $('#ledger_gst_vat_pan_details_modal').on('shown.bs.modal', function () {
@@ -412,6 +412,22 @@ $('#save_tax_pan_details').click(function() {
 
 
 <script>
+$('#new_tax_pan_details').click(function(){
+
+
+
+$('#ledger_gst_vat_pan_details_modal input,#ledger_gst_vat_pan_details_modal textarea').val('');
+
+        var selectElements = document.querySelectorAll('select:not(.yes_no)');
+        selectElements.forEach(function(select) {
+            select.selectedIndex = 0;
+        });
+       
+
+        $("#gst_registration_type_id").focus();
+
+});
+
 function cancelTaxPanDetails()
 {
 

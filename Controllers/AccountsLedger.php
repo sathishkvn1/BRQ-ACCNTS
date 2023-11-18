@@ -45,7 +45,7 @@ class AccountsLedger extends MY_Controller
 
         
      
-         $this->load->view('brq-accounts/inventory/legder_bank_account_creation',$data);
+         $this->load->view('brq-accounts/ledger/legder_bank_account_creation',$data);
         
 
     }   
@@ -54,7 +54,7 @@ class AccountsLedger extends MY_Controller
         $data["acc_accounts_group"]     = $this->AccountsLedgerModel->get_acc_accounts_group();
 
      
-        $this->load->view('brq-accounts/inventory/ledger_index',$data);
+        $this->load->view('brq-accounts/ledger/ledger_index',$data);
         
 
     }   
@@ -79,7 +79,7 @@ class AccountsLedger extends MY_Controller
 
         $data["AllGodownName"]	= $this->AccountsLedgerModel->get_godown_name();
      
-         $this->load->view('brq-accounts/inventory/ledger_supplier_customer_creation',$data);
+         $this->load->view('brq-accounts/ledger/ledger_supplier_customer_creation',$data);
         
 
     }   

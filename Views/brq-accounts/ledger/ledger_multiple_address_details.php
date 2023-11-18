@@ -205,7 +205,7 @@
             $("#address_line_1").focus();
             $("#ledger_multiple_address_details_modal td").removeClass('sorting_1');
             
-              
+               loadDataTableMultipleAddress();
             });
 
      

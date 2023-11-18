@@ -11,7 +11,7 @@
 
 <div class="wrapper">
     	<!-- Navbar  TOP NAV BAR MESSAGES & SEARCH -->
-        <?php include('application/views/brq-accounts/header_nav_bar.php');?>
+		<?php include("application/views/brq-accounts/header-nav-search-messages.php"); ?>
 		<!-- /.navbar  TOP NAVE BAR MESSAGES & SEARCH-->
 
 
@@ -450,6 +450,10 @@ $(document).ready(function() {
     });
 
     loadDataTableBankAccountCreation();
+
+
+
+
 });
    
 
@@ -547,12 +551,21 @@ function loadDataTableBankAccountCreation() {
                     var id = full.ledger_id; 
 
                     return '<div class="operations">' +
-                        '<a href="#" class="btn btn-xs first_a" title="Edit" onclick="editBank(' + id + ');"><i class="fas fa-edit"></i></a>' +
-                        '<a href="#" class="btn btn-xs" title="Delete" onclick="deleteBank(' + id + ');"><i class="fas fa-trash"></i></a>' +
+                        '<a href="#" class="btn btn-xs first_a" title="Edit" onclick="editBank(event,' + id + ');"><i class="fas fa-edit"></i></a>' +
+                        '<a href="#" class="btn btn-xs" title="Delete" onclick="deleteBank(event,' + id + ');"><i class="fas fa-trash"></i></a>' +
                         '</div>';
                 }
             }
-        ]
+        ],
+        "createdRow": function(row, data, dataIndex)
+     {
+        $(row).addClass("clickable-row");
+     },// call the customised data table
+     "initComplete": function(settings, json) {
+        // Call the customizeDataTableBankAccountCreation function after DataTable initialization
+        customizeDataTableBankAccountCreation('bank_account_creation_table');// call the data table function , type id of data table as parameter
+   
+    }
     });
 
 }
@@ -650,8 +663,9 @@ $('#save_bank_account_creation_btn').click(function() {
 <script>
 
 
-function editBank(id)   
-{
+function editBank(event,id)  
+{   
+    event.preventDefault();
     $("#rowID").val(id);
     flag_id=$("#flag_id").val("1");
     
@@ -805,9 +819,9 @@ function generateDynamicTableRowsForBillOfMaterial(data=null)
                          
            
 
-function deleteBank(id) {
+function deleteBank(event,id) {
    
-   
+    event.preventDefault();
    
    if (confirm("Are you sure you want to delete this item?")) {
        $.ajax({
@@ -1001,14 +1015,166 @@ function cancelBankAccountCreation()
 
 function handleEscapeBankAccountCreation(event) {
     if (event.key === "Escape") {
-        cancelBankAccountCreation();
+  
         window.history.back();
+        cancelBankAccountCreation();    
         
     }
 }
 $('#legder_bank_account_creation').on('keydown', handleEscapeBankAccountCreation);
 
 </script>
+<script>
+
+function customizeDataTableBankAccountCreation(tableId) {// customized datatable function
+   
+   var table = $('#' + tableId).dataTable();// table id
+   var filterInput = document.querySelector('#' + tableId + '_filter input');// search input
+ 
+ 
+   var iconElement = document.createElement('i');// create i tag
+   iconElement.className = 'fas fa-search'; // search i tag
+ 
+   // Add the icon element as a child of the label element
+   var labelElement = filterInput.parentElement;
+   labelElement.insertBefore(iconElement, filterInput); // Insert the icon before the input element
+ 
+   // Remove the "Search:" text node
+   labelElement.removeChild(labelElement.firstChild);
+ 
+   // Set a placeholder for the search input
+   $('#' + tableId + '_filter input[type="search"]').attr('placeholder', 'Search...');
+ 
+   // Iterate through each page
+   for (var i = 0; i < table.fnSettings().fnRecordsTotal(); i++) {
+       // Go to the next page
+       table.fnPageChange(i);
+ 
+       // Select all rows in the current page
+       var rows = table.$('tr');
+ 
+       // Iterate through each row and remove the "sorting_1" class from its cells
+       rows.each(function() {
+           $(this).find('td').removeClass('sorting_1').addClass("first_td");// remove all sorting td class in each modal
+       });
+   }
+ }
+ 
+
+
+
+
+ // data table key movement start here 
+const table = $('#bank_account_creation_table').DataTable();
+let focusedRowIndex = -1; // Track the index of the currently focused row
+let currentPage = table.page(); // Track the current pagination page
+//  click event handler to table rows
+table.on('click', 'tr.clickable-row', function () {
+
+  $(".focus-tr").removeClass("focus-tr");
+  $(".focus-atag").removeClass("focus-atag");
+  const clickedRow = $(this);
+  clickedRow.addClass("focus-tr");
+
+  const firstAnchor = clickedRow.find('a:visible:first');
+  firstAnchor.addClass("focus-atag");
+});
+table.on('click', 'tr.clickable-row a', function () {
+    $(".focus-tr").removeClass("focus-tr");
+    $(".focus-atag").removeClass("focus-atag");
+    if (target.is('a')) {
+    $(".focus-tr").removeClass("focus-tr");
+    $(".focus-atag").removeClass("focus-atag");
+    return; // Exit the function to prevent further processing
+  }
+});
+
+
+//  click event handler to the document to remove focus class when clicking outside of the table
+$(document).on('click', function (e) {
+  const target = $(e.target);
+
+  // Check if the clicked element is not within the table
+  if (!target.closest('table').length) {
+    $(".focus-tr").removeClass("focus-tr");
+    $(".focus-atag").removeClass("focus-atag");
+  }
+});
+
+
+
+$(document).on('keydown', function (e) {
+  if (e.keyCode === 37 || e.keyCode === 39) {
+    // Check if the pressed key is the left or right arrow
+    const focusedRow = $(".focus-tr");
+
+    if (focusedRow.length) {
+      const focusAtag = focusedRow.find(".focus-atag");
+      const allAtags = focusedRow.find("a:visible");
+
+      if (allAtags.length > 1) {
+        if (e.keyCode === 37) { // If left arrow, focus on the first <a> tag
+          focusAtag.removeClass("focus-atag");
+          allAtags.eq(0).addClass("focus-atag");
+        } else if (e.keyCode === 39) { // If right arrow, focus on the second <a> tag
+          focusAtag.removeClass("focus-atag");
+          allAtags.eq(1).addClass("focus-atag");
+        }
+      }
+    }
+  } 
+ else if (e.keyCode === 40 || e.keyCode === 38) {
+    // Check if the pressed key is the down or up arrow
+    const focusedRow = $(".focus-tr");
+
+    if (focusedRow.length)
+     {
+        let targetRow;
+       if (e.keyCode === 40)
+        { // If down arrow, find the next visible row
+          targetRow = focusedRow.nextAll('tr:visible').first();
+          if (!targetRow.length)
+           {
+            // If no more visible rows, go to the first visible row
+            targetRow = focusedRow.siblings('tr:visible').first();
+          }
+       } 
+      else if (e.keyCode === 38) 
+      { // If up arrow, find the previous visible row
+        targetRow = focusedRow.prevAll('tr:visible').first();
+        if (!targetRow.length) {
+          // If no previous visible row, go to the last visible row
+          targetRow = focusedRow.siblings('tr:visible').last();
+        }
+      }
+
+      if (targetRow.length) {
+        focusedRow.removeClass("focus-tr");
+        $(".focus-atag").removeClass("focus-atag");
+
+        targetRow.addClass("focus-tr");
+        const firstAnchor = targetRow.find('a:visible:first');
+        firstAnchor.addClass("focus-atag");
+      }
+    }
+  }
+  else if (e.keyCode === 13) { // Check if the pressed key is the Enter key (key code 13)
+    const focusedRow = $(".focus-tr");
+    if (focusedRow.length) {
+      const focusAtag = focusedRow.find(".focus-atag");
+      if (focusAtag.length) {
+        // Trigger a click event on the focused anchor tag
+        focusAtag.click();
+        focusedRow.removeClass("focus-tr");
+        $(".focus-atag").removeClass("focus-atag");
+
+      }
+    }
+  }
+});
+ // data table key movement ends here 
+</script>
+
 
 
 

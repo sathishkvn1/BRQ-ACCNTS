@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supplier Creation</title>
     <?php include("application/views/brq-accounts/top-css.php"); ?>
-    <style>
-       
-  
-    
-    </style>
    
 </head>
 <body>
@@ -43,6 +38,15 @@
 <!-- including modal of supplier bank account details  -->
 <?php include('ledger_bank_account_details.php'); ?> 
 
+<!-- including modal of TDS TCS details  -->
+<?php include('ledger_tds_tcs_details.php'); ?>
+
+<!-- including modal of TDS deductable same voucher details  -->
+<?php include('ledger_tds_deductable_in_same_voucher.php'); ?> 
+
+<!-- including modal of TDS deductable same voucher details  -->
+<?php include('ledger_tds_ignore_income_tax_excemption_limit.php'); ?> 
+
 
 
 
@@ -54,7 +58,7 @@
                 <div class="modal_header">
                     <div class="main_head">
                         <h6 class="inventory_modal_headding">Supplier Creation</h6>
-                        <i class="fa fa-close close_modal" id="stock_cost_center_cancel_icon"></i>
+                        <i class="fa fa-close close_modal" onclick="cancelSupplierCustomerCreation();"></i>
                     </div>
                 </div>
                 <div class="modal-body bg-white">
@@ -363,7 +367,7 @@
                     <div class="row save_cancel_section">
                         <div class="col-12" style="display: flex !important;flex-direction: row-reverse !important;">
                         
-                            <button id="cancel_account_suplier_creation" onclick="closeModal();" class="cancel_account_supplier_creation_btn btn ml-4" type="button" tabindex="20021" >
+                            <button id="cancel_account_suplier_creation" onclick="cancelSupplierCustomerCreation();" class="cancel_account_supplier_creation_btn btn ml-4" type="button" tabindex="20021" >
                                 <span>C</span>ancel
                             </button>
                             <button id="new_account_supplier_creation_btn" class="enable new_account_supplier_creation_btn btn ml-4"  type="button" tabindex="20020" >
@@ -392,6 +396,10 @@
 <script>
 
 $(document).ready(function() {
+    // addRowTdsDeductable(true);
+    // addRowTdsIgnoreIncomeTax(true);
+  
+    
     var isFirstLoad = true;
     var lastChangedSelect; 
 
@@ -417,10 +425,13 @@ $(document).ready(function() {
     });
 
     loadDataTableSupplierCreation();
+   
 });
    
 
 </script>
+
+
 
 <script>
 
@@ -476,7 +487,6 @@ $(document).ready(function() {
 </script>
 
 
-
 <script>
 function loadDataTableSupplierCreation() {
     var token = "<?php echo $_SESSION['li_token']; ?>";
@@ -520,7 +530,17 @@ function loadDataTableSupplierCreation() {
                         '</div>';
                 }
             }
-        ]
+        ],
+        "createdRow": function(row, data, dataIndex)
+     {
+    // Add a class to the <tr> element here
+          $(row).addClass("clickable-row");
+     },// call the customised data table
+     "initComplete": function(settings, json) {
+        // Call the customizeDataTableSupplierCreation function after DataTable initialization
+        customizeDataTableSupplierCreation('account_supplier_creation_table');// call the data table function , type id of data table as parameter
+   
+    }
     });
 
 }
@@ -615,7 +635,10 @@ function editSupplier(id)
     $('#ledger_bank_account_details_modal input').val('');
     $('#ledger_gst_vat_pan_details_modal input').val('');
     $('#ledger_address_and_contact_details_modal input').val('');
-    $('#additional_details_holder select').val('no'); 
+    $('#additional_details_holder select').val('no');
+    
+
+  
 
     $.ajax({
        
@@ -654,7 +677,7 @@ function editSupplier(id)
                     $('[name="website"]').val(response.data[0].website);
 
                 
-                    
+                    // generateDynamicTableRowsForTdsDeductInSameVoucher(response.data);
                
                     if (response.data4 && response.data4.length > 0) {
                         $('[name="bank_transaction_type_id"]').val(response.data4[0].bank_transaction_type_id);
@@ -682,6 +705,57 @@ function editSupplier(id)
                         $('[name="pan_effective_date"]').val(response.data3[0].pan_effective_date);
                         $('[name="name_on_the_pan"]').val(response.data3[0].name_on_the_pan);
                     }
+                    if (response.data5 && response.data5.length > 0) {
+                        
+                        $('[name="is_tds_deductable"]').val(response.data5[0].is_tds_deductable);
+                        $('[name="is_tcs_applicable"]').val(response.data5[0].is_tcs_applicable);
+
+                        $('[name="tds_deductee_type_id"]').val(response.data5[0].tds_deductee_type_id);
+                        $('[name="deduct_tds_in_same_voucher"]').val(response.data5[0].deduct_tds_in_same_voucher);
+                        $('[name="use_advanced_tds_entries"]').val(response.data5[0].use_advanced_tds_entries);
+                        $('[name="tds_ignore_surcharge_excemption_limit"]').val(response.data5[0].tds_ignore_surcharge_excemption_limit);
+                        $('[name="tds_ignore_income_tax_excemption_limit"]').val(response.data5[0].tds_ignore_income_tax_excemption_limit);
+
+
+                        $('[name="buyer_lessee_type_id"]').val(response.data5[0].buyer_lessee_type_id);
+                        $('[name="deduct_tds_in_same_voucher"]').val(response.data5[0].deduct_tds_in_same_voucher);
+                        $('[name="use_advanced_configuration_for_tcs"]').val(response.data5[0].use_advanced_configuration_for_tcs);
+                        $('[name="tcs_ignore_surcharge_excemption_limit"]').val(response.data5[0].tcs_ignore_surcharge_excemption_limit);
+                        $('[name="tcs_ignore_income_tax_excemption_limit"]').val(response.data5[0].tcs_ignore_income_tax_excemption_limit);
+                        $('[name="set_zero_lower_rate_for_tcs_collection"]').val(response.data5[0].set_zero_lower_rate_for_tcs_collection);
+                        $('[name="override_realisation_based_nature_of_goods"]').val(response.data5[0].override_realisation_based_nature_of_goods);
+                        
+                        
+                    }
+
+                    if (response.data6 && response.data6.length > 0) {
+                        
+                        $('[name="applicable_price_level_id"]').val(response.data6[0].applicable_price_level_id);
+                        $('[name="maintain_balances_bill_by_bill"]').val(response.data6[0].maintain_balances_bill_by_bill);
+
+                        $('[name="default_credit_period"]').val(response.data6[0].default_credit_period);
+                        $('[name="check_for_credit_days_during_voucher_entry"]').val(response.data6[0].check_for_credit_days_during_voucher_entry);
+                        $('[name="credit_limit"]').val(response.data6[0].credit_limit);
+                        $('[name="inventory_values_are_affected"]').val(response.data6[0].inventory_values_are_affected);
+                        $('[name="cost_centers_are_applicable"]').val(response.data6[0].cost_centers_are_applicable);
+
+
+                        $('[name="activate_interest_calculation"]').val(response.data6[0].activate_interest_calculation);
+                        $('[name="calculate_interest_transaction_by_transaction"]').val(response.data6[0].calculate_interest_transaction_by_transaction);
+                        $('[name="calculate_interest_based_on_id"]').val(response.data6[0].calculate_interest_based_on_id);
+                        $('[name="include_trasaction_date_for_amount_added"]').val(response.data6[0].include_trasaction_date_for_amount_added);
+                        $('[name="include_trasaction_date_for_amount_deducted"]').val(response.data6[0].include_trasaction_date_for_amount_deducted);
+                        $('[name="interest_rate"]').val(response.data6[0].interest_rate);
+                        $('[name="calculation_period_id"]').val(response.data6[0].calculation_period_id);
+                        $('[name="calculate_on_id"]').val(response.data6[0].calculate_on_id);
+                        
+                        
+                    }
+
+                    $("#is_tds_deductable").trigger("change");
+                    $("#is_tcs_applicable").trigger("change");
+                    $("#use_advanced_tds_entries").trigger("change");
+                    $("#use_advanced_configuration_for_tcs").trigger("change");
 
                     
                 } else {
@@ -694,73 +768,7 @@ function editSupplier(id)
             }
         });
 }
-function generateDynamicTableRowsForOpeningBalance(data = null) {
 
-    isLastRow = true;
-
-    if (!data || data.length === 0) {
-        addRow(true, '', '', '', '', '', '', '', isLastRow);
-    }
-     else {
-        
-        const dataLength = data.length;
-        
-
-        for (let i = 0; i < data.length; i++) {
-            if (i === dataLength - 1) {
-
-                isLastRow = true;
-                
-            }
-            else{
-
-                isLastRow = false;
-
-            }
-
-            addRow(data[i].godown_id || '', data[i].batch_number || '', data[i].expiry_date || '', data[i].manufacture_date || '', data[i].quantity || '', data[i].rate || '', data[i].id || '','',isLastRow);
-
-            // Only show the button in the last row
-           
-        }
-    }
-}
-
-function generateDynamicTableRowsForBillOfMaterial(data=null) 
-{
-    
-    isLastRowBom = true;
-        
-    if (!data || data.length === 0) 
-            {
-               
-                addRowBom(true, true, true, '',true, '', '',isLastRowBom);
-            }
-            else{
-                const dataLengthBom = data.length;
-
-                    for (let i = 0; i < data.length; i++)
-                    {
-                        if (i === dataLengthBom - 1) {
-
-                            isLastRowBom = true;
-                            
-
-                            }
-                            else{
-
-                            isLastRowBom = false;
-
-                            }
-                        addRowBom(data[i].item_master_id || '', data[i].godown_id || '', data[i].component_type_id || '', data[i].component_quantity || '',data[i].component_unit_id || '', data[i].rate_percentage || '', data[i].id || '',isLastRowBom);
-                    }
-                }
-            return;
-            
-}
-     
-                         
-           
 
 function deleteSupplier(id) {
    
@@ -793,19 +801,7 @@ function deleteSupplier(id) {
 
 </script>
 
-<script>
 
-$('#new_account_supplier_creation_btn').click(function(){
-
-    location.reload();
-
-});
-
-
-
-
-
-</script>
 
 
 
@@ -821,7 +817,7 @@ if (provide_stock_and_bill_details_val === "yes") {
     
     $("#ledger_stock_and_bill_settings_modal").modal('show');
 }
- else if (provide_behaviour_option_val == "no") {
+ else if (provide_stock_and_bill_details_val == "no") {
     
 }
 });
@@ -852,12 +848,14 @@ if (provide_mutiple_mailing_address_val === "yes") {
     $('[id^=modal]').modal('hide');
     
     $("#ledger_multiple_address_details_modal").modal('show');
+    loadDataTableMultipleAddress();
 }
  else if (provide_mutiple_mailing_address_val == "no") {
     
 }
 });
 </script>
+
 <script>
 $("#provide_gst_vat_pan_details").on("change", function() {
 var provide_gst_vat_pan_details_val = $("#provide_gst_vat_pan_details").val();
@@ -895,6 +893,87 @@ if (provide_bank_details_val === "yes") {
 });
 </script>
 <script>
+$("#provide_tds_tcs_details").on("change", function() {
+var provide_tds_tcs_details_val = $("#provide_tds_tcs_details").val();
+
+
+if (provide_tds_tcs_details_val === "yes") {
+
+    $("#ledger_supplier_customer_creation_modal").modal('hide');
+    $('[id^=modal]').modal('hide');
+    
+   
+    $("#ledger_tds_tcs_details_modal").modal('show');
+}
+ else if (provide_tds_tcs_details_val == "no") {
+    
+}
+});
+</script>
+
+<script>
+$("#deduct_tds_in_same_voucher").on("change", function() {
+var deduct_tds_in_same_voucher_val = $("#deduct_tds_in_same_voucher").val();
+
+
+if (deduct_tds_in_same_voucher_val === "yes") {
+
+    $("#ledger_tds_tcs_details_modal").modal('hide');
+    $('[id^=modal]').modal('hide');
+    
+   
+    $("#ledger_tds_deductable_in_same_voucher_modal").modal('show');
+}
+ else if (deduct_tds_in_same_voucher_val == "no") {
+    
+}
+});
+</script>
+
+<script>
+$("#ignore_income_tax_exemption_limit").on("change", function() {
+var ignore_income_tax_exemption_limit_val = $("#ignore_income_tax_exemption_limit").val();
+
+
+if (ignore_income_tax_exemption_limit_val === "yes") {
+
+    $("#ledger_tds_tcs_details_modal").modal('hide');
+    $('[id^=modal]').modal('hide');
+    
+   
+    $("#ledger_tds_ignore_income_tax_excemption_limit").modal('show');
+}
+ else if (deduct_tds_in_same_voucher_val == "no") {
+    
+}
+});
+</script>
+
+<script>
+$("#set_alter_zero_lower_deduction").on("change", function() {
+var set_alter_zero_lower_deduction_val = $("#set_alter_zero_lower_deduction").val();
+
+
+if (set_alter_zero_lower_deduction_val === "yes") {
+
+    $("#ledger_tds_tcs_details_modal").modal('hide');
+    $('[id^=modal]').modal('hide');
+    
+   
+    $("#ledger_tds_zero_lower_deduction_details").modal('show');
+}
+ else if (deduct_tds_in_same_voucher_val == "no") {
+    
+}
+});
+</script>
+
+
+
+
+
+
+<script>
 function resizeTextarea(textarea) {
   
     const textArea = textarea;
@@ -918,6 +997,236 @@ function resizeTextarea(textarea) {
     }
 }
 </script>
+
+<script>
+    
+$('#new_account_supplier_creation_btn').click(function(){
+
+// $('#ledger_supplier_customer_creation_modal input').val('');
+
+//         var selectElements = document.querySelectorAll('select:not(.yes_no)');
+//         selectElements.forEach(function(select) {
+//             select.selectedIndex = 0;
+//         });
+//         $("#account_head_name").focus();
+
+});
+
+function cancelSupplierCustomerCreation()
+{
+    window.history.back();
+}
+
+function handleEscapeSupplierCustomerCreation(event) {
+    if (event.key === "Escape") {
+        cancelSupplierCustomerCreation();
+        window.history.back();
+        
+    }
+}
+$('#ledger_supplier_customer_creation_modal').on('keydown', handleEscapeSupplierCustomerCreation);
+
+
+
+</script>
+
+<!-- <script>
+function generateDynamicTableRowsForTdsDeductInSameVoucher(data = null) {
+
+    isLastRow = true;
+
+
+    if (!data || data.length === 0) {
+        addRowTdsDeduct(true);
+    }
+     else {
+        
+        const dataLength = data.length;
+        
+
+        for (let i = 0; i < data.length; i++) {
+            if (i === dataLength - 1) {
+
+                isLastRow = true;
+                
+            }
+            else{
+
+                isLastRow = false;
+
+            }
+
+            addRowTdsDeduct(data[i].state_id || '',isLastRow);      
+
+            // Only show the button in the last row
+           
+        }
+    }
+}
+
+</script> -->
+<script>
+function customizeDataTableSupplierCreation(tableId) {// customized datatable function
+   
+   var table = $('#' + tableId).dataTable();// table id
+   var filterInput = document.querySelector('#' + tableId + '_filter input');// search input
+ 
+ 
+   var iconElement = document.createElement('i');// create i tag
+   iconElement.className = 'fas fa-search'; // search i tag
+ 
+   // Add the icon element as a child of the label element
+   var labelElement = filterInput.parentElement;
+   labelElement.insertBefore(iconElement, filterInput); // Insert the icon before the input element
+ 
+   // Remove the "Search:" text node
+   labelElement.removeChild(labelElement.firstChild);
+ 
+   // Set a placeholder for the search input
+   $('#' + tableId + '_filter input[type="search"]').attr('placeholder', 'Search...');
+ 
+   // Iterate through each page
+   for (var i = 0; i < table.fnSettings().fnRecordsTotal(); i++) {
+       // Go to the next page
+       table.fnPageChange(i);
+ 
+       // Select all rows in the current page
+       var rows = table.$('tr');
+ 
+       // Iterate through each row and remove the "sorting_1" class from its cells
+       rows.each(function() {
+           $(this).find('td').removeClass('sorting_1').addClass("first_td");// remove all sorting td class in each modal
+       });
+   }
+ }
+ 
+
+
+
+
+ // data table key movement start here 
+const table = $('#account_supplier_creation_table').DataTable();
+let focusedRowIndex = -1; // Track the index of the currently focused row
+let currentPage = table.page(); // Track the current pagination page
+//  click event handler to table rows
+table.on('click', 'tr.clickable-row', function () {
+
+  $(".focus-tr").removeClass("focus-tr");
+  $(".focus-atag").removeClass("focus-atag");
+  const clickedRow = $(this);
+  clickedRow.addClass("focus-tr");
+
+  const firstAnchor = clickedRow.find('a:visible:first');
+  firstAnchor.addClass("focus-atag");
+});
+table.on('click', 'tr.clickable-row a', function () {
+    $(".focus-tr").removeClass("focus-tr");
+    $(".focus-atag").removeClass("focus-atag");
+    if (target.is('a')) {
+    $(".focus-tr").removeClass("focus-tr");
+    $(".focus-atag").removeClass("focus-atag");
+    return; // Exit the function to prevent further processing
+  }
+});
+
+
+//  click event handler to the document to remove focus class when clicking outside of the table
+$(document).on('click', function (e) {
+  const target = $(e.target);
+
+  // Check if the clicked element is not within the table
+  if (!target.closest('table').length) {
+    $(".focus-tr").removeClass("focus-tr");
+    $(".focus-atag").removeClass("focus-atag");
+  }
+});
+
+
+
+$(document).on('keydown', function (e) {
+  if (e.keyCode === 37 || e.keyCode === 39) {
+    // Check if the pressed key is the left or right arrow
+    const focusedRow = $(".focus-tr");
+
+    if (focusedRow.length) {
+      const focusAtag = focusedRow.find(".focus-atag");
+      const allAtags = focusedRow.find("a:visible");
+
+      if (allAtags.length > 1) {
+        if (e.keyCode === 37) { // If left arrow, focus on the first <a> tag
+          focusAtag.removeClass("focus-atag");
+          allAtags.eq(0).addClass("focus-atag");
+        } else if (e.keyCode === 39) { // If right arrow, focus on the second <a> tag
+          focusAtag.removeClass("focus-atag");
+          allAtags.eq(1).addClass("focus-atag");
+        }
+      }
+    }
+  } 
+ else if (e.keyCode === 40 || e.keyCode === 38) {
+    // Check if the pressed key is the down or up arrow
+    const focusedRow = $(".focus-tr");
+
+    if (focusedRow.length)
+     {
+        let targetRow;
+       if (e.keyCode === 40)
+        { // If down arrow, find the next visible row
+          targetRow = focusedRow.nextAll('tr:visible').first();
+          if (!targetRow.length)
+           {
+            // If no more visible rows, go to the first visible row
+            targetRow = focusedRow.siblings('tr:visible').first();
+          }
+       } 
+      else if (e.keyCode === 38) 
+      { // If up arrow, find the previous visible row
+        targetRow = focusedRow.prevAll('tr:visible').first();
+        if (!targetRow.length) {
+          // If no previous visible row, go to the last visible row
+          targetRow = focusedRow.siblings('tr:visible').last();
+        }
+      }
+
+      if (targetRow.length) {
+        focusedRow.removeClass("focus-tr");
+        $(".focus-atag").removeClass("focus-atag");
+
+        targetRow.addClass("focus-tr");
+        const firstAnchor = targetRow.find('a:visible:first');
+        firstAnchor.addClass("focus-atag");
+      }
+    }
+  }
+  else if (e.keyCode === 13) { // Check if the pressed key is the Enter key (key code 13)
+    const focusedRow = $(".focus-tr");
+    if (focusedRow.length) {
+      const focusAtag = focusedRow.find(".focus-atag");
+      if (focusAtag.length) {
+        // Trigger a click event on the focused anchor tag
+        focusAtag.click();
+        focusedRow.removeClass("focus-tr");
+        $(".focus-atag").removeClass("focus-atag");
+
+      }
+    }
+  }
+});
+ // data table key movement ends here 
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
