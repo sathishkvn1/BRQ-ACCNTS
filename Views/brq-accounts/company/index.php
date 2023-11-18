@@ -500,9 +500,13 @@
 
 			<!-- Modal content-->
 			<div class="modal-content">
+				<div class="search_wrapper 	justify-content-center">
+							<h6>Master</h6>
+							<input type="text" class="mb-2" id="searchInput" >
+					</div>
 				<div class="modal-header modal-header-with-close-icon">
 					<div class="modal-title">List Of Masters(new)</div>
-					<i class="fa fa-close" id="list_of_masters_new_cancel_icon"></i>
+					<i class="fa fa-close" id="list_of_masters_new_cancel_icon" onclick="cancelIndex();"></i>
 				</div>
 				<div class="modal-body">
 					<div class="row">
@@ -520,8 +524,10 @@
 										<li class="element li_accounting_masters" id="master_group"><a href='#'
 												data-toggle="modal" data-target="#company_creation_second"
 												data-backdrop="false" tabindex="-1" autofocus>Group</a></li>
-										<li class="element li_accounting_masters" id="master_ledger"><a
-												href='#'>Ledger</a></li>
+									
+                                        <li class="element li_accounting_masters" id="ledger_index"><a
+                                        href='<?php  echo base_url("AccountsLedger/ledger_index") ?>'>Ledger</a>
+                                        </li>
 										<li class="element li_accounting_masters" id="master_cost_center"><a
 												href='#'>Cost Center</a></li>
 										<li class="element li_accounting_masters" id="master_currency"><a
@@ -556,12 +562,20 @@
 										href='<?php  echo base_url("AccountsInventory/stock_unit_creation")?>?source=frominventoryunitcreation'>Stock Unit Creation</a>
 										</li>
 										<li class="element li_inventory_masters" id="stock_item_creation"><a
-												href='<?php  echo base_url("AccountsInventory/stock_item_creation") ?>'>Stock Item</a>
-										</li>
+										href='<?php  echo base_url("AccountsInventory/stock_item_creation") ?>'>Stock Item</a>
+                                        </li>
+                                        <li class="element li_inventory_masters" id="ledger_supplier_customer_creation"><a
+                                        href='<?php  echo base_url("AccountsLedger/ledger_supplier_customer_creation") ?>'>Supplier Master</a>
+                                        </li>
+                                        <li class="element li_inventory_masters" id="legder_bank_account_creation"><a
+                                        href='<?php  echo base_url("AccountsLedger/legder_bank_account_creation") ?>'>Bank Account</a>
+                                        </li>
 										<li class="element li_inventory_masters" id="master_unit"><a href='#'>Unit</a>
 										</li>
 										<li class="element li_inventory_masters" id="master_godown"><a
-												href='#'>Godown</a>
+												
+										href="<?php echo base_url('AccountsInventory/godown_creation')?>?source=from_master_godown">Godown</a>
+												
 										</li>
 										<li class="element li_inventory_masters" id="master_price_level"><a
 												href='#'>Price levels</a>
@@ -670,7 +684,8 @@
 <script>
 
 	 var company_id = <?php echo $company_id; ?>;
-	
+	// var company_id = <-?php echo $this->session->userdata('company_id'); ?>;
+
 	 $('#masters_two').modal('hide');
 	  if (company_id == 0) {
 
@@ -679,23 +694,64 @@
 		 }
 
 	$(document).ready(function () {
+	
 		
-    const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(window.location.search);
+//  alert(params);  //openModal=true
+const openModal = params.get('openModal');
 
-    const openModal = params.get('openModal');
+// alert(openModal); //true
 
-    if (openModal === 'true') {
-    
-    	$('#masters_two').modal('show');
-    	const urlWithoutParameter = window.location.href.split('?')[0];
-        history.replaceState({}, document.title, urlWithoutParameter);
+if (openModal === 'true') {
+
+	$('#masters_two').modal('show');
+	const urlWithoutParameter = window.location.href.split('?')[0];
+    history.replaceState({}, document.title, urlWithoutParameter);
+}
+
+$('#masters_two').on('shown.bs.modal', function () {
+		$('#searchInput').focus();
+	});
+
+
+
+
+
+});
+
+ document.getElementById("searchInput").addEventListener("input", function() {
+    var searchValue = this.value.toLowerCase();
+    var listItems = document.querySelectorAll(".ul_movement li");
+
+    // Remove element-hover class from all li elements
+    listItems.forEach(function(item) {
+        item.classList.remove("element-hover");
+        var linkText = item.textContent.toLowerCase();
+        if (linkText.includes(searchValue)) {
+            item.style.display = "list-item";
+        } else {
+            item.style.display = "none";
+        }
+    });
+
+    // Add element-hover class to the topmost visible li element
+    var visibleItems = document.querySelectorAll(".ul_movement li[style*='list-item']");
+    if (visibleItems.length > 0) {
+        var firstVisibleItem = visibleItems[0];
+        firstVisibleItem.classList.add("element-hover");
     }
-   });
+    if (!visibleItems.length === 0) {
+      
+		$(this).find('li:first').addClass('element-hover');
+    }
+	
+});
 
  
 	
 // to open gst_classification modal
 	$("#gst_classification").on("click",function(){
+		
 		loadDataTable();
 		
 		$('#gst_classification_modal').modal('show');
@@ -739,9 +795,10 @@ $('#masters_two').on('click', '#master_vat_registration_detailes a', function (e
 // // to open gst modal
 function openGstModal(){
 	
-
+	//  var company_id = <?php //echo $this->session->userdata('company_id'); ?>;
+	
 	 var token = "<?php echo $_SESSION['li_token']; ?>";
-
+	// alert(token);
 	$.ajax({
 		url: BASE_URL + "index.php/" + accountsController + "/get_gst_row_count",
 		type: 'POST',
@@ -853,7 +910,7 @@ $(window).on("keydown", function (e)
         			var modalId = liSelectedClass.find('a').attr("data-target"); // Get the data-target attribute value
        				 if (modalId)
 					  {
-					
+						// alert(modalId)
 						// Close any open modal first
 						$(".modal.show").modal("hide");
 
@@ -913,5 +970,58 @@ $("#list_of_vouchers_new_cancel_icon").on("click",function(){
 	$("#vouchers").modal("hide");
 });
 </script>
+<script>
+
+
+$(document).ready(function() {
+    if (localStorage.getItem('cancelFlag') === 'stock_item_creation') {
+        $('#create_master_two').click();
+		$('#masters_two li').removeClass('element-hover');
+		$('#stock_item_creation').addClass('element-hover');
+        localStorage.removeItem('cancelFlag');
+    }
+    
+	else if(localStorage.getItem('cancelFlag') === 'cancel_ledger') {
+        $('#create_master_two').click();
+		$('#masters_two li').removeClass('element-hover');
+		$('#ledger_index').addClass('element-hover');
+        localStorage.removeItem('cancelFlag');
+    }
+});
+ </script>
+ <script>
+function cancelIndex()
+{
+
+    $('#masters_two').modal('hide');
+	$('#masters').modal('hide');
+	$('#company_select').modal('hide');
+
+}
+
+function handleEscapeIndex(event) {
+    if (event.key === "Escape") {
+        cancelIndex();
+        
+    }
+}
+$(document).on('keydown', handleEscapeIndex);
+
+
+</script>
+
+<script>
+
+// const params = new URLSearchParams(window.location.search);
+// const openModal = params.get('openModal');
+// alert(openModal);
+
+// // If "openModal" is set to "true", open the modal
+// if (openModal === 'true') {
+// 	alert("hai")
+//     $('#masters_two').modal('show');
+// }
+
+ </script> 
 
 

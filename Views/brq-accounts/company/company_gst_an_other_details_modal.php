@@ -28,7 +28,7 @@ ini_set('display_errors', 1);
             <div class="modal-content">
                 <div class="modal_header">
                     <div class="main_head">
-                        <h6>gst Rate and Other Details</h6>
+                        <h6>GST Rate and Other Details</h6>
                     </div>
                 </div>
                 <div class="modal-body">
@@ -718,7 +718,7 @@ $('#save_btn_gst_other_details').click(function () {
                 $("#hsn_sac_description").addClass("enable");
             }
         }
-    })
+    });
     $("#gst_rate_details_id").on("change", function() {
 
         var gst_rate_details_id_option = ($("#gst_rate_details_id option:selected").val());
@@ -792,8 +792,72 @@ $('#save_btn_gst_other_details').click(function () {
             }
         }
 
-    })
+    });
+    $("#hsn_gst_classification_id").on("change", function() {
+        
+        var hsn_gst_classification_id_option = ($("#hsn_gst_classification_id option:selected").val());
+         var token = "<?php echo $_SESSION['li_token']; ?>";
+            // Save the changes made in the gst_modal
+      
+            $.ajax({
+                url: BASE_URL + "index.php/" + accountsController + "/get_hsn_sac_details",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                 
+                    hsn_gst_classification_id: $("#hsn_gst_classification_id").val(),
+                    li_token: token
+                },
+                success: function (response) {
+                   
+                    console.log("response of hsn/sac details gst is",response);
+                   
+                                  $('#hsn_sac_number').val(response[0].hsn_sac);
+                                  $('#hsn_sac_description').val(response[0].hsn_sac_description);
 
+
+                },
+                error: function (xhr, status, error) {
+                console.log('Error response:', xhr.responseText);
+                console.log('An error occurred:', error);
+                alert('An error occurred while get HSN/SAC details. Please check the console for more information.');
+            }
+            });
+
+    });
+    $("#gst_classification_id").on("change", function() {
+        
+        var gst_classification_id_option = ($("#gst_classification_id option:selected").val());
+         var token = "<?php echo $_SESSION['li_token']; ?>";
+            // Save the changes made in the gst_modal
+      
+            $.ajax({
+                url: BASE_URL + "index.php/" + accountsController + "/get_gst_rate_details",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                 
+                    gst_classification_id: $("#gst_classification_id").val(),
+                    li_token: token
+                },
+                success: function (response) {
+                   
+                    console.log("response of gst rate details gst is",response);
+                             $('#igst_rate').val(response[0].igst_rate);
+                             $('#cgst_rate').val(response[0].cgst_rate);
+                             $('#sgst_utgst_rate').val(response[0].sgst_utgst_rate);
+                             $('#cess_rate').val(response[0].cess_rate);
+
+
+                },
+                error: function (xhr, status, error) {
+                console.log('Error response:', xhr.responseText);
+                console.log('An error occurred:', error);
+                alert('An error occurred while get HSN/SAC details. Please check the console for more information.');
+            }
+            });
+
+    });
 $(document).on('keydown', function (event) {
     
     if ((event.key === 's' || event.key === 'S') && $("#gst_other_details_Modal").hasClass("show")) {

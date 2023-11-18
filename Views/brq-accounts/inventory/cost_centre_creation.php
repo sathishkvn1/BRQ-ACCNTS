@@ -28,8 +28,8 @@
         .focus-atag{
             background-color: #ffe793!important
         }
-        .inventory_modals table.dataTable.display tbody tr.odd.focus-tr,
-        .inventory_modals table.dataTable.display tbody tr.even.focus-tr{
+        .inventory_modal table.dataTable.display tbody tr.odd.focus-tr,
+        .inventory_modal table.dataTable.display tbody tr.even.focus-tr{
             background-color: #6090cb !important;
             color:white;
         }
@@ -60,7 +60,7 @@ table.dataTable.display tbody tr.odd>.sorting_1{
 <body>
 <div class="wrapper">
     	<!-- Navbar  TOP NAV BAR MESSAGES & SEARCH -->
-        <?php include('application/views/brq-accounts/header-nav-search-messages.php');?>
+        <?php include('application/views/brq-accounts/header_nav_bar.php');?>
 		<!-- /.navbar  TOP NAVE BAR MESSAGES & SEARCH-->
        
 
@@ -69,7 +69,7 @@ table.dataTable.display tbody tr.odd>.sorting_1{
         <?php include('application/views/brq-accounts/index-sidebar-navigation-right.php');?>
 		<!--- End : For sidebar Right Navigation for Short Cut Key like Tally -->
 </div>
-<div class="modal fade backdrop modal_common modal_centered_lg gst_details inventory_modals" 
+<div class="modal fade backdrop modal_common modal_centered_lg gst_details inventory_modal" 
         id="cost_centre_creation_modal" data-value="enable_tds" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -556,7 +556,7 @@ function loadDataTable() {// load data table
 // deletion
 
 function deleteRow(id) {
-    alert('Delete clicked with id: ' + id);
+   
     url= BASE_URL + "index.php/" + inventoryController + "/deleteCostCentreCreation";
     // alert(url);
     if (confirm("Are you sure you want to delete this item?")) {
@@ -586,7 +586,7 @@ function deleteRow(id) {
 // fr editing
 function editRow(id) {
    
-   alert('Edit clicked with id: ' + id);
+   
    $("#row_id").val(id);
    flag_id=$("#flag_id").val("1");
  
@@ -762,34 +762,12 @@ $(document).keydown(function (event) {
                 
                 itype = $(this).prop('type');
                 currentId = $(this).attr('id');
-                // if(currentId =="cost_centre_name")
-                // {
-                //     validateCostCenterName();
-                //     // return false;
-                //  }
-             
-                // if(currentId =="cost_centre_alternate_name")
-                // {
-                //     var CostCentreValue = $("#cost_centre_name").val();
                 
-                //     var CostCentreAlternateNameValue = $("#cost_centre_alternate_name").val();
-                    
-                //     if (CostCentreValue === CostCentreAlternateNameValue) {
-                //         // alert("Name and Alternative Name should not be the same.");
-                //         alert_message("failure", "Error", "Name and Alternative Name should not be the same.");
-                //         e.preventDefault(); 
-                //     }
-                
-                //     validateCostCenterAlternateName();
-                   
-                    
-                    
-                // }
                
                 if (currentId === "email_id") {
                   
                     $("#save_inventory_cost_centre_creation_btn").focus();
-                        e.preventDefault(); 
+                        event.preventDefault(); 
                     }
                 if (itype !== 'submit') {
                     current_cost_centre_creation_tabindex = $(this).attr('tabindex');
@@ -817,13 +795,13 @@ $(document).keydown(function (event) {
         //     // Your custom Tab key handling code here
         //     alert("Tab key pressed!");
         // }
-         if (e.which === 83) {
+         if (event.which === 83) {
             // $("#save_inventory_cost_centre_creation_btn").click();
         }
-        if (e.which === 67) {//c
-            $("#cancel_inventory_cost_centre_creation_btn").click();
-        }
-        if (e.which === 27) {//ecc
+        // if (event.which === 67) {//c
+        //     $("#cancel_inventory_cost_centre_creation_btn").click();
+        // }
+        if (event.which === 27) {//ecc
             $("#cancel_inventory_cost_centre_creation_btn").click();
         }
         }
@@ -836,16 +814,19 @@ $(document).keydown(function (event) {
 <script>
     $("#cost_centre_bank_detailes").on("change",function(){
         var cost_centre_bank_detailes_value =$("#cost_centre_bank_detailes").val();
+      
         if(cost_centre_bank_detailes_value =="yes")
-        {
-            $(".hide_show_section_depend_provide_bank_details").hide();
-            $(".hide_show_section_depend_provide_bank_details .row .col-md-4 input,.hide_show_section_depend_provide_bank_details .row .col-md-4 select").removeClass("enable");
-        }
-        else if (cost_centre_bank_detailes_value =="no")
         {
             $(".hide_show_section_depend_provide_bank_details").show();
             $(".hide_show_section_depend_provide_bank_details .row .col-md-4 input,.hide_show_section_depend_provide_bank_details .row .col-md-4 select").addClass("enable");
 
+        }
+        else if (cost_centre_bank_detailes_value =="no")
+        {
+                        $(".hide_show_section_depend_provide_bank_details").hide();
+            $(".hide_show_section_depend_provide_bank_details .row .col-md-4 input,.hide_show_section_depend_provide_bank_details .row .col-md-4 select").removeClass("enable");
+        
+            
         }
         
     });
@@ -854,22 +835,20 @@ $(document).keydown(function (event) {
         var cost_centre_bank_detailes_value =$("#cost_centre_bank_detailes").val();
         if(cost_centre_bank_detailes_value =="yes")
         {
-            $(".hide_show_section_depend_provide_bank_details").hide();
-            $(".hide_show_section_depend_provide_bank_details .row .col-md-4 input,.hide_show_section_depend_provide_bank_details .row .col-md-4 select").removeClass("enable");
+            $(".hide_show_section_depend_provide_bank_details").show();
+            $(".hide_show_section_depend_provide_bank_details .row .col-md-4 input,.hide_show_section_depend_provide_bank_details .row .col-md-4 select").addClass("enable");
 
 
 
         }
         else if (cost_centre_bank_detailes_value =="no")
         {
-            $(".hide_show_section_depend_provide_bank_details").show();
-            $(".hide_show_section_depend_provide_bank_details .row .col-md-4 input,.hide_show_section_depend_provide_bank_details .row .col-md-4 select").addClass("enable");
-
+            $(".hide_show_section_depend_provide_bank_details").hide();
+            $(".hide_show_section_depend_provide_bank_details .row .col-md-4 input,.hide_show_section_depend_provide_bank_details .row .col-md-4 select").removeClass("enable");
+            
         }
     });
 </script>
-
-
 
 
 <script>
@@ -911,28 +890,6 @@ $(document).on('click', function (e) {
     $(".focus-atag").removeClass("focus-atag");
   }
 });
-
-
-// $(".pagination-button").on("click", function () {
-//   // Remove focus classes from previous rows and anchor tags
-//   $(".focus-tr").removeClass("focus-tr");
-//   $(".focus-atag").removeClass("focus-atag");
-
-//   // Find and focus on the first row of the new pagination
-//   const paginationContainer = $(this).closest(".pagination-container");
-//   const firstRow = paginationContainer.find("tr.clickable-row:visible:first");
-  
-//   // Focus on the first row if it exists
-//   if (firstRow.length > 0) {
-//     firstRow.addClass("focus-tr");
-    
-//     // Focus on the first anchor tag in the new pagination if it exists
-//     const firstAnchor = firstRow.find("a:visible:first");
-//     if (firstAnchor.length > 0) {
-//       firstAnchor.addClass("focus-atag");
-//     }
-//   }
-// });
 
 
 $(document).on('keydown', function (e) {
@@ -1009,9 +966,9 @@ $(document).on('keydown', function (e) {
 </script>
 
 <script>
-const table = $('#cost_centre_data_table').DataTable();
-let focusedRowIndex = -1; // Track the index of the currently focused row
-let currentPage = table.page(); // Track the current pagination page
+<!--const table = $('#cost_centre_data_table').DataTable();-->
+<!--let focusedRowIndex = -1; // Track the index of the currently focused row-->
+<!--let currentPage = table.page(); // Track the current pagination page-->
 //  click event handler to table rows
 table.on('click', 'tr.clickable-row', function () {
   $(".focus-tr").removeClass("focus-tr");

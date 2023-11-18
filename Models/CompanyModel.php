@@ -173,7 +173,7 @@ public function set_current_year($selected_year_id)
     {
         $this->db->where('company_id', $company_id);
         $query = $this->db->get('acc_financial_year_master');
-    
+
         return $query->result_array();
     }
 
@@ -627,7 +627,12 @@ public function getGstRateDetails($company_id){
     return $query->result_array();
 
 }   
-
+public function getHsnSacDetails($gst_classification_id)
+{
+      $this->db->where('id', $gst_classification_id);
+    $query = $this->db->get('acc_gst_classification');
+    return $query->result_array();
+}
 public function hsn_sac_related_action(){
     $query = $this->db->get('acc_gst_hsn_sac_related_action');
      if($query->num_rows()>0)

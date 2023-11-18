@@ -19,7 +19,7 @@
 <body>
 <div class="wrapper">
     	<!-- Navbar  TOP NAV BAR MESSAGES & SEARCH -->
-        <?php include('application/views/brq-accounts/header-nav-search-messages.php');?>
+        <?php include('application/views/brq-accounts/header_nav_bar.php');?>
 		<!-- /.navbar  TOP NAVE BAR MESSAGES & SEARCH-->
        
 
@@ -484,8 +484,8 @@
     var BASE_URL = "<?php echo base_url(); ?>";
     var inventoryController = "<?php echo CONTROLLER_INVENTORY; ?>";
     var token = "<?php echo $_SESSION['li_token']; ?>";     
-   
  $(document).ready(function() {
+    //   $("#gst_classification_section").hide();
     $('#inventory_group_creation_modal').modal('show');
 }); // document.ready
              $('#save_inventory_group_settings_btn').click(function() {
@@ -521,7 +521,7 @@
              success: function(response) {
                 
                  console.log("response",response);
-                 alert(response.message);
+                 
                  toast_message("success", "Successful", response.message);
                  location.reload();
                 //  toast_message("success", "Successful", response.message);
@@ -628,9 +628,14 @@ $("#gst_rate_details_id_for_stock").change(function() {
         if (selectedGstRateDetailsOption === "4") {
             
             gstClassificationDropdown.prop("disabled", false);
+             $("#gst_gst_classification_id").addClass("enable");
+              $("#gst_classification_section").show();
+            
         } else {
            
             gstClassificationDropdown.prop("disabled", true);
+            $("#gst_classification_section").hide();
+                $("#gst_gst_classification_id").removeClass("enable");
         }
 
     

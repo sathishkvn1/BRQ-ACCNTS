@@ -39,7 +39,7 @@ ini_set('display_errors', 1);
 
                                 <!-- Single features Section Start Here -->
                                 <div class="col-md-12">
-                                    <h6 class="tcs_side_headding">TDS Registration Details</h6>
+                                    <h6 class="tcs_side_headding">TCS Registration Details</h6>
 
                                     <!--  start of GST Registration Details -->
 
@@ -694,6 +694,7 @@ alert('An error occurred while saving TDS details. Please check the console for 
 ////////// ooo////////////////
 $(".yes_no,.enable").on("keydown", function(event) {
     if ($("#tcs_details_modal").hasClass("show")) {
+        $('#masters_two').modal('hide'); 
         var validationFails = false;
         if ((event.key === "Enter" || (event.key === "Tab" && !event.shiftKey)) && !validationFails)  {
             // Prevent the default behavior of the Tab key

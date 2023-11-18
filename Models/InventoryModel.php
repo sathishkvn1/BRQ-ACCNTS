@@ -15,7 +15,7 @@ class InventoryModel extends CI_Model {
         return $this->db->insert('acc_stock_groups', $data);
     }
 
-    
+  
     public function insert_inventory_stock_category($data) {
 
         return $this->db->insert('acc_stock_category', $data);
@@ -51,9 +51,10 @@ class InventoryModel extends CI_Model {
 
 
 
-    public function getHsnSacDetails($selectedOption, $company_id) {
+    public function getHsnSacDetails($selectedOption, $company_id="") {
         $this->db->where('hsn_sac_details_id', $selectedOption);
-        $this->db->where('company_id', $company_id);
+        if($company_id)
+            $this->db->where('company_id', $company_id);
         $query = $this->db->get('acc_gst_company_gst_rate_and_other_details');
         
         if ($query->num_rows() > 0) {
@@ -64,11 +65,12 @@ class InventoryModel extends CI_Model {
     }
     
 
-    public function getGstClassificationName($selectedOption, $company_id)
+    public function getGstClassificationName($selectedOption, $company_id="")
 {
     $this->db->select('id, gst_classification_name');
     $this->db->where('hsn_sac_details_id', $selectedOption);
-    $this->db->where('company_id', $company_id); 
+    if($company_id)
+        $this->db->where('company_id', $company_id); 
    
     $query = $this->db->get('acc_gst_classification');
    
@@ -81,7 +83,7 @@ class InventoryModel extends CI_Model {
 public function getGstClassificationNames($selectedGstRateDetailsOption, $company_id)
 {
     $this->db->select('id,hsn_sac_details_id, gst_classification_name'); // Include 'id' in the selection
-    $this->db->where('hsn_sac_details_id', $selectedGstRateDetailsOption);
+    $this->db->where('gst_rate_details_id', $selectedGstRateDetailsOption);
     $this->db->where('company_id', $company_id); 
     $query = $this->db->get('acc_gst_classification');
    
@@ -177,7 +179,7 @@ public function delete_stock_category_by_id($id)
         $this->db->where('id', $id);
         return $this->db->update('acc_stock_category', $data);
     }
-  
+
     public function get_stock_categories_by_id($id)
     {
         $this->db->where('id', $id);
@@ -189,7 +191,7 @@ public function delete_stock_category_by_id($id)
             return false;
         }
     }
- 
+
     public function update_inventory_stock_category($hidden_id, $data){
         $this->db->where('id', $hidden_id);
         $this->db->update('acc_stock_category', $data);
@@ -200,7 +202,7 @@ public function delete_stock_category_by_id($id)
             return false; // Update failed
         }
     }
-    
+
     public function get_stock_category() {
         $this->db->select('id, stock_category_name');
         $this->db->from('acc_stock_category');
@@ -215,7 +217,7 @@ public function delete_stock_category_by_id($id)
     }
     
 
-   
+
 public function check_stock_category_name($stock_category_name, $company_id, $flag_id, $hidden_id)
 {
     if ($flag_id == 0) {
@@ -460,14 +462,11 @@ public function delete_tcs_nature_of_goods_by_id($id) {
     }
 
 // vaishakk code
-public function get_stock_item_data_table()
+	public function get_stock_item_data_table()
 {
   
     $query = $this->db->where('is_deleted', 'no')->get('acc_stock_item_master');
     
-    
-    
-
     if ($query->num_rows() > 0) {
         
         return $query->result_array();
@@ -494,34 +493,20 @@ public function get_stock_item_master_bill_of_material_data_table2()
     }
 }
 
+public  function get_godown_name(){
+		  
+    $SQL="SELECT *
+      FROM  acc_godown ";
 
-// public function get_godown_name()
+       $res 	 = $this->db->query($SQL);
+          if($res->num_rows() > 0)
+          {	
+              
+              return ($res->result());
+          }
+          return array();
 
-// {
-  
-//     $query = $this->db->get('acc_godown');
-  
-//     if ($query->num_rows() > 0) {
-        
-//         return $query->result_array();
-//     } else {
-        
-//         return array();
-//     }
-// }
-
-public function get_godown_name($company_id)
-{
-    $this->db->where('company_id', $company_id); // Add a condition to match the company_id
-
-    $query = $this->db->get('acc_godown');
-
-    if ($query->num_rows() > 0) {
-        return $query->result_array();
-    } else {
-        return array();
-    }
-}
+   }
 
 public function get_stock_item_master_bill_of_material()
 {
@@ -547,8 +532,18 @@ public function saveStockItem($data) {
 }
 
 public function updateStockItem($rowID, $data){
+
+       $now 					= date("Y-m-d H:i:s");
+
+    $data1 =  array(
+        
+        "modfied_on"  =>  $now
+
+    );
     $this->db->where('id', $rowID);
+
     $this->db->update('acc_stock_item_master', $data);
+    $this->db->update('acc_stock_item_master', $data1);
    
     if ($this->db->affected_rows() > 0) {
         return true; 
@@ -561,7 +556,7 @@ public function updateStockItem($rowID, $data){
 public function update_stock_item_behaviour_setting($rowID, $data){
     $this->db->where('id', $rowID);
     $this->db->update('acc_stock_item_master', $data);
-   
+
     if ($this->db->affected_rows() > 0) {
         return true;
     } else {
@@ -589,25 +584,121 @@ public function save_stock_item_master_set_vat_details($data) {
 
 
 public function update_stock_item_master_set_vat_details($rowID, $data){
-    $this->db->where('item_master_id', $rowID);
-    $this->db->update('acc_stock_vat_rate_details', $data);
+
    
-    if ($this->db->affected_rows() > 0) {
-        return true; 
-    } else {
-        return false; 
-    }
+      $this->db->where('item_master_id', $rowID);
+      $query = $this->db->get('acc_stock_vat_rate_details');
+      
+      if ($query->num_rows() === 0) {
+        
+          $now = date("Y-m-d H:i:s");
+          $data['item_master_id'] = $rowID;
+          $data['created_on'] = $now;
+          $this->db->insert('acc_stock_vat_rate_details', $data);
+      } else {
+         
+          $now = date("Y-m-d H:i:s");
+          $data1 = array(
+              "modfied_on" => $now
+          );
+  
+      
+          $this->db->where('item_master_id', $rowID);
+          $this->db->update('acc_stock_vat_rate_details', $data);
+          $this->db->update('acc_stock_vat_rate_details', $data1);
+      }
+  
+      if ($this->db->affected_rows() > 0) {
+          return true; 
+      } else {
+          return false; 
+      }
 }
+public function save_stock_item_master_set_opening_balance($data) {
 
-public function save_stock_item_master_bill_of_material($data) {
-
-    $this->db->insert('acc_stock_bom_master', $data);
+    $this->db->insert('acc_stock_opening_balance', $data);
     return $this->db->insert_id(); 
 }
 
-public function update_stock_item_master_bill_of_material($rowID, $data){
+
+public function update_stock_item_master_set_opening_balance($currentDynamicRowID, $data,$rowID){
+
+    $this->db->where('id', $currentDynamicRowID);
+    $query = $this->db->get('acc_stock_opening_balance');
+    
+    if ($query->num_rows() === 0) {
+      
+        $now = date("Y-m-d H:i:s");
+        $data['item_master_id'] = $rowID;
+        $data['created_on'] = $now;
+        $this->db->insert('acc_stock_opening_balance', $data);
+    } else {
+       
+        $now = date("Y-m-d H:i:s");
+        $data1 = array(
+            "modfied_on" => $now
+        );
+
+        $this->db->where('id', $currentDynamicRowID);
+        $this->db->update('acc_stock_opening_balance', $data);
+        $this->db->update('acc_stock_opening_balance', $data1);
+    }
+
+    if ($this->db->affected_rows() > 0) {
+        return true; 
+    } else {
+        return false; 
+    }
+
+
+
+}
+
+public function save_stock_item_master_bill_of_material($data1) {
+
+    $this->db->insert('acc_stock_bom_master', $data1);
+    return $this->db->insert_id(); 
+}
+
+public function update_stock_item_master_bill_of_material($rowID, $data1) {
+    
     $this->db->where('item_master_id', $rowID);
-    $this->db->update('acc_stock_bom_master', $data);
+    $query = $this->db->get('acc_stock_bom_master');
+    
+    if ($query->num_rows() === 0) {
+        $data1['item_master_id'] = $rowID;
+        $this->db->insert('acc_stock_bom_master', $data1);
+      
+        $insert_id = $this->db->insert_id();
+      
+       
+    } else {
+        $this->db->where('item_master_id', $rowID);
+        $this->db->update('acc_stock_bom_master', $data1);
+       
+       
+    }
+
+    if ($this->db->affected_rows() > 0) {
+        return true; 
+    } else {
+        return false; 
+    }
+}
+
+
+public function save_stock_item_master_bill_of_material_details($data) {
+
+    $this->db->insert('acc_stock_bom_details', $data);
+    return $this->db->insert_id(); 
+}
+
+
+public function update_stock_item_master_bill_of_material_details($currentDynamicRowID, $data){
+
+    
+    $this->db->where('id', $currentDynamicRowID);
+    $this->db->update('acc_stock_bom_details', $data);
    
     if ($this->db->affected_rows() > 0) {
         return true; 
@@ -616,12 +707,11 @@ public function update_stock_item_master_bill_of_material($rowID, $data){
     }
 }
 
+
 public function get_stock_item_by_id($id)
 {
-    $this->db->select('acc_stock_item_master.*, acc_stock_vat_rate_details.*');
-    $this->db->from('acc_stock_item_master');
-    $this->db->join('acc_stock_vat_rate_details', 'acc_stock_item_master.id = acc_stock_vat_rate_details.item_master_id', 'left');
-    $this->db->where('acc_stock_item_master.id', $id);
+    $this->db->from('view_acc_stock_item_master');
+    $this->db->where('id', $id);
 
     $query = $this->db->get();
 
@@ -635,25 +725,28 @@ public function get_stock_item_by_id($id)
 public function delete_stock_item($id)
 {
 
+    $now 					= date("Y-m-d H:i:s");
+
     $data1 =  array(
-        "is_deleted"  => "yes"
-    
+        "is_deleted"  => "yes",
+        "deleted_on"  =>  $now
+
     );
+
     $this->db->where('id', $id);
     $this->db->update('acc_stock_item_master',$data1);
     if ($this->db->affected_rows() > 0) {
-        return true; // Deletion successful
+        return true; 
     } else {
-        return false; // Deletion failed
+        return false; 
     }
 }
-
 public function get_acc_stock_groups(){
     $company_id = $this->session->userdata('company_id');
     $this->db->select('id, stock_group_name');
-    // // $this->db->where('company_id', $company_id);
+   
     $query = $this->db->get('acc_stock_groups');
-    //  echo "Last Query: " . $this->db->last_query();
+   
     if ($query->num_rows() > 0) {
         return $query->result();
     }
@@ -664,9 +757,9 @@ public function get_acc_stock_groups(){
 public function get_acc_stock_category(){
     $company_id = $this->session->userdata('company_id');
     $this->db->select('id, stock_category_name');
-    // $this->db->where('company_id', $company_id);
+
     $query = $this->db->get('acc_stock_category');
-    //  echo "Last Query: " . $this->db->last_query();
+  
     if ($query->num_rows() > 0) {
         return $query->result();
     }
@@ -676,9 +769,7 @@ public function get_acc_stock_category(){
 public function get_acc_stock_units(){
     $company_id = $this->session->userdata('company_id');
     $this->db->select('id, stock_unit_name');
-    // $this->db->where('company_id', $company_id);
     $query = $this->db->get('acc_stock_units');
-    //  echo "Last Query: " . $this->db->last_query();
     if ($query->num_rows() > 0) {
         return $query->result();
     }
@@ -688,9 +779,7 @@ public function get_acc_stock_units(){
 public function get_acc_stock_units_bom(){
     $company_id = $this->session->userdata('company_id');
     $this->db->select('id, stock_unit_name');
-    // $this->db->where('company_id', $company_id);
     $query = $this->db->get('acc_stock_units');
-    //  echo "Last Query: " . $this->db->last_query();
     if ($query->num_rows() > 0) {
         return $query->result();
     }
@@ -703,7 +792,6 @@ public function get_acc_stock_costing_methods(){
     $company_id = $this->session->userdata('company_id');
     $this->db->select('id, costing_method');
     $query = $this->db->get('acc_stock_costing_methods');
-    //  echo "Last Query: " . $this->db->last_query();
     if ($query->num_rows() > 0) {
         return $query->result();
     }
@@ -714,7 +802,6 @@ public function get_acc_stock_market_valuation_methods(){
     $company_id = $this->session->userdata('company_id');
     $this->db->select('id, market_valuation_method');
     $query = $this->db->get('acc_stock_market_valuation_methods');
-    //  echo "Last Query: " . $this->db->last_query();
     if ($query->num_rows() > 0) {
         return $query->result();
     }
@@ -726,7 +813,6 @@ public function get_acc_stock_gst_applicability(){
     $company_id = $this->session->userdata('company_id');
     $this->db->select('id, gst_applicability');
     $query = $this->db->get('acc_stock_gst_applicability');
-    //  echo "Last Query: " . $this->db->last_query();
     if ($query->num_rows() > 0) {
         return $query->result();
     }
@@ -737,7 +823,6 @@ public function get_acc_gst_hsn_sac_related_action(){
     $company_id = $this->session->userdata('company_id');
     $this->db->select('id, hsn_sac_related_action');
     $query = $this->db->get('acc_gst_hsn_sac_related_action');
-    //  echo "Last Query: " . $this->db->last_query();
     if ($query->num_rows() > 0) {
         return $query->result();
     }
@@ -747,9 +832,7 @@ public function get_acc_gst_hsn_sac_related_action(){
 public function get_acc_gst_classification(){
     $company_id = $this->session->userdata('company_id');
     $this->db->select('id, gst_classification_name');
-    // // $this->db->where('company_id', $company_id);
     $query = $this->db->get('acc_gst_classification');
-    //  echo "Last Query: " . $this->db->last_query();
     if ($query->num_rows() > 0) {
         return $query->result();
     }
@@ -846,7 +929,6 @@ public function get_acc_vat_schedule_groups(){
 
     return array();
 }
-
 
 public function get_unit_name()
 {
@@ -1055,6 +1137,201 @@ public function get_unit_type()
     return $query->result();
 }
 
+
+public function cost_cenrtre_name()
+{
+   $query = $this->db->get('acc_cost_centres');
+   return $query->result();
+}
+
+
+public function insert_godown_creation($data) {
+
+    return $this->db->insert('acc_godown', $data);
+}
+
+
+public function get_godown_creation() {
+    $this->db->select('id, godown_name,godown_address_line_1');
+    $this->db->from('acc_godown');
+    $this->db->where('is_deleted', 'no');
+    $query = $this->db->get();
+
+    if ($query->num_rows() > 0) {
+        return $query->result_array();
+    }
+
+    return array(); 
+}
+
+
+public function get_godown_names()
+{
+    $company_id = $this->session->userdata('company_id');
+
+    $this->db->where('company_id', $company_id); 
+    $this->db->where('is_deleted', 'no');
+    $query = $this->db->get('acc_godown');
+
+    if ($query->num_rows() > 0) {
+        return $query->result_array();
+    } else {
+        return array();
+    }
+}
+
+
+
+public function delete_godown_by_id($id)
+    {
+        $data = array('is_deleted' => 'yes');
+        $this->db->where('id', $id);
+        return $this->db->update('acc_godown', $data);
+    }
+  
+
+    public function  get_godown_by_id($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('acc_godown');
     
-    
+        if ($query->num_rows() == 1) {
+            return $query->row();
+        } else {
+            return false;
+        }
+    }
+ 
+    public function update_godown_creation($hidden_id, $data){
+        $this->db->where('id', $hidden_id);
+        $this->db->update('acc_godown', $data);
+       
+        if ($this->db->affected_rows() > 0) {
+            return true; // Update successful
+        } else {
+            return false; // Update failed
+        }
+    }
+
+  
+    public function check_godown_name_exists($godown_name, $company_id, $flag_id, $hidden_id)
+    {
+        if ($flag_id == 0) {
+            $this->db->where("(`company_id` = '$company_id' AND `godown_name` = '$godown_name' AND `is_deleted` = 'no') OR (`company_id` = '$company_id' AND `godown_alternate_name` = '$godown_name' AND `is_deleted` = 'no')");
+        } else {
+           
+            $this->db->where("(`company_id` = '$company_id' AND `godown_name` = '$godown_name' AND `id` != '$hidden_id' AND `is_deleted` = 'no') OR (`company_id` = '$company_id' AND `godown_alternate_name` = '$godown_name' AND `id` != '$hidden_id' AND `is_deleted` = 'no')");
+        }
+        $query = $this->db->get('acc_godown');
+        return ($query->num_rows() > 0);
+    }
+
+   
+public function  check_godown_alternate_name_exists($godown_alternate_name, $company_id, $flag_id, $hidden_id)
+{
+    if ($flag_id == 0) {
+        $this->db->where("(`company_id` = '$company_id' AND `godown_alternate_name` = '$godown_alternate_name' AND `is_deleted` = 'no') OR (`company_id` = '$company_id' AND `godown_name` = '$godown_alternate_name' AND `is_deleted` = 'no')");
+    } else {
+       
+        $this->db->where("(`company_id` = '$company_id' AND `godown_alternate_name` = '$godown_alternate_name' AND `id` != '$hidden_id' AND `is_deleted` = 'no') OR (`company_id` = '$company_id' AND `godown_name` = '$godown_alternate_name' AND `id` != '$hidden_id' AND `is_deleted` = 'no')");
+    }
+    $query = $this->db->get('acc_godown');
+    return ($query->num_rows() > 0);
+}
+  
+   
+   
+public  function get_stock_bom_component_type(){
+		  
+    $SQL="SELECT *
+      FROM  acc_stock_bom_component_type ";
+
+       $res 	 = $this->db->query($SQL);
+          if($res->num_rows() > 0)
+          {	
+              
+              return ($res->result());
+          }
+          return array();
+
+   }
+
+
+   
+   public function get_acc_stock_opening_balance($row_id) {
+
+    // $testId =$row_id;
+    // echo $row_id;
+
+
+
+
+    $this->db->select('*');
+    $this->db->from('acc_stock_opening_balance');
+    $this->db->where('item_master_id', $row_id);
+    $query = $this->db->get();
+  
+
+
+   
+   
+    if ($query->num_rows() > 0) {
+        return $query->result();
+    } else {
+        return array();
+    }
+} 
+
+public function get_acc_stock_bill_of_material_details($row_id) {
+
+    $this->db->select('*');
+    $this->db->from('acc_stock_bom_details');
+    $this->db->where('item_master_id', $row_id);
+    $query = $this->db->get();
+  
+   
+   
+    if ($query->num_rows() > 0) {
+        return $query->result();
+    } else {
+        return array();
+    }
+} 
+public function get_acc_stock_bill_of_material($row_id) {
+
+    $this->db->select('*');
+    $this->db->from('acc_stock_bom_master');
+    $this->db->where('item_master_id', $row_id);
+    $query = $this->db->get();
+  
+   
+   
+    if ($query->num_rows() > 0) {
+        return $query->result();
+    } else {
+        return array();
+    }
+} 
+
+ public  function get_stock_item_master(){
+		  
+    $SQL="SELECT *
+      FROM  acc_stock_item_master ";
+
+       $res 	 = $this->db->query($SQL);
+          if($res->num_rows() > 0)
+          {	
+              
+              return ($res->result());
+          }
+          return array();
+
+}   
+
+public function getHsnSacData($gst_classification_id)
+{
+      $this->db->where('id', $gst_classification_id);
+    $query = $this->db->get('acc_gst_classification');
+    return $query->result_array();
+}
 }

@@ -30,8 +30,8 @@
         .focus-atag{
             background-color: #ffe793!important
         }
-        .inventory_modals table.dataTable.display tbody tr.odd.focus-tr,
-        .inventory_modals table.dataTable.display tbody tr.even.focus-tr{
+        .inventory_modal table.dataTable.display tbody tr.odd.focus-tr,
+        .inventory_modal table.dataTable.display tbody tr.even.focus-tr{
             background-color: #6090cb !important;
             color:white;
         }
@@ -59,7 +59,8 @@
 <body>
 <div class="wrapper">
     	<!-- Navbar  TOP NAV BAR MESSAGES & SEARCH -->
-        <?php include('application/views/brq-accounts/header-nav-search-messages.php');?>
+        <!--<?php //include('application/views/brq-accounts/header-nav-search-messages.php');?>-->
+                <?php include('application/views/brq-accounts/header_nav_bar.php');?>
 		<!-- /.navbar  TOP NAVE BAR MESSAGES & SEARCH-->
        
 
@@ -68,7 +69,7 @@
         <?php include('application/views/brq-accounts/index-sidebar-navigation-right.php');?>
 		<!--- End : For sidebar Right Navigation for Short Cut Key like Tally -->
 </div>
-<div class="modal fade backdrop modal_common modal_centered_lg gst_details inventory_modals" 
+<div class="modal fade backdrop modal_common modal_centered_lg gst_details inventory_modal" 
         id="tcs_nature_goods_modal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">

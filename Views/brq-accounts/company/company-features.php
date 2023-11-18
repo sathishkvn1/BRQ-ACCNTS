@@ -592,7 +592,8 @@ $('#enable_gst').on('keydown', function(e) {
     var accountsController = "<?php echo CONTROLLER_ACCOUNTS; ?>";
     // var company_id = <?php //echo $this->session->userdata('company_id'); ?>;
     var token = "<?php echo $_SESSION['li_token']; ?>";
-
+    var company_id  = "<?php echo $company_id; ?>";
+    
     //  $(document).ready(function(){
 
     $(document).on('keydown', function (event) {
@@ -733,7 +734,6 @@ function getGstDetails() {
 
     $('#enable_tds').on('change', function () {
          var tds_value = $(this).val();
-         alert(tds_value);
         
         if (tds_value === 'yes') {
            
@@ -799,7 +799,7 @@ function getGstDetails() {
 
 $('#enable_tcs').on('change', function () {
          var tcs_value = $(this).val();
-         alert(tcs_value);
+
         
         if (tcs_value === 'yes') {
  
@@ -865,7 +865,7 @@ $('#enable_tcs').on('change', function () {
     ///////////////////// populating values fr vat
     $('#enable_vat').on('change', function () {
          var vat_value = $(this).val();
-         alert(vat_value);
+         
           if (vat_value === 'yes') {
             populateVATModal();
         //  url = BASE_URL + "index.php/" + accountsController + "/get_vat_details";

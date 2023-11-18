@@ -44,19 +44,6 @@ class Accounts extends MY_Controller
 		
 		//===============End Loading Model===============
 		
-		
-		// ----------- FOR CORS POLICY BLOCKING ------------------
-// 		header('Access-Control-Allow-Origin: *');
-// 		header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-// 		header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-		
-// 		$ci = get_instance(); // CI_Loader instance
-// 		$ci->load->config('config');
-// 		$this->headTitle = $ci->config->item('admin_title');
-// 		$this->adminController = $ci->config->item('admin_controller');
-// 		$this->reportController = $ci->config->item('report_controller');
-// 		$this->payrollController = $ci->config->item('payroll_controller');
-		// $this->loadConfiguration_settings(); // Defined in MY_Controller
 		$this->load->helper("brq");
 	
 	}
@@ -66,7 +53,7 @@ class Accounts extends MY_Controller
     {
          if (!$this->input->is_ajax_request()) 
            exit("Access denied");
-    }
+    } 	
 	
 	private function isSessionSet()
 	{
@@ -74,8 +61,8 @@ class Accounts extends MY_Controller
 	   return FALSE;
 	else
 	    return TRUE;	
-	}
-*/	
+	}*/
+
 
 
 //fillCombo() function for loading the table values into select box's option
@@ -102,6 +89,7 @@ class Accounts extends MY_Controller
 
 function index()
 {
+    
 	  $data = array();
      $_SESSION['user_id'] = 1; 
     // $data['company_details'] =$this->AccountsModel->get_company_details();
@@ -128,12 +116,25 @@ function index()
         $data["classification_name"]                = $this-> CompanyModel->hsn_gst_classification_name();
         $data["nature_of_goods"]                    = $this->CompanyModel->get_nature_of_goods();
         $data['gst_classifications']                = $this->CompanyModel->getGstClassifications();
+       
+        $_SESSION['financial_year'] = $this->company_financial_year_master();;
+         $_SESSION['gst_classifications'] = $this->CompanyModel->getGstClassifications();
+         $_SESSION['nature_of_goods'] =$this->CompanyModel->get_nature_of_goods();
+         $_SESSION['classification_name'] =$this-> CompanyModel->hsn_gst_classification_name();
+         $_SESSION['gst_threshold_limit_values'] =$this->CompanyModel->gst_threshold_limit_values();
+         $_SESSION['gst_cess_valuation_type'] =$this->CompanyModel->gst_cess_valuation_type();
+         $_SESSION['gst_taxability_type'] =$this->CompanyModel-> gst_taxability_type();
+         $_SESSION['gst_classi_nature_of_transaction'] =$this->CompanyModel->gst_nature_of_transaction();
+         $_SESSION['gst_classi_nature_of_transaction'] =$this->CompanyModel->gst_rate();
     if( $this->session->userdata('company_id'))
     {
+        // echo "inside if condition";
+        // exit;
         $company_id = $this->session->userdata('company_id');
 
        $data["address_type"]                       = $this->getAddressTypes();
        $data["company_id"]                          = $company_id;
+        $data['gst_classifications']                = $this->CompanyModel->getGstClassifications($company_id);
     } else {
 
         $data["company_id"]= 0;
@@ -182,6 +183,11 @@ function index()
     }
 
     public function create_new_financial_year_for_modal(){
+        if(!$this->isSessionSet())
+		{
+			$this->index();
+			return;
+		}
         $company_id             = $this->session->userdata('company_id');
         $last_financial_year    = $this->CompanyModel->get_last_financial_year($company_id);
        
@@ -253,6 +259,7 @@ public function save_new_financial_year()
 {
     $company_id = $this->session->userdata('company_id');
     $res =  $this->CompanyModel->getFinancialYearsByCompany($company_id);
+
     if (count($res) > 0) {
         return $res; 
     }
@@ -568,7 +575,9 @@ echo json_encode($response);
 }
 
 public function get_tds_details() {
-    $company_id = $this->input->post('company_id');
+      $company_id = $this->session->userdata('company_id');
+
+    // $company_id = $this->input->post('company_id');
     if (empty($company_id)) {
         http_response_code(400);
         echo json_encode(array('error' => 'companyId is missing from session data'));
@@ -1365,6 +1374,7 @@ echo json_encode($response);
 }
 public function get_gstrate_details(){
     $company_id = $this->input->post('company_id');
+    // $companyId = $this->session->userdata('company_id');
     if (empty($company_id)) {
         http_response_code(400);
         echo json_encode(array('error' => 'companyId is missing from session data'));
@@ -1417,6 +1427,32 @@ public function get_gstrate_details(){
             ->set_content_type('application/json')
             ->set_output(json_encode(array()));
     }
+}
+public function get_gst_rate_details()
+{
+    $gst_classification_id  = $this->input->post('gst_classification_id');
+    $result                 = $this->CompanyModel->getHsnSacDetails($gst_classification_id);
+// print_r($result);
+// exit;
+    echo json_encode($result);
+    
+}
+public function get_hsn_sac_details()
+{
+   $gst_classification_id       = $this->input->post('hsn_gst_classification_id');
+   $results = $this->CompanyModel->getHsnSacDetails($gst_classification_id); 
+   if(!empty($results))
+   {
+      echo  json_encode($results) ;
+    //   $row = $results[0];
+    //          $gstHsnSacDetails = array(
+    //                                 'hsn_sac' => $row['hsn_sac'],
+    //                                 'hsn_sac_description' => $row['description'],
+    //                                 );
+    //     $this->output
+    //         ->set_content_type('application/json')
+            // ->set_output(json_encode($gstHsnSacDetails));
+   }
 }
 
 public function save_gst_classification() {

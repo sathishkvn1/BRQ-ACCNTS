@@ -97,6 +97,7 @@ class AccountsInventory extends MY_Controller
 
     public function stock_group_creation(){
         // echo "inside inventory";
+        $data['company_id']             =$this->session->userdata('company_id');
 
         $data = array();
         $data["gst_taxability_type"]   = $this->InventoryModel-> gst_taxability_type();
@@ -138,7 +139,8 @@ class AccountsInventory extends MY_Controller
             'eligible_for_input_tax_credit'                      => $this->input->post('eligible_for_input_tax_credit'),
         );
         // var_dump($data);
-
+        // exit;
+       
         if ($data['parent_group_id'] == 0) {
             // Set is_primary to "yes"
             $data['is_primary'] = 'yes';
@@ -637,6 +639,10 @@ public function check_tcs_nature_of_goods_exist(){
     // stat of vaishak code
 
     public function stock_item_creation(){
+        
+        $data['company_id']             =$this->session->userdata('company_id');
+
+        $data["acc_stock_item_master"]	= $this->InventoryModel->get_stock_item_master();
         $data["acc_stock_groups"]     = $this->InventoryModel->get_acc_stock_groups();
         $data["acc_stock_category"]     = $this->InventoryModel->get_acc_stock_category();
         $data["acc_stock_units"]     = $this->InventoryModel->get_acc_stock_units();
@@ -656,30 +662,258 @@ public function check_tcs_nature_of_goods_exist(){
         $data["acc_vat_schedule_groups"]     = $this->InventoryModel-> get_acc_vat_schedule_groups();
         
         $data["acc_stock_units_bom"]     = $this->InventoryModel-> get_acc_stock_units_bom();
+
         
+        $data["acc_stock_bom_component_type"]	= $this->InventoryModel->get_stock_bom_component_type();
+
+         $data["AllGodownName"]	= $this->InventoryModel->get_godown_name();
+        // $data["financial_year"]                     = $this->company_financial_year_master();
+$data["financial_year"]                         =$this->session->userdata('financial_year');
        
         $this->load->view('brq-accounts/inventory/stock_item_creation',$data);
-    }
-    public function get_stock_item_data_table()
-    {
-        $stockItemCreation = $this->InventoryModel->get_stock_item_data_table();
-    
         
-        echo json_encode(['data' => $stockItemCreation]);
-    }
+
+    } 
   
-    public function get_stock_item_master_bill_of_material_data_table()
-    {
-        $get_stock_item_master_bill_of_material = $this->InventoryModel->get_stock_item_master_bill_of_material();
+    public function get_stock_item_data_table()
+{
+    $stockItemCreation = $this->InventoryModel->get_stock_item_data_table();
+
     
+    echo json_encode(['data' => $stockItemCreation]);
+}
+  
+   public function get_stock_item_master_bill_of_material_data_table()
+{
+    $get_stock_item_master_bill_of_material = $this->InventoryModel->get_stock_item_master_bill_of_material();
+
+    
+    echo json_encode(['data' => $get_stock_item_master_bill_of_material]);
+}
+
+    function saveStockItem()
+{
         
-        echo json_encode(['data' => $get_stock_item_master_bill_of_material]);
+		
+		$data 					= array();  
+        
+		$now 					= date("Y-m-d H:i:s");
+
+        $company_id = $this->session->userdata('company_id');
+		
+			
+// 		$stock_item_name  			            = $this->input->post('stock_item_name');
+// 		$stock_item_alternate_name  			= $this->input->post('stock_item_alternate_name');
+// 		$stock_item_part_number 				= $this->input->post('stock_item_part_number');
+// 		$stock_item_alternate_part_number 		= $this->input->post('stock_item_alternate_part_number');
+// 		$stock_item_description 		        = $this->input->post('stock_item_description');
+// 		$stock_item_notes			            = $this->input->post('stock_item_notes');
+// 		$stock_item_group_id 				    = $this->input->post('stock_item_group_id');
+// 		$stock_item_category_id 				= $this->input->post('stock_item_category_id');
+// 		$stock_item_unit_id			            = $this->input->post('stock_item_unit_id');
+
+//         $stock_item_alternate_unit_id 			= $this->input->post('stock_item_alternate_unit_id');
+// 		$maintain_in_batches 			        = $this->input->post('maintain_in_batches');
+// 		$set_date_of_manufacturing		     	= $this->input->post('set_date_of_manufacturing');
+// 		$set_expiry_date 				        = $this->input->post('set_expiry_date');
+// 		$costing_method_id 				        = $this->input->post('costing_method_id');
+// 		$market_valuation_method_id		     	= $this->input->post('market_valuation_method_id');
+		
+		$data					= array(
+											'stock_item_name'  		                =>   $this->input->post('stock_item_name'),  	                                                            
+                                            'stock_item_alternate_name'   		    =>   $this->input->post('stock_item_alternate_name'),                                  
+											'stock_item_part_number'  	  		    =>   $this->input->post('stock_item_part_number'), 	
+                                            'stock_item_alternate_part_number'  	=>   $this->input->post('stock_item_alternate_part_number'),                                        
+											'stock_item_description'  	  		    =>   $this->input->post('stock_item_description'),                                            
+											'stock_item_notes'	                    =>   $this->input->post('stock_item_notes'),	                                                            
+											'stock_item_group_id'		            =>   $this->input->post('stock_item_group_id'),                                  
+											'stock_item_category_id'	            =>   $this->input->post('stock_item_category_id'),                              
+											'stock_item_unit_id'  	  	            =>   $this->input->post('stock_item_unit_id'),		                          
+
+											'stock_item_alternate_unit_id'      	=>   $this->input->post('stock_item_alternate_unit_id'),                                
+                                            'maintain_in_batches'	                =>   $this->input->post('maintain_in_batches'),                            
+                                            'set_date_of_manufacturing'		        =>   $this->input->post('set_date_of_manufacturing'),                      
+											'set_expiry_date'	                    =>   $this->input->post('set_expiry_date'),                    
+											'costing_method_id'  	  	            =>   $this->input->post('costing_method_id'), 		                   
+                                            'market_valuation_method_id'  	    	=>   $this->input->post('market_valuation_method_id'),
+                                            'created_on'	                        =>   $now,
+                                            'company_id'                            =>   $company_id
+										);
+
+                                        
+										
+    $flag_id=$_POST['flag_id'];
+    if ($flag_id === "0") {
+       
+        $insertedRowId = $this->InventoryModel->saveStockItem($data);
+       
+        // $stock_item_name  			            = $this->input->post('stock_item_name');
+
+            if ($insertedRowId) {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Company inventory stock category saved successfully.',
+                    'insertedRowId' => $insertedRowId,
+                    'itemName'      => $this->input->post('stock_item_name')  
+
+                );
+
+            }
+            else {
+                $response = array(
+                    'success' => false,
+                    'message' => 'Error in saving company inventory stock category.'
+                );
+        }
+    }
+    elseif ($flag_id === "1") {
+        
+        $rowID = $this->input->post('rowID'); 
+        $res = $this->InventoryModel->updateStockItem($rowID, $data);
+
+
+        if ($res) {
+            $response = array(
+                'success' => true,
+                'message' => 'Updated Succesfully .',
+                'rowID'   => $rowID
+            );
+
+        }
+        else {
+            $response = array(
+                'success' => false,
+                'message' => 'Failed Updating'
+            );
+    }
+       
+    }
+ 
+    echo json_encode($response);
+   
+
+}
+
+    public function delete_stock_item()
+    {
+        $id  = $this->input->post('id');
+        $res = $this->InventoryModel->delete_stock_item($id);
+
+        $response = ['success' => true, 'message' => 'Item deleted successfully'];
+        echo json_encode($response);
     }
     
     
     
+         function save_stock_item_behaviour_setting()
+    {
+            
+             // collecting the posted data
+            
+            $data 					= array();  
+            $now 					= date("Y-m-d H:i:s");
+            
+                
+            // $ignore_difference_in_physical_stock  			            = $this->input->post('ignore_difference_in_physical_stock');
+            // $ignore_neagative_stock  			                        = $this->input->post('ignore_neagative_stock');
+            // $treat_all_sales_as_new_manufacture 				        = $this->input->post('treat_all_sales_as_new_manufacture');
+            // $treat_all_purchases_as_consumed 		                    = $this->input->post('treat_all_purchases_as_consumed');
+            // $treat_all_rejections_inward_as_scrap 		                = $this->input->post('treat_all_rejections_inward_as_scrap');
+            // $use_expired_batches_during_voucher_entry			        = $this->input->post('use_expired_batches_during_voucher_entry');
+            
+            $data					= array(
+                                                'ignore_difference_in_physical_stock'  		                =>   $this->input->post('ignore_difference_in_physical_stock'),  	                                                            
+                                                'ignore_neagative_stock'   		                            =>   $this->input->post('ignore_neagative_stock'),                                  
+                                                'treat_all_sales_as_new_manufacture'  	  		            =>   $this->input->post('treat_all_sales_as_new_manufacture'), 	
+                                                'treat_all_purchases_as_consumed'                       	=>   $this->input->post('treat_all_purchases_as_consumed'),                                        
+                                                'treat_all_rejections_inward_as_scrap'  	  		        =>   $this->input->post('treat_all_rejections_inward_as_scrap'),                                            
+                                                'use_expired_batches_during_voucher_entry'	                =>   $this->input->post('use_expired_batches_during_voucher_entry'),	                                                            
+                                                           
+                                            );
+                                            
+            
+            $rowID = $this->input->post('rowID'); 
+         
+
+            $res = $this->InventoryModel->update_stock_item_behaviour_setting($rowID, $data);
+           
+        if($res)
+        {
+        $response = array(
+            'success' => true,
+            'message' => 'Company behaviour setting updated successfully.'
+        );
+        }
+        else
+        {
+            $response = array(
+            'success' => false,
+            'message' => 'No Change is made through Company behaviour setting updation .'
+            );
+        }
+       
+        echo json_encode($response);
     
-        function saveStockItem()
+    }
+
+    function save_gst_rate_details()
+    {
+            
+             // collecting the posted data
+            
+            $data 					= array();  
+            $now 					= date("Y-m-d H:i:s");
+            
+            
+            
+            $data					= array(
+                                                'gst_applicability_id'  			             => $this->input->post('gst_applicable'),
+                                                'hsn_sac_details_id'  			                => $this->input->post('hsn_sac_details_id'),
+                                                'hsn_gst_classification_id' 				    => $this->input->post('hsn_gst_classification_id'),
+                                                'hsn_sac_number' 		                        => $this->input->post('hsn_sac_number'),
+                                                'hsn_sac_description'	                        => $this->input->post('hsn_sac_description'),
+                                                'gst_rate_details_id'			                => $this->input->post('gst_rate_details_id'),
+                                                'gst_gst_classification_id '				    => $this->input->post('gst_gst_classification_id'),
+                                                'taxability_type_id'                            => $this->input->post('taxability_type_id'),
+                                                'igst_rate '		                            => $this->input->post('igst_rate'),
+                                                'cgst_rate '		                            => $this->input->post('cgst_rate'),
+                                                'sgst_utgst_rate'			                    => $this->input->post('sgst_utgst_rate'),
+                                                'cess_valuation_type_id'				        => $this->input->post('cess_valuation_type_id'),
+                                                'cess_rate '		                            => $this->input->post('cess_rate'),
+                                                'applicable_for_reverse_charge' 		        => $this->input->post('applicable_for_reverse_charge'),
+                                                'eligible_for_input_tax_credit'			        => $this->input->post('eligible_for_input_tax_credit'),
+                                                'type_of_supply_id'			                    => $this->input->post('type_of_supply')      
+                                            );
+                                            
+        
+      
+
+                        $rowID = $this->input->post('rowID'); 
+
+
+                        $res = $this->InventoryModel->update_gst_rate_details($rowID, $data);
+                        
+                    if($res)
+                    {
+                        $response = array(
+                            'success' => true,
+                            'message' => 'Company inventory stock category updated successfully.'
+                        );
+                    }
+                    else
+                    {
+                        $response = array(
+                        'success' => false,
+                        'message' => 'Error in Company inventory stock category supdation.'
+                        );
+                    }
+                    
+                    echo json_encode($response);
+    
+    }
+
+
+    function save_stock_item_master_set_vat_details()
     {
             
             
@@ -687,57 +921,45 @@ public function check_tcs_nature_of_goods_exist(){
             $now 					= date("Y-m-d H:i:s");
     
             $company_id = $this->session->userdata('company_id');
-            
+            $rowID = $this->input->post('rowID'); 
                 
-            $stock_item_name  			            = $this->input->post('stock_item_name');
-            $stock_item_alternate_name  			= $this->input->post('stock_item_alternate_name');
-            $stock_item_part_number 				= $this->input->post('stock_item_part_number');
-            $stock_item_alternate_part_number 		= $this->input->post('stock_item_alternate_part_number');
-            $stock_item_description 		        = $this->input->post('stock_item_description');
-            $stock_item_notes			            = $this->input->post('stock_item_notes');
-            $stock_item_group_id 				    = $this->input->post('stock_item_group_id');
-            $stock_item_category_id 				= $this->input->post('stock_item_category_id');
-            $stock_item_unit_id			            = $this->input->post('stock_item_unit_id');
+            // $type_of_goods  			      = $this->input->post('type_of_goods');
+            // $nature_of_goods  			      = $this->input->post('nature_of_goods');
+            // $commodity_name 				  = $this->input->post('commodity_name');
+            // $commodity_code 		          = $this->input->post('commodity_code');
+            // $tax_rate 		                  = $this->input->post('tax_rate');
+            // $cess_rate_vat			          = $this->input->post('cess_rate_vat');
+            // $tax_type 				          = $this->input->post('tax_type');
+            // $schedule 				          = $this->input->post('schedule');
+            // $schedule_serial_no			      = $this->input->post('schedule_serial_no');
     
-            $stock_item_alternate_unit_id 			= $this->input->post('stock_item_alternate_unit_id');
-            $maintain_in_batches 			        = $this->input->post('maintain_in_batches');
-            $set_date_of_manufacturing		     	= $this->input->post('set_date_of_manufacturing');
-            $set_expiry_date 				        = $this->input->post('set_expiry_date');
-            $costing_method_id 				        = $this->input->post('costing_method_id');
-            $market_valuation_method_id		     	= $this->input->post('market_valuation_method_id');
             
             $data					= array(
-                                                'stock_item_name'  		                =>   $stock_item_name,  	                                                            
-                                                'stock_item_alternate_name'   		    =>   $stock_item_alternate_name,                                  
-                                                'stock_item_part_number'  	  		    =>   $stock_item_part_number, 	
-                                                'stock_item_alternate_part_number'  	=>   $stock_item_alternate_part_number,                                        
-                                                'stock_item_description'  	  		    =>   $stock_item_description,                                            
-                                                'stock_item_notes'	                    =>   $stock_item_notes,	                                                            
-                                                'stock_item_group_id'		            =>   $stock_item_group_id,                                  
-                                                'stock_item_category_id'	            =>   $stock_item_category_id,                              
-                                                'stock_item_unit_id'  	  	            =>   $stock_item_unit_id,		                          
-    
-                                                'stock_item_alternate_unit_id'      	=>   $stock_item_alternate_unit_id,                                
-                                                'maintain_in_batches'	                =>   $maintain_in_batches,                            
-                                                'set_date_of_manufacturing'		        =>   $set_date_of_manufacturing,                      
-                                                'set_expiry_date'	                    =>   $set_expiry_date,                    
-                                                'costing_method_id'  	  	            =>   $costing_method_id, 		                   
-                                                'market_valuation_method_id'  	    	=>   $market_valuation_method_id,
-                                                'created_on'	                        =>   $now,
-                                                'company_id'                            =>   $company_id
+                                                'type_of_goods_id'          =>    $this->input->post('type_of_goods'),  	                                                            
+                                                'nature_of_goods_id'        =>   $this->input->post('nature_of_goods'),  
+                                                'item_master_id'            =>      $rowID,                          
+                                                'commodity_name'  	  	    =>   $this->input->post('commodity_name'), 	
+                                                'commodity_code'  	        =>   $this->input->post('commodity_code'),                                        
+                                                'vat_rate'  	  		    =>   $this->input->post('tax_rate'),                                            
+                                                'cess_rate'	                =>   $this->input->post('cess_rate_vat'),	                                                            
+                                                'taxability_type_id'		=>   $this->input->post('tax_type'),                                  
+                                                'vat_schedule_id'	        =>   $this->input->post('schedule'),                              
+                                                'schedule_serial_number'    =>   $this->input->post('schedule_serial_no'),	
+                                                'created_on'	            =>   $now,
+                                                'company_id'                =>   $company_id,
                                             );
                                             
         $flag_id=$_POST['flag_id'];
         if ($flag_id === "0") {
            
-            $insertedRowId = $this->InventoryModel->saveStockItem($data);
+            $insertedRowId = $this->InventoryModel->save_stock_item_master_set_vat_details($data);
      
     
                 if ($insertedRowId) {
                     $response = array(
                         'success' => true,
                         'message' => 'Company inventory stock category saved successfully.',
-                        'insertedRowId' => $insertedRowId  
+                        'insertedRowId' => $insertedRowId, 
                     );
     
                 }
@@ -751,7 +973,7 @@ public function check_tcs_nature_of_goods_exist(){
         elseif ($flag_id === "1") {
             
             $rowID = $this->input->post('rowID'); 
-            $res = $this->InventoryModel->updateStockItem($rowID, $data);
+            $res = $this->InventoryModel->update_stock_item_master_set_vat_details($rowID, $data);
     
     
             if ($res) {
@@ -775,321 +997,264 @@ public function check_tcs_nature_of_goods_exist(){
        
     
     }
-    
-        public function delete_stock_item()
-        {
-            $id  = $this->input->post('id');
-            $res = $this->InventoryModel->delete_stock_item($id);
-    
-            $response = ['success' => true, 'message' => 'Item deleted successfully'];
-            echo json_encode($response);
-        }
-    
-    
-    
-        function save_stock_item_behaviour_setting()
-        {
-                
-                 // collecting the posted data
-                
-                $data 					= array();  
-                $now 					= date("Y-m-d H:i:s");
-                
-                    
-                $ignore_difference_in_physical_stock  			            = $this->input->post('ignore_difference_in_physical_stock');
-                $ignore_neagative_stock  			                        = $this->input->post('ignore_neagative_stock');
-                $treat_all_sales_as_new_manufacture 				        = $this->input->post('treat_all_sales_as_new_manufacture');
-                $treat_all_purchases_as_consumed 		                    = $this->input->post('treat_all_purchases_as_consumed');
-                $treat_all_rejections_inward_as_scrap 		                = $this->input->post('treat_all_rejections_inward_as_scrap');
-                $use_expired_batches_during_voucher_entry			        = $this->input->post('use_expired_batches_during_voucher_entry');
-                
-                $data					= array(
-                                                    'ignore_difference_in_physical_stock'  		                =>   $ignore_difference_in_physical_stock,  	                                                            
-                                                    'ignore_neagative_stock'   		                            =>   $ignore_neagative_stock,                                  
-                                                    'treat_all_sales_as_new_manufacture'  	  		            =>   $treat_all_sales_as_new_manufacture, 	
-                                                    'treat_all_purchases_as_consumed'                       	=>   $treat_all_purchases_as_consumed,                                        
-                                                    'treat_all_rejections_inward_as_scrap'  	  		        =>   $treat_all_rejections_inward_as_scrap,                                            
-                                                    'use_expired_batches_during_voucher_entry'	                =>   $use_expired_batches_during_voucher_entry,	                                                            
-                                                               
-                                                );
-                                                
-            
-            
         
-          
-                
-                $rowID = $this->input->post('rowID'); 
-             
+    function save_stock_item_master_bill_of_material()
+    {
+        $data = array();
+        $data1 = array(); 
+        $now = date("Y-m-d H:i:s");
     
-                $res = $this->InventoryModel->update_stock_item_behaviour_setting($rowID, $data);
-               
-            if($res)
-            {
-            $response = array(
-                'success' => true,
-                'message' => 'Company inventory stock category updated successfully.'
-            );
+        $company_id = $this->session->userdata('company_id');
+        $flag_id = $_POST['flag_id'];
+        $rowID =  $_POST['rowID'];
+       
+        
+        $bom_name = $_POST['bom_name'];
+        $manufacturing_quantity = $_POST['manufacturing_quantity'];
+        $manufacturing_unit_id = $_POST['manufacturing_unit_id'];
+        $component_type_specified = $_POST['component_type_specified'];
+
+
+      
+
+        $data1 =array(
+            'item_master_id'  	             =>   $rowID, 
+            'bom_name'                       =>   $bom_name,  	                                                            
+            'manufacturing_quantity'         =>   $manufacturing_quantity,  
+            'manufacturing_unit_id'          =>   $manufacturing_unit_id,                          
+            'component_type_specified'  	 =>   $component_type_specified, 	
+            'created_on'	                 =>   $now,
+            'company_id'                     =>   $company_id
+        );
+
+
+        $flag_id=$_POST['flag_id'];
+        if ($flag_id === "0") {     // for normal save
+           
+            $insertedRowId = $this->InventoryModel->save_stock_item_master_bill_of_material($data1);
+     
+    
+                if ($insertedRowId) {
+                    $response = array(
+                        'success' => true,
+                        'message' => 'Company inventory stock category saved successfully.',
+                        'insertedRowId' => $insertedRowId, 
+                    );
+    
+                }
+                else {
+                    $response = array(
+                        'success' => false,
+                        'message' => 'Error in saving company inventory stock category.'
+                    );
+
+
+
             }
-            else
-            {
+        }
+        elseif ($flag_id === "1") {
+            
+            $rowID =  $_POST['rowID'];
+            $res = $this->InventoryModel->update_stock_item_master_bill_of_material($rowID, $data1);
+    
+            
+    
+            if ($res) {
                 $response = array(
-                'success' => false,
-                'message' => 'Error in Company inventory stock category supdation.'
+                    'success' => true,
+                    'message' => 'Updated Succesfully .',
+                    'rowID'   => $rowID
                 );
+    
             }
-           
-            echo json_encode($response);
-        
+            else {
+                $response = array(
+                    'success' => false,
+                    'message' => 'Failed Updating'
+                );
         }
+           
+        }
+
+        $godown_id_bom = $_POST['godown_id_bom'];
+        $item_master_id_bom = $_POST['item_master_id_bom'];
+        $component_quantity = $_POST['component_quantity'];
+        $component_type_id = $_POST['component_type_id'];
+        $component_unit_id = $_POST['component_unit_id'];
+        $rate_percentage = $_POST['rate_percentage'];
+
+        
+
+        $dynamicrowID = $_POST['bill_row_id'];
+
     
-        function save_gst_rate_details()
+   
+     
+        foreach ($godown_id_bom as $key => $value)   // for dynamic row save 
         {
+                $currentDynamicRowID = $dynamicrowID[$key];
+                $data = array(
+                    'item_master_id'        =>  $rowID,
+                    'godown_id'             => $value,
+                    'component_type_id'     => $component_type_id[$key],
+                    'component_quantity'    => $component_quantity[$key],
+                    'component_unit_id'     => $component_unit_id[$key],
+                    'rate_percentage'       => $rate_percentage[$key],
+                    'bom_master_id'         => $insertedRowId
+                );
                 
-                 // collecting the posted data
-                
-                $data 					= array();  
-                $now 					= date("Y-m-d H:i:s");
-                
-                
-                
-                $data					= array(
-                                                    'gst_applicabilty_id'  			                    => $this->input->post('gst_applicable'),
-                                                    'hsn_sac_details_id'  			                => $this->input->post('hsn_sac_details_id'),
-                                                    'hsn_gst_classification_id' 				    => $this->input->post('hsn_gst_classification_id'),
-                                                    'hsn_sac_number' 		                        => $this->input->post('hsn_sac_number'),
-                                                    'hsn_sac_description'	                        => $this->input->post('hsn_sac_description'),
-                                                    'gst_rate_details_id'			                => $this->input->post('gst_rate_details_id'),
-                                                    'gst_gst_classification_id '				    => $this->input->post('gst_gst_classification_id'),
-                                                    'igst_rate '		                            => $this->input->post('igst_rate'),
-                                                    'cgst_rate '		                            => $this->input->post('cgst_rate'),
-                                                    'sgst_utgst_rate'			                    => $this->input->post('sgst_utgst_rate'),
-                                                    'cess_valuation_type_id '				        => $this->input->post('cess_valuation_type_id'),
-                                                    'cess_rate '		                            => $this->input->post('cess_rate'),
-                                                    'applicable_for_reverse_charge' 		        => $this->input->post('applicable_for_reverse_charge'),
-                                                    'eligible_for_input_tax_credit'			        => $this->input->post('eligible_for_input_tax_credit'),
-                                                    'type_of_supply_id'			                    => $this->input->post('type_of_supply')      
-                                                );
-                                                
-            
-          
     
-                            $rowID = $this->input->post('rowID'); 
-    
-    
-                            $res = $this->InventoryModel->update_gst_rate_details($rowID, $data);
+                if ($flag_id === "0" || $currentDynamicRowID === "0") {
+                    $insertedRowIdDetails = $this->InventoryModel->save_stock_item_master_bill_of_material_details($data);
+        
+                    if ($insertedRowId) {
+                        $response = array(
+                            'success' => true,
+                            'message' => 'Company inventory stock category saved successfully.',
+                            'insertedRowId' => $insertedRowIdDetails, 
+                        );
+                    } else {
+                        $response = array(
+                            'success' => false,
+                            'message' => 'Error in saving company inventory stock category.'
+                        );
+                    }
+                }
+                elseif ($flag_id === "1") {
+
+                        $res = $this->InventoryModel->update_stock_item_master_bill_of_material_details($currentDynamicRowID, $data);
+                
+                        if ($res) {
                             
-                        if($res)
-                        {
-                        $response = array(
-                            'success' => true,
-                            'message' => 'Company inventory stock category updated successfully.'
-                        );
-                        }
-                        else
-                        {
                             $response = array(
-                            'success' => false,
-                            'message' => 'Error in Company inventory stock category supdation.'
-                            );
-                        }
-                        
-                        echo json_encode($response);
-        
-        }
-    
-    
-        function save_stock_item_master_set_vat_details()
-        {
-                
-                
-                $data 					= array();  
-                $now 					= date("Y-m-d H:i:s");
-        
-                $company_id = $this->session->userdata('company_id');
-                $rowID = $this->input->post('rowID'); 
-                    
-                $type_of_goods  			      = $this->input->post('type_of_goods');
-                $nature_of_goods  			      = $this->input->post('nature_of_goods');
-                $commodity_name 				  = $this->input->post('commodity_name');
-                $commodity_code 		          = $this->input->post('commodity_code');
-                $tax_rate 		                  = $this->input->post('tax_rate');
-                $cess_rate_vat			          = $this->input->post('cess_rate_vat');
-                $tax_type 				          = $this->input->post('tax_type');
-                $schedule 				          = $this->input->post('schedule');
-                $schedule_serial_no			      = $this->input->post('schedule_serial_no');
-        
-                
-                $data					= array(
-                                                    'type_of_goods_id'          =>   $type_of_goods,  	                                                            
-                                                    'nature_of_goods_id'        =>   $nature_of_goods,  
-                                                    'item_master_id'            =>      $rowID,                          
-                                                    'commodity_name'  	  	    =>   $commodity_name, 	
-                                                    'commodity_code'  	        =>   $commodity_code,                                        
-                                                    'vat_rate'  	  		    =>   $tax_rate,                                            
-                                                    'cess_rate'	                =>   $cess_rate_vat,	                                                            
-                                                    'taxability_type_id'		=>   $tax_type,                                  
-                                                    'vat_schedule_id'	        =>   $schedule,                              
-                                                    'schedule_serial_number'    =>   $schedule_serial_no,	
-                                                    'created_on'	            =>   $now,
-                                                    'company_id'                =>   $company_id,
-                                                );
-                                                
-            $flag_id=$_POST['flag_id'];
-            if ($flag_id === "0") {
-               
-                $insertedRowId = $this->InventoryModel->save_stock_item_master_set_vat_details($data);
-         
-        
-                    if ($insertedRowId) {
-                        $response = array(
-                            'success' => true,
-                            'message' => 'Company inventory stock category saved successfully.',
-                            'insertedRowId' => $insertedRowId  
-                        );
-        
-                    }
-                    else {
-                        $response = array(
-                            'success' => false,
-                            'message' => 'Error in saving company inventory stock category.'
-                        );
-                }
-            }
-            elseif ($flag_id === "1") {
-                
-                $rowID = $this->input->post('rowID'); 
-                $res = $this->InventoryModel->update_stock_item_master_set_vat_details($rowID, $data);
-        
-        
-                if ($res) {
-                    $response = array(
-                        'success' => true,
-                        'message' => 'Updated Succesfully .',
-                        'rowID'   => $rowID
-                    );
-        
-                }
-                else {
-                    $response = array(
-                        'success' => false,
-                        'message' => 'Failed Updating'
-                    );
-            }
-               
-            }
-         
-            echo json_encode($response);
-           
-        
-        }
-        
-        function save_stock_item_master_bill_of_material()
-        {
-                
-                
-                $data 					= array();  
-                $now 					= date("Y-m-d H:i:s");
-        
-                $company_id = $this->session->userdata('company_id');
-                $rowID = $this->input->post('rowID'); 
-                    
-                $manufacturing_quantity  			      = $this->input->post('manufacturing_quantity');
-                $manufacturing_unit_id  			      = $this->input->post('manufacturing_unit_id');
-                $component_type_specified 				  = $this->input->post('component_type_specified');
-                $bill_of_material_name 				      = $this->input->post('bill_of_material_name');
-        
-                
-                $data					= array(
-                                                    'bill_of_material_name'          =>   $bill_of_material_name,  	                                                            
-                                                    'manufacturing_quantity'          =>   $manufacturing_quantity,  	                                                            
-                                                    'manufacturing_unit_id'           =>   $manufacturing_unit_id,  
-                                                    'component_type_specified'        =>      $component_type_specified,                          
-                                                    'item_master_id'  	              =>   $rowID,                                        
-                                                    'created_on'	                  =>   $now,
-                                                    'company_id'                      =>   $company_id
-                                                );
-                                                
-            $flag_id=$_POST['flag_id'];
-            if ($flag_id === "0") {
-               
-                $insertedRowId = $this->InventoryModel->save_stock_item_master_bill_of_material($data);
-         
-        
-                    if ($insertedRowId) {
-                        $response = array(
-                            'success' => true,
-                            'message' => 'Company inventory stock category saved successfully.',
-                            'insertedRowId' => $insertedRowId  
-                        );
-        
-                    }
-                    else {
-                        $response = array(
-                            'success' => false,
-                            'message' => 'Error in saving company inventory stock category.'
-                        );
-                }
-            }
-            elseif ($flag_id === "1") {
-                
-                $rowID = $this->input->post('rowID'); 
-                $res = $this->InventoryModel->update_stock_item_master_bill_of_material($rowID, $data);
-        
-        
-                if ($res) {
-                    $response = array(
-                        'success' => true,
-                        'message' => 'Updated Succesfully .',
-                        'rowID'   => $rowID
-                    );
-        
-                }
-                else {
-                    $response = array(
-                        'success' => false,
-                        'message' => 'Failed Updating'
-                    );
-            }
-               
-            }
-         
-            echo json_encode($response);
-           
-        
-        }
-    
-    
-        public function get_edit_stock_list()
-            {
-                $id = $this->input->post('id');
-              
-                $result = $this->InventoryModel->get_stock_item_by_id($id);
-               
-                if ($result) {
-                            $response = [
                                 'success' => true,
-                                'data' => $result
-                            ];
+                                'message' => 'Updated Successfully.',
+                                'rowID'   => $rowID
+                            );
+                            
                         } else {
-                            $response = [
-                                'success' => false,
-                                'message' => 'Stock list item not found'
-                            ];
+                            $response = array(
+                                'success' => true,
+                                'message' => 'Updated Successfully.',
+                                'rowID'   => $rowID
+                            );
+
                         }
-                          echo json_encode($response);
-            }
-            
-        public function  get_stock_item_master_bill_of_material_data_table2()
+                    }
+             
+        }
+     
+        echo json_encode($response);
+
+        
+    }   
+    
+    function save_stock_item_master_set_opening_balance()
+    {
+        $data = array();
+        $now = date("Y-m-d H:i:s");
+    
+        $company_id = $this->session->userdata('company_id');
+
+        $flag_id = $_POST['flag_id'];
+        $rowID =  $_POST['rowID'];
+       
+
+    
+        $godown_ids = $_POST['godown_id'];
+        $batch_number = $_POST['batch_number'];
+        $expiry_dates = $_POST['expiry_date'];
+        $manufacture_date = $_POST['manufacture_date'];
+        $quantities = $_POST['quantity'];
+        $rates = $_POST['rate'];
+        $dynamicrowID = $_POST['opening_row_id'];
+
+
+
+        
+        
+    
+        foreach ($godown_ids as $key => $value) 
         {
-            // $id = $this->input->post('id');
-          
-            $result = $this->InventoryModel->get_stock_item_master_bill_of_material_data_table2();
-            //var_dump($result);
+                $currentDynamicRowID = $dynamicrowID[$key];
+                $data = array(
+                    'item_master_id'        =>  $rowID,
+                    'godown_id'             => $value,
+                    'batch_number'          => $batch_number[$key],
+                    'expiry_date'           => $expiry_dates[$key],
+                    'manufacture_date'      => $manufacture_date[$key],
+                    'quantity'              => $quantities[$key],
+                    'rate'                  => $rates[$key],
+                    'created_on'            => $now,
+                    'company_id'            => $company_id
+                );
+                
+    
+                if ($flag_id === "0" || $currentDynamicRowID === "0") {
+                    $insertedRowId = $this->InventoryModel->save_stock_item_master_set_opening_balance($data);
+        
+                    if ($insertedRowId) {
+                        $response = array(
+                            'success' => true,
+                            'message' => 'Company inventory stock category saved successfully.',
+                            'insertedRowId' => $insertedRowId, 
+                        );
+                    } else {
+                        $response = array(
+                            'success' => false,
+                            'message' => 'Error in saving company inventory stock category.'
+                        );
+                    }
+                }
+                elseif ($flag_id === "1") {
+
+                        $res = $this->InventoryModel->update_stock_item_master_set_opening_balance($currentDynamicRowID, $data,$rowID);
+                
+                        if ($res) {
+                            
+                            $response = array(
+                                'success' => true,
+                                'message' => 'Updated Successfully.',
+                                'rowID'   => $rowID
+                            );
+                            
+                        } else {
+                            $response = array(
+                                'success' => true,
+                                'message' => 'Updated Successfully.',
+                                'rowID'   => $rowID
+                            );
+
+                        }
+                    }
+             
+        }
+
+        echo json_encode($response);
+    }
+
            
-            if ($result) {
+    public function get_edit_stock_list()
+		{
+            $id = $this->input->post('id');
+
+			$result = $this->InventoryModel->get_stock_item_by_id($id);
+            // $os =  $this->InventoryModel->get_os_by_id($id);
+            $data["acc_stock_opening_balance"] = $this->InventoryModel->get_acc_stock_opening_balance($id);
+            $data["acc_stock_bill_of_material_details"] = $this->InventoryModel->get_acc_stock_bill_of_material_details($id);
+            $data["acc_stock_bill_of_material"] = $this->InventoryModel->get_acc_stock_bill_of_material($id);
+
+           
+
+           
+			if ($result) {
                         $response = [
                             'success' => true,
-                            'data' => $result
+                            'data' => $result,
+                            'data2' => $data["acc_stock_opening_balance"],
+                            'data3' => $data["acc_stock_bill_of_material_details"],
+                            'data4' => $data["acc_stock_bill_of_material"]
+                            
                         ];
                     } else {
                         $response = [
@@ -1097,31 +1262,70 @@ public function check_tcs_nature_of_goods_exist(){
                             'message' => 'Stock list item not found'
                         ];
                     }
-                      echo json_encode($response);
-        }
+                echo json_encode($response);
 
-   
-          
-            
-        public function get_godown_name()
-        {
-            $company_id = $this->session->userdata('company_id'); 
-        
-            $result = $this->InventoryModel->get_godown_name($company_id);
-        
-            if ($result) {
-                $response = [
-                    'success' => true,
-                    'data' => $result
-                ];
-            } else {
-                $response = [
-                    'success' => false,
-                    'message' => 'Stock list item not found'
-                ];
-            }
-            echo json_encode($response);
+                // echo json_encode($data["acc_stock_bill_of_material_details"]);
+                // echo json_encode($data["acc_stock_bill_of_material"]);
+                
+                
+
+
         }
+        
+    public function  get_stock_item_master_bill_of_material_data_table2()
+    {
+        // $id = $this->input->post('id');
+      
+        $result = $this->InventoryModel->get_stock_item_master_bill_of_material_data_table2();
+        //var_dump($result);
+       
+        if ($result) {
+                    $response = [
+                        'success' => true,
+                        'data' => $result
+                    ];
+                } else {
+                    $response = [
+                        'success' => false,
+                        'message' => 'Stock list item not found'
+                    ];
+                }
+                  echo json_encode($response);
+    }
+    public function  get_godown_name()
+    {
+        // $id = $this->input->post('id');
+      
+        $result = $this->InventoryModel->get_godown_name();
+        //var_dump($result);
+       
+        if ($result) {
+                    $response = [
+                        'success' => true,
+                        'data' => $result
+                    ];
+                } else {
+                    $response = [
+                        'success' => false,
+                        'message' => 'Stock list item not found'
+                    ];
+                }
+                  echo json_encode($response);
+    }
+    
+    
+    public function delete_supplier_by_id() {
+    $id = $this->input->post('id');
+    $result = $this->InventoryModel->delete_supplier_by_id($id);
+
+    if ($result) {
+        $response = ['success' => true, 'message' => 'Item marked as deleted successfully'];
+    } else {
+        $response = ['success' => false, 'message' => 'Failed to mark item as deleted'];
+    }
+
+    echo json_encode($response);
+}
         
  //stock unit creation start from here 
  public function stock_unit_creation(){
@@ -1312,7 +1516,9 @@ public function check_unit_name_exist()
 
 
  public function tds_nature_payment(){
-        $this->load->view('brq-accounts/inventory/tds_nature_of_payment');
+  if($this->session->userdata('company_id'))
+            $data['company_id'] =$this->session->userdata('company_id');
+  $this->load->view('brq-accounts/inventory/tds_nature_of_payment',$data);
     }
   
     
@@ -1415,7 +1621,175 @@ public function check_unit_name_exist()
 
     }
 
+    public function godown_creation(){
+        $data = array();
+        $data["cost_cenrtre_names"]  = $this->InventoryModel->cost_cenrtre_name();
+        $this->load->view('brq-accounts/inventory/godown_creation',$data);
 
+    }
+
+    public function save_godown_creation(){
+
+        $company_id = $this->session->userdata('company_id');
+        // $hidden_id=$_POST['hidden_id'];
+        // $gid=(int)$this->input->post('parent_godown_id');
+        // echo "gis id".$gid;
+      
+        $data = array(
+            'company_id'                    => $company_id,
+            'godown_name'                   => $this->input->post('godown_name'),
+            'godown_alternate_name'         => $this->input->post('godown_alternate_name'),
+            'parent_godown_id'              => (int)$this->input->post('parent_godown_id'),
+            'godown_address_line_1'         => $this->input->post('godown_address_line_1'),
+            'godown_address_line_2'         => $this->input->post('godown_address_line_2'),
+            'godown_address_line_3'         => $this->input->post('godown_address_line_3'),
+            'godown_address_line_4'         => $this->input->post('godown_address_line_4'),
+            'allow_storage_of_materials'    => $this->input->post('allow_storage_of_materials'),
+            'cost_centre_id'                => (int)$this->input->post('cost_centre_id'),
+            'used_for_stock_with_third_party'   => $this->input->post('used_for_stock_with_third_party'),
+            'used_for_third_party_stock_with_us' => $this->input->post('used_for_third_party_stock_with_us'),
+          
+            
+        );
+        // var_dump($data);
+    
+        if ($data['parent_godown_id'] == 0) {
+            // Set is_primary to "yes"
+            $data['is_primary'] = 'yes';
+        } 
+        
+        
+   
+        $flag_id=$_POST['flag_id'];
+       
+      
+        if ($flag_id === "0") {
+           
+           $res = $this->InventoryModel->insert_godown_creation($data);
+        }
+        elseif ($flag_id === "1") {
+            
+            $hidden_id = $this->input->post('hidden_id'); 
+            $res = $this->InventoryModel->update_godown_creation($hidden_id, $data);
+           
+        }
+      
+        if($res)
+        {
+        $response = array(
+            'success' => true,
+            'message' => 'Saved successfully.'
+        );
+        }
+        else
+        {
+            $response = array(
+            'success' => false,
+            'message' => 'Error in updation.'
+            );
+        }
+       
+        echo json_encode($response);
+    
+    }
+
+  
+public function  get_godown_creation()
+{
+  
+    $godownCreation = $this->InventoryModel->get_godown_creation();
+    
+    echo json_encode(['data' => $godownCreation]);
+}
+
+
+public function get_godown_names() {
+ 
+    $stockCategories = $this->InventoryModel->get_godown_names();
+    echo json_encode($stockCategories);
+}
+
+
+public function delete_godown_by_id()
+{
+    $id  = $this->input->post('id');
+    $result = $this->InventoryModel->delete_godown_by_id($id);
+
+    if ($result) {
+        $response = ['success' => true, 'message' => 'Item deleted successfully'];
+    } else {
+        $response = ['success' => false, 'message' => 'Failed to mark item as deleted'];
+    }
+
+    echo json_encode($response);
+}
+
+
+public function get_godown_by_id()
+{
+    $id = $this->input->post('id');
+    $result = $this->InventoryModel->get_godown_by_id($id);
+
+    if ($result) {
+        $response = [
+            'success' => true,
+            'data' => $result
+        ];
+    } else {
+        $response = [
+            'success' => false,
+            'message' => 'Not found'
+        ];
+    }
+
+    echo json_encode($response);
+}
+
+
+public function check_godown_name_exists()
+{
+    $godown_name = $this->input->post('godown_name');
+    $company_id = $this->session->userdata('company_id');
+    $flag_id = $this->input->post('flag_id');  
+    $hidden_id = $this->input->post('hidden_id');  
+
+    $result = $this->InventoryModel->check_godown_name_exists($godown_name, $company_id, $flag_id, $hidden_id);
+
+    echo json_encode(['exists' => $result]);
+}
+
+
+public function check_godown_alternate_name_exists()
+{
+    $godown_alternate_name = $this->input->post('godown_alternate_name');
+    $company_id = $this->session->userdata('company_id');
+    $flag_id = $this->input->post('flag_id');  
+    $hidden_id = $this->input->post('hidden_id');  
+
+    $result = $this->InventoryModel->check_godown_alternate_name_exists($godown_alternate_name, $company_id, $flag_id, $hidden_id);
+
+    echo json_encode(['exists' => $result]);
+}
+
+public function get_hsn_sac_details()
+{
+   $gst_classification_id       = $this->input->post('hsn_gst_classification_id');
+   $results = $this->InventoryModel->getHsnSacData($gst_classification_id); 
+   if(!empty($results))
+   {
+      echo  json_encode($results) ;
+   
+   }
+}
+public function get_gst_rate_details()
+{
+    $gst_classification_id  = $this->input->post('gst_classification_id');
+    
+    $result                 = $this->InventoryModel->getHsnSacDetails($gst_classification_id);
+
+    echo json_encode($result);
+    
+}
 
 }
     

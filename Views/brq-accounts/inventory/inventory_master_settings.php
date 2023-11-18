@@ -21,7 +21,7 @@
 <div class="wrapper">
     	<!-- Navbar  TOP NAV BAR MESSAGES & SEARCH -->
 		
-        <?php include('application/views/brq-accounts/header-nav-search-messages.php');?>
+        <?php include('application/views/brq-accounts/header_nav_bar.php');?>>
 		<!-- /.navbar  TOP NAVE BAR MESSAGES & SEARCH-->
 		<!--- For sidebar Right Navigation for Short Cut Key like Tally -->
         <?php include('application/views/brq-accounts/index-sidebar-navigation-right.php');?>

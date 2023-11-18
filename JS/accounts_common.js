@@ -579,6 +579,7 @@ for(var i = 0; i < selects.length; i++) {
 }
 
 const modalBody = document.querySelector('#company_select .modal-body');
+// var modalBody = document.querySelector('#company_select .modal-body');
 
 
 

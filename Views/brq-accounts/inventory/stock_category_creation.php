@@ -54,7 +54,7 @@
 <body>
 <div class="wrapper">
     	<!-- Navbar  TOP NAV BAR MESSAGES & SEARCH -->
-        <?php include('application/views/brq-accounts/header-nav-search-messages.php');?>
+        <?php include('application/views/brq-accounts/header_nav_bar.php');?>
 		<!-- /.navbar  TOP NAVE BAR MESSAGES & SEARCH-->
        
 
@@ -64,7 +64,7 @@
 		<!--- End : For sidebar Right Navigation for Short Cut Key like Tally -->
 </div>
 
-<div class="modal fade backdrop modal_common modal_centered_lg gst_details inventory_modals my-modal" 
+<div class="modal fade backdrop modal_common modal_centered_lg gst_details inventory_modal my-modal" 
         id="comapny_stock_category_creation_modal" data-value="enable_tds" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
